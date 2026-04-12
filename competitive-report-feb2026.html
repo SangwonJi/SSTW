@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" style="scroll-behavior:smooth">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -19,7 +19,7 @@ h3{font-size:13.5px;font-weight:700;color:var(--n);margin:24px 0 10px}
 .meta{font-size:11px;color:var(--sv);margin-bottom:20px}
 .kf{background:var(--lt);border-left:4px solid var(--bl);border-radius:0 6px 6px 0;padding:16px 20px;margin-bottom:24px}
 .kf-t{font-size:9px;font-weight:700;color:var(--bl);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px}
-.kf p{font-size:12px;line-height:1.85}
+.kf p{font-size:12.5px;line-height:1.9}
 .kf strong{color:var(--n)}.kf .w{color:var(--rd);font-weight:700}
 
 .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px}
@@ -40,7 +40,7 @@ h3{font-size:13.5px;font-weight:700;color:var(--n);margin:24px 0 10px}
 .tab-btn{flex:1;padding:10px;font-size:12px;font-weight:700;text-align:center;cursor:pointer;border:none;background:var(--lt);color:var(--g);border-radius:6px 6px 0 0;margin-right:2px;transition:.15s}
 .tab-btn:hover{background:var(--bd)}
 .tab-btn.a-ff{background:#fef3c7;color:#92400e}.tab-btn.a-cm{background:#ede9fe;color:#5b21b6}.tab-btn.a-df{background:#d1fae5;color:#065f46}
-.gp{display:none;padding:20px 0 0}.gp.on{display:block}
+.gp{display:none;padding:20px 0 0;animation:fadeIn .2s}.gp.on{display:block}@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
 .sum{border-radius:6px;padding:14px 18px;margin-bottom:14px;border:1px solid;font-size:12px;line-height:1.8}
 .sum .h{font-size:13px;font-weight:600;color:var(--n);margin-bottom:3px}
@@ -53,7 +53,7 @@ th{background:var(--lt);font-weight:600;color:var(--n);padding:8px 12px;text-ali
 td{padding:8px 12px;border:1px solid var(--bd);vertical-align:top}
 tr:hover td{background:#fafcff}
 
-.ib{border-radius:6px;padding:12px 14px;margin:14px 0;border-left:3px solid;font-size:11.5px;line-height:1.75;background:var(--lt)}
+.ib{border-radius:6px;padding:14px 16px;margin:16px 0;border-left:3px solid;font-size:12px;line-height:1.8;background:var(--lt)}
 .ib .il{font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-bottom:3px}
 .ib-bl{border-color:var(--bl)}.ib-bl .il{color:var(--bl)}
 .ib-rd{border-color:var(--rd);background:#fef7f7}.ib-rd .il{color:var(--rd)}
@@ -63,9 +63,9 @@ tr:hover td{background:#fafcff}
 .st{padding:5px 14px;border-radius:5px;font-size:10px;font-weight:600;cursor:pointer;border:1px solid var(--bd);background:var(--w);color:var(--g)}
 .st.on{background:var(--n);color:#fff;border-color:var(--n)}
 .img-cell{width:130px;min-width:130px}
-.img-cell img{width:100%;border-radius:4px;margin-bottom:2px;display:block}
+.img-cell img{width:100%;border-radius:4px;margin-bottom:2px;display:block;transition:transform .2s;cursor:pointer}.img-cell img:hover{transform:scale(1.05)}
 .img-cell .src{font-size:8px;color:var(--sv)}
-.foot{padding:16px 32px;font-size:9px;color:var(--sv);border-top:1px solid var(--bd);margin-top:40px}
+a{color:var(--bl);text-decoration:none}a:hover{text-decoration:underline}.foot{padding:16px 32px;font-size:9px;color:var(--sv);border-top:1px solid var(--bd);margin-top:40px}
 @media(max-width:800px){.cards,.two{grid-template-columns:1fr}.tabs{flex-direction:column}}
 </style>
 </head>
