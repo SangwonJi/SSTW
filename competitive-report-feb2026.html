@@ -3,287 +3,290 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PUBGM Competitive Intelligence — Feb 2026</title>
+<title>2026년 2월 직접경쟁작 월간 리포트</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--n:#0c1222;--d:#1e293b;--s:#334155;--g:#64748b;--sv:#94a3b8;--bd:#e2e8f0;--lt:#f1f5f9;--bg:#f8fafc;--w:#fff;--bl:#2563eb;--am:#d97706;--vi:#7c3aed;--em:#059669;--rd:#dc2626;--gn:#16a34a}
-body{font-family:'Noto Sans KR',system-ui,sans-serif;background:var(--bg);color:var(--s);line-height:1.65;-webkit-font-smoothing:antialiased}
+:root{--n:#0f172a;--d:#1e293b;--s:#334155;--g:#64748b;--sv:#94a3b8;--bd:#e2e8f0;--lt:#f1f5f9;--bg:#f8fafc;--w:#fff;--bl:#2563eb;--am:#d97706;--vi:#7c3aed;--em:#059669;--rd:#dc2626;--gn:#16a34a}
+body{font-family:'Noto Sans KR',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--s);line-height:1.65;-webkit-font-smoothing:antialiased}
+.top{background:var(--n);padding:10px 28px;display:flex;justify-content:space-between;align-items:center}
+.top span{font-size:10px;letter-spacing:1px}
+.top .l{color:var(--sv);font-weight:600;text-transform:uppercase}.top .r{color:var(--g)}
+.wrap{max-width:1200px;margin:0 auto;padding:24px 28px 60px}
 
-/* TOP */
-.top{background:var(--n);padding:10px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
-.top .br{color:var(--sv);font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase}
-.top .mt{color:var(--g);font-size:10px}
+/* HEADER */
+.hdr h1{font-size:22px;font-weight:900;color:var(--n);margin-bottom:4px}
+.hdr p{font-size:12px;color:var(--g);margin-bottom:20px}
 
-/* NAV TABS */
-.nav{background:var(--w);border-bottom:1px solid var(--bd);padding:0 24px;position:sticky;top:38px;z-index:99;display:flex;gap:0;overflow-x:auto}
-.nav-btn{padding:12px 20px;font-size:12px;font-weight:600;color:var(--g);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s}
-.nav-btn:hover{color:var(--s);background:var(--lt)}
-.nav-btn.on{color:var(--bl);border-bottom-color:var(--bl)}
+/* KEY FINDING */
+.kf{background:linear-gradient(135deg,#eff6ff,#f0fdf4);border-left:4px solid var(--bl);border-radius:0 8px 8px 0;padding:18px 22px;margin-bottom:20px}
+.kf-t{font-size:9px;font-weight:700;color:var(--bl);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px}
+.kf p{font-size:12.5px;color:var(--s);line-height:1.8}
+.kf strong{color:var(--n)}.kf .w{color:var(--rd);font-weight:700}
 
-/* PAGES */
-.page{display:none;max-width:1200px;margin:0 auto;padding:28px 24px 60px}
-.page.on{display:block}
-
-/* COMPONENTS */
-.kf{background:linear-gradient(135deg,#eef4ff,#f0faf5);border-left:4px solid var(--bl);border-radius:0 10px 10px 0;padding:20px 24px;margin-bottom:24px}
-.kf-l{font-size:10px;font-weight:700;color:var(--bl);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:6px}
-.kf p{font-size:13px;color:var(--s);line-height:1.8}
-.kf strong{color:var(--n)}.kf .wr{color:var(--rd);font-weight:700}
-
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
-.cd{background:var(--w);border-radius:10px;padding:16px;border:1px solid var(--bd);position:relative}
-.cd::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:10px 10px 0 0}
+/* CARDS */
+.cds{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+.cd{background:var(--w);border-radius:8px;padding:14px;border:1px solid var(--bd);position:relative}
+.cd::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:8px 8px 0 0}
 .cd.pm{border:2px solid var(--bl);border-top:none}.cd.pm::after{background:var(--bl)}
 .cd.ff::after{background:var(--am)}.cd.cm::after{background:var(--vi)}.cd.df::after{background:var(--em)}
-.cd .lb{font-size:10px;font-weight:600;margin-bottom:8px}
-.cd .bg{font-size:18px;font-weight:800;color:var(--n)}
-.cd .md{font-size:13px;color:var(--s);margin-bottom:8px}
-.cd .bx{display:flex;flex-wrap:wrap;gap:4px}
-
-.b{display:inline-block;padding:2px 7px;border-radius:100px;font-size:9.5px;font-weight:600}
+.cd .lb{font-size:10px;font-weight:600;margin-bottom:6px}
+.cd .v1{font-size:17px;font-weight:800;color:var(--n)}
+.cd .v2{font-size:12px;color:var(--s);margin-bottom:6px}
+.bx{display:flex;flex-wrap:wrap;gap:3px}
+.b{display:inline-block;padding:1px 6px;border-radius:100px;font-size:9px;font-weight:600}
 .bu{background:#e6f7ed;color:var(--gn)}.bd{background:#fdeeed;color:var(--rd)}.bn{background:var(--lt);color:var(--g)}
 
-.sh{display:flex;align-items:center;gap:8px;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--n)}
-.sh h2{font-size:16px;font-weight:800;color:var(--n)}
-.sh .tg{padding:3px 10px;border-radius:100px;font-size:10px;font-weight:600}
-.sn{width:22px;height:22px;border-radius:5px;background:var(--n);color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center}
+/* CHART */
+.chrt{background:var(--w);border-radius:8px;border:1px solid var(--bd);padding:16px 20px;margin-bottom:16px}
+.chrt .t{font-size:12px;font-weight:700;color:var(--n);margin-bottom:2px}
+.chrt .s{font-size:10px;color:var(--sv);margin-bottom:12px}
 
-.cb{background:var(--w);border-radius:10px;border:1px solid var(--bd);padding:20px 24px;margin-bottom:14px}
-.cb .ct{font-size:13px;font-weight:700;color:var(--n);margin-bottom:2px}
-.cb .cs{font-size:11px;color:var(--sv);margin-bottom:14px}
+/* TABS */
+.game-tabs{display:flex;gap:0;margin:24px 0 0;border-bottom:2px solid var(--n)}
+.gt{flex:1;padding:10px 16px;font-size:13px;font-weight:700;text-align:center;cursor:pointer;border:none;background:var(--lt);color:var(--g);transition:all .15s;border-radius:8px 8px 0 0;margin-right:2px}
+.gt:hover{background:var(--bd)}
+.gt.on-ff{background:var(--am);color:var(--w)}.gt.on-cm{background:var(--vi);color:var(--w)}.gt.on-df{background:var(--em);color:var(--w)}
+.gp{display:none;padding:20px 0}
+.gp.on{display:block}
 
-.ib{border-radius:8px;padding:12px 16px;margin:14px 0;border:1px solid}
-.ib .il{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px}
-.ib p{font-size:12px;color:var(--s);line-height:1.7}
-.ib-bl{background:#f0f6ff;border-color:#c8ddf8}.ib-bl .il{color:var(--bl)}
-.ib-rd{background:#fdf2f2;border-color:#f5caca}.ib-rd .il{color:var(--rd)}
-.ib-am{background:#fefbf0;border-color:#f5e6b8}.ib-am .il{color:var(--am)}
+/* GAME SECTION ELEMENTS */
+.sum{border-radius:8px;padding:16px 20px;margin-bottom:14px;border:1px solid}
+.sum .h{font-size:13px;font-weight:600;color:var(--n);margin-bottom:4px}
+.sum .d{font-size:12px;color:var(--s);line-height:1.75}
+.kt{display:inline-flex;align-items:center;gap:6px;margin-bottom:10px;padding:6px 14px;border-radius:8px;font-size:11px;font-weight:600}
+.sec-t{font-size:13px;font-weight:700;color:var(--n);margin:18px 0 8px;display:flex;align-items:center;gap:6px}
+.sec-t::before{content:'';width:3px;height:14px;border-radius:2px}
 
-.sb{border-radius:10px;padding:16px 20px;margin-bottom:14px;border:1px solid}
-.sb .hl{font-size:13px;font-weight:600;color:var(--n);margin-bottom:4px}
-.sb .ds{font-size:12px;color:var(--s);line-height:1.7}
-
-table{width:100%;border-collapse:separate;border-spacing:0;font-size:11.5px;border-radius:8px;overflow:hidden;border:1px solid var(--bd);margin-bottom:12px}
-th{background:var(--lt);font-weight:600;color:var(--n);padding:8px 12px;text-align:left;font-size:10.5px}
-td{padding:8px 12px;border-top:1px solid var(--bd);color:var(--s)}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:11px;border-radius:8px;overflow:hidden;border:1px solid var(--bd);margin-bottom:12px}
+th{background:var(--lt);font-weight:600;color:var(--n);padding:7px 10px;text-align:left;font-size:10px}
+td{padding:7px 10px;border-top:1px solid var(--bd);color:var(--s)}
 tr:hover td{background:#fafbfd}
 
-.tabs{display:flex;gap:4px;margin-bottom:14px}
-.tab{padding:6px 16px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--bd);background:var(--w);color:var(--g);transition:all .15s}
-.tab.on{background:var(--n);color:#fff;border-color:var(--n)}
+.ib{border-radius:6px;padding:12px 14px;margin:12px 0;border:1px solid;font-size:11.5px;line-height:1.7}
+.ib .il{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px}
+ul{margin:0 0 10px 16px;font-size:12px;color:var(--s);line-height:1.8}
+ul li{margin-bottom:4px}
+ul strong{color:var(--n)}
 
-.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sub-tab{display:flex;gap:3px;margin-bottom:10px}
+.st{padding:5px 14px;border-radius:5px;font-size:10px;font-weight:600;cursor:pointer;border:1px solid var(--bd);background:var(--w);color:var(--g)}
+.st.on{background:var(--n);color:#fff;border-color:var(--n)}
 
-.kt{display:flex;align-items:center;gap:6px;margin-bottom:10px}
-.kt span:first-child{font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;letter-spacing:.8px}
-.kt span:last-child{font-size:11.5px;color:var(--s)}
-
-.sig{padding:10px 14px;border-radius:8px;border-left:3px solid;margin-bottom:10px}
-.sig .st{font-size:10.5px;font-weight:700;margin-bottom:3px}
-.sig .sd{font-size:11.5px;color:var(--s)}
-
-.act{background:var(--w);border-radius:10px;padding:16px;border:1px solid var(--bd);border-top:3px solid}
-.act .al{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
-.act .at{font-size:12.5px;font-weight:700;color:var(--n);margin-bottom:4px}
-.act .ad{font-size:11.5px;color:var(--s);line-height:1.7}
-
-.ft{background:var(--n);padding:14px 24px;text-align:center}
-.ft p{font-size:10px;color:var(--g)}
-
-@media(max-width:900px){.cards,.two,.three{grid-template-columns:1fr}}
+.ft{background:var(--n);padding:12px;text-align:center;margin-top:40px}
+.ft p{font-size:9px;color:var(--g)}
+@media(max-width:768px){.cds,.two{grid-template-columns:1fr}.game-tabs{flex-direction:column}}
 </style>
 </head>
 <body>
+<div class="top"><span class="l">KRAFTON IPL · Competitive Intelligence</span><span class="r">Sensor Tower · 79 Countries · Feb 2026</span></div>
 
-<div class="top"><span class="br">KRAFTON IPL · Competitive Intelligence</span><span class="mt">Sensor Tower · 79 Countries · Feb 2026</span></div>
-
-<div class="nav">
-  <button class="nav-btn on" onclick="go('summary')">Executive Summary</button>
-  <button class="nav-btn" onclick="go('charts')">차트 분석</button>
-  <button class="nav-btn" onclick="go('ff')">1. Free Fire</button>
-  <button class="nav-btn" onclick="go('cm')">2. CODM</button>
-  <button class="nav-btn" onclick="go('df')">3. Delta Force</button>
-  <button class="nav-btn" onclick="go('threat')">위협 매트릭스</button>
-  <button class="nav-btn" onclick="go('action')">Recommended Actions</button>
+<div class="wrap">
+<div class="hdr">
+  <h1>2026년 2월 직접경쟁작 월간 리포트</h1>
+  <p>PUBG Mobile 관점 경쟁 환경 분석 — Sensor Tower · 79개국 · 중국 제외 · 2026.02.01~02.28</p>
 </div>
 
-<!-- ========== SUMMARY ========== -->
-<div class="page on" id="p-summary">
+<!-- KEY FINDING -->
 <div class="kf">
-  <div class="kf-l">Key Finding</div>
-  <p><strong>1.</strong> PUBGM은 경쟁작 4개 중 <strong>유일하게 매출 MoM·YoY 동시 성장</strong> 달성. 일매출 $3.05M으로 FF·CODM 대비 2~3배 격차, ARPU $2.07로 과금 효율 압도적 우위<br>
-  <strong>2.</strong> CODM은 대규모 콘텐츠 투입에도 <strong>YoY ▼20% 구조적 침체 탈피 실패</strong>. 월평균 일매출 $1M 하회<br>
-  <strong>3.</strong> Delta Force는 <span class="wr">인도네시아(비중 31→38%)·베트남(+29.2%)</span>에서 이벤트별 유저 흡수 패턴 반복 — PUBGM 핵심 시장과의 경합 심화</p>
+  <div class="kf-t">Key Finding</div>
+  <p><strong>1.</strong> PUBGM은 경쟁작 중 <strong>유일하게 매출 MoM·YoY 동시 성장</strong>. 일매출 $3.05M으로 FF·CODM 대비 2~3배, ARPU $2.07로 과금 효율 우위<br>
+  <strong>2.</strong> CODM은 S2 대규모 콘텐츠에도 <strong>YoY ▼20% 구조적 침체</strong>. 월평균 일매출 $1M 하회<br>
+  <strong>3.</strong> Delta Force는 <span class="w">인도네시아(비중 31→38%)·베트남(+29.2%)</span>에서 이벤트별 유저 흡수 반복 — PUBGM 핵심 시장 경합 심화</p>
 </div>
-<div class="cards">
-  <div class="cd ff"><div class="lb" style="color:var(--am)">Free Fire</div><div class="bg">59.7M</div><div class="md">$41.5M · ARPU $0.70</div><div class="bx"><span class="b bu">DAU ▲5.9%</span><span class="b bd">YoY ▼7.4%</span><span class="b bd">Rev ▼14.9%</span><span class="b bu">Rev YoY ▲15.6%</span></div></div>
-  <div class="cd pm"><div class="lb" style="color:var(--bl)">PUBG Mobile ★</div><div class="bg">18.2M</div><div class="md">$37.6M · ARPU <strong style="color:var(--bl)">$2.07</strong></div><div class="bx"><span class="b bu">DAU ▲5.4%</span><span class="b bd">YoY ▼12.7%</span><span class="b bu">Rev ▲6.9%</span><span class="b bu">Rev YoY ▲20.4%</span></div></div>
-  <div class="cd cm"><div class="lb" style="color:var(--vi)">CODM</div><div class="bg">8.0M</div><div class="md">$27.6M · ARPU $3.46</div><div class="bx"><span class="b bd">DAU ▼3.8%</span><span class="b bd">YoY ▼19.9%</span><span class="b bd">Rev ▼2.2%</span><span class="b bd">Rev YoY ▼20.8%</span></div></div>
-  <div class="cd df"><div class="lb" style="color:var(--em)">Delta Force</div><div class="bg">2.0M</div><div class="md">$3.1M · ARPU $1.60</div><div class="bx"><span class="b bu">DAU ▲27.2%</span><span class="b bn">YoY N/A</span><span class="b bu">Rev ▲155.2%</span></div></div>
+
+<!-- METRIC CARDS -->
+<div class="cds">
+  <div class="cd ff"><div class="lb" style="color:var(--am)">Free Fire</div><div class="v1">59.7M</div><div class="v2">$41.5M · ARPU $0.70</div><div class="bx"><span class="b bu">DAU ▲5.9%</span><span class="b bd">YoY ▼7.4%</span><span class="b bd">Rev ▼14.9%</span><span class="b bu">YoY ▲15.6%</span></div></div>
+  <div class="cd pm"><div class="lb" style="color:var(--bl)">PUBG Mobile ★</div><div class="v1">18.2M</div><div class="v2">$37.6M · ARPU <strong style="color:var(--bl)">$2.07</strong></div><div class="bx"><span class="b bu">DAU ▲5.4%</span><span class="b bd">YoY ▼12.7%</span><span class="b bu">Rev ▲6.9%</span><span class="b bu">YoY ▲20.4%</span></div></div>
+  <div class="cd cm"><div class="lb" style="color:var(--vi)">CODM</div><div class="v1">8.0M</div><div class="v2">$27.6M · ARPU $3.46</div><div class="bx"><span class="b bd">DAU ▼3.8%</span><span class="b bd">YoY ▼19.9%</span><span class="b bd">Rev ▼2.2%</span><span class="b bd">YoY ▼20.8%</span></div></div>
+  <div class="cd df"><div class="lb" style="color:var(--em)">Delta Force</div><div class="v1">2.0M</div><div class="v2">$3.1M · ARPU $1.60</div><div class="bx"><span class="b bu">DAU ▲27.2%</span><span class="b bn">N/A</span><span class="b bu">Rev ▲155%</span></div></div>
 </div>
+
+<!-- DAILY REVENUE CHART -->
+<div class="sub-tab"><div class="st on" onclick="sw('rv','d',this)">2월 일별 매출</div><div class="st" onclick="sw('rv','m',this)">14개월 추이</div></div>
+<div id="rv-d" class="chrt"><div class="t">PUBGM, 2.20 일매출 $3.05M — FF·CODM 대비 2~3배 격차</div><div class="s">호버하여 상세 수치 확인</div><div style="height:280px"><canvas id="c1"></canvas></div></div>
+<div id="rv-m" class="chrt" style="display:none"><div class="t">14개월 내 유일하게 2월 MoM·YoY 동시 성장</div><div class="s">CODM은 DF 론칭(2025.4) 이후 구조적 하락</div><div style="height:280px"><canvas id="c2"></canvas></div></div>
+
+<!-- ========== GAME TABS ========== -->
+<div class="game-tabs">
+  <button class="gt on-ff" id="btn-ff" onclick="gm('ff')">Free Fire</button>
+  <button class="gt" id="btn-cm" onclick="gm('cm')">CODM</button>
+  <button class="gt" id="btn-df" onclick="gm('df')">Delta Force</button>
+</div>
+
+<!-- FREE FIRE -->
+<div class="gp on" id="gp-ff">
+<div class="kt" style="background:#fff7ed;color:var(--am)">KEY TAKEAWAY — 트래픽 반등 성공, IP 파워 부재로 매출 역성장. PUBGM과의 매출 격차 확대 중</div>
+<div class="sum" style="background:#fffbf0;border-color:#f5e6b8">
+  <div class="h">▶ A.DAU 59,662,211 (MoM ▲5.9%, YoY ▼7.4%) · Revenue $41,532,561 (MoM ▼14.9%, YoY ▲15.6%)</div>
+  <div class="d">피크 DAU 64,220,051 (2.15) · 피크 일매출 $2,262,986 (2.14 발렌타인데이) · 월평균 $1,483,306<br>OB52 시즌 기반 운영 중(1.14 론칭). Holi: Beat Carnival(DJ Alok) + Ramadan Cup e스포츠로 인도·MENA 문화권 이중 커버리지 전개. 1월 고과금 BM(나루토 2차·NFC) 소진 후 소비 피로도에 따른 매출 하락세 전환</div>
+</div>
+
+<div class="sec-t" style="color:var(--am)"><span style="background:var(--am)"></span>트래픽 분석</div>
+<ul>
+  <li><strong>(Beat Carnival, 2.20~3.9)</strong> DJ Alok 연계 뮤직 페스티벌 이벤트. 전용 테마곡 'BULLETPROOF' 인게임 통합, Solara 맵 거대 Alok 프로젝션·불꽃놀이 연출, BR/CS 모드 댄스 그레네이드·사운드웨이브 존·스피커 트램폴린 신규 아이템. 무료 보상: 매직 큐브, Rodeo Superstar 번들, UMP: Sea of Hues 무기 스킨</li>
+  <li><strong>(e스포츠 — Ramadan Cup, 2.21~28)</strong> 18팀 $25K 상금. MY 4팀·ID 2팀·BD 6팀·PK 6팀. Bermuda·Purgatory·Alpine·Kalahari·NexTerra·Solara 맵풀. KO 스테이지(2.21~23) → Grand Final(2.28, Champion Rush 포맷: 80pt+Booyah 달성 시 우승)</li>
+  <li><strong>(e스포츠 — FF MAX India Cup Spring, 2.7~)</strong> 시티 퀄리파이어 4개 도시(2.7~8) → 그룹 스테이지(2.26~). 인도 핵심 유저 충성도 강화 전략 지속</li>
+  <li><strong>(주간 추이)</strong> W8(2.16~22) A.DAU 62.2M 월 최고. Beat Carnival 오픈(2.20) 시점과 일치</li>
+</ul>
+
+<div class="sec-t" style="color:var(--am)"><span style="background:var(--am)"></span>매출 분석</div>
+<ul>
+  <li><strong>(2.14)</strong> 월 최고 일매출 $2,262,986 — 발렌타인데이 + Beat Carnival 사전 프로모션 시너지</li>
+  <li><strong>(2.20~)</strong> Beat Carnival 정식 오픈. 100% 보너스 다이아몬드 탑업, Beat Beast/Leopard 프리미엄 번들, Panther 테마 유료 라인업</li>
+</ul>
+
+<div class="sec-t" style="color:var(--am)"><span style="background:var(--am)"></span>콘텐츠 업데이트 상세</div>
 <table>
-  <tr><th>구분</th><th>A.DAU</th><th>MoM</th><th>YoY</th><th>Revenue</th><th>MoM</th><th>YoY</th><th>ARPU</th></tr>
-  <tr><td><strong>Free Fire</strong></td><td>59,662,211</td><td style="color:var(--gn)">▲5.9%</td><td style="color:var(--rd)">▼7.4%</td><td>$41,532,561</td><td style="color:var(--rd)">▼14.9%</td><td style="color:var(--gn)">▲15.6%</td><td>$0.70</td></tr>
-  <tr style="background:#eef7ff"><td><strong style="color:var(--bl)">★ PUBG Mobile</strong></td><td><strong>18,209,960</strong></td><td style="color:var(--gn)"><strong>▲5.4%</strong></td><td style="color:var(--rd)">▼12.7%</td><td><strong>$37,601,815</strong></td><td style="color:var(--gn)"><strong>▲6.9%</strong></td><td style="color:var(--gn)"><strong>▲20.4%</strong></td><td><strong style="color:var(--bl)">$2.07</strong></td></tr>
-  <tr><td><strong>CODM</strong></td><td>7,974,793</td><td style="color:var(--rd)">▼3.8%</td><td style="color:var(--rd)">▼19.9%</td><td>$27,621,019</td><td style="color:var(--rd)">▼2.2%</td><td style="color:var(--rd)">▼20.8%</td><td>$3.46</td></tr>
-  <tr><td><strong>Delta Force</strong></td><td>1,964,987</td><td style="color:var(--gn)">▲27.2%</td><td style="color:var(--g)">N/A</td><td>$3,147,081</td><td style="color:var(--gn)">▲155.2%</td><td style="color:var(--g)">N/A</td><td>$1.60</td></tr>
+  <tr><th>분류</th><th>컨텐츠</th><th>일자</th><th>주요내용</th></tr>
+  <tr><td>이벤트</td><td><strong>Holi: Beat Carnival</strong></td><td>2.20~3.9</td><td>DJ Alok 연계. BULLETPROOF 테마곡, Solara 맵 프로젝션·불꽃놀이, 댄스 그레네이드·사운드웨이브 존. 무료: 매직 큐브, Rodeo Superstar 번들, UMP 스킨</td></tr>
+  <tr><td>BM</td><td>Beat Carnival 프리미엄</td><td>2.20~</td><td>Beat Beast·Leopard 프리미엄 번들, 100% 보너스 다이아 탑업, Panther 테마 유료 라인업</td></tr>
+  <tr><td>e스포츠</td><td>Ramadan Cup 2026</td><td>2.21~28</td><td>18팀 $25K. KO 스테이지(3그룹×6팀, 15매치) → Grand Final(Champion Rush). MY·ID·BD·PK 팀 참가</td></tr>
+  <tr><td>e스포츠</td><td>FF MAX India Cup Spring</td><td>2.7~</td><td>시티 퀄리파이어 4개 도시(2.7~8) → 그룹 스테이지(2.26~)</td></tr>
+  <tr><td>시즌</td><td>OB52 시즌 운영 중</td><td>1.14~</td><td>JJK 콜라보 포함. OB53은 4월 예정(Advance Server 3월 중순)</td></tr>
 </table>
-<div class="ib ib-bl"><div class="il">ARPU 분석</div><p>CODM ARPU $3.46은 "축소 경제" 현상(DAU 감소 > 매출 감소). PUBGM은 DAU·매출 동시 성장하면서 ARPU $2.07 유지 = <strong>건강한 성장 구조</strong>. FF는 ARPU $0.70 볼륨 의존형.</p></div>
+<div class="ib" style="background:#eff6ff;border-color:#c8ddf8"><div class="il" style="color:var(--bl)">So What? — PUBGM 시사점</div>Beat Carnival은 대형 IP 없이 자사 캐릭터(Alok) 재활용 + 문화 이벤트(Holi) 결합의 <strong>저비용 고효율 사례</strong>. YoY ▼7.4%는 전년 나루토급 IP 부재가 원인 → PUBGM IP 콜라보 우위 재확인. 인도(Holi)·MENA(Ramadan) 이중 커버리지는 PUBGM도 참고할 만한 로컬라이제이션 전략. 위협도: <span class="b bu">낮음</span></div>
 </div>
 
-<!-- ========== CHARTS ========== -->
-<div class="page" id="p-charts">
-<div class="sh"><h2>차트 분석</h2><span class="tg" style="background:#eef4ff;color:var(--bl)">인터랙티브 — 호버하여 상세 수치 확인</span></div>
-<div class="tabs"><div class="tab on" onclick="st('rv','d',this)">2월 일별 매출</div><div class="tab" onclick="st('rv','m',this)">14개월 매출 추이</div></div>
-<div id="rv-d" class="cb"><div class="ct">PUBGM, 2.20 일매출 $3.05M으로 경쟁작 대비 2~3배 격차</div><div class="cs">2026년 2월 일별 매출 ($M)</div><div style="height:320px"><canvas id="c1"></canvas></div></div>
-<div id="rv-m" class="cb" style="display:none"><div class="ct">14개월 내 유일하게 2월 MoM·YoY 매출 동시 성장</div><div class="cs">월간 매출 추이 · CODM은 DF 론칭 이후 구조적 하락</div><div style="height:320px"><canvas id="c2"></canvas></div></div>
-
-<div class="tabs" style="margin-top:20px"><div class="tab on" onclick="st('da','a',this)">DAU — FF·PUBGM·CODM</div><div class="tab" onclick="st('da','b',this)">DAU — Delta Force</div></div>
-<div id="da-a" class="cb"><div class="ct">FF가 DAU 규모 주도, PUBGM이 매출 효율(ARPU) 압도</div><div class="cs">2026년 2월 일별 DAU (M)</div><div style="height:300px"><canvas id="c3"></canvas></div></div>
-<div id="da-b" class="cb" style="display:none"><div class="ct">Delta Force: RED DAY(2.13~) 기점 피크 DAU +40% 급등</div><div class="cs">빨간 구간 = RED DAY 이벤트 기간</div><div style="height:260px"><canvas id="c4"></canvas></div></div>
-
-<div class="two" style="margin-top:20px">
-  <div class="cb"><div class="ct">DF 트래픽 상위국 (DAU)</div><div class="cs">빨간색 = PUBGM 핵심 시장</div><div style="height:220px"><canvas id="c5"></canvas></div></div>
-  <div class="cb"><div class="ct">DF 매출 상위국 (Revenue)</div><div class="cs">빨간색 = 대만 단일 의존 53%</div><div style="height:220px"><canvas id="c6"></canvas></div></div>
-</div>
+<!-- CODM -->
+<div class="gp" id="gp-cm">
+<div class="kt" style="background:#fef2f2;color:var(--rd)">KEY TAKEAWAY — 콘텐츠가 아닌 유저 베이스 자체의 구조적 이탈. 반등 시그널 부재</div>
+<div class="sum" style="background:#fdf5f5;border-color:#f5caca">
+  <div class="h">▶ A.DAU 7,974,793 (MoM ▼3.8%, YoY ▼19.9%) · Revenue $27,621,019 (MoM ▼2.2%, YoY ▼20.8%)</div>
+  <div class="d">피크 DAU 8,635,600 (2.1) · 피크 일매출 $1,650,571 (2.13) · <strong style="color:var(--rd)">월평균 $986,465 ($1M 하회)</strong><br>S2 Lunar Charge(2.11~) 대규모 콘텐츠 투입 — Plunder BR 최초 도입, DMZ 확장, 미식 무기 이벤트 — 에도 불구하고 YoY 트래픽·매출 모두 경쟁작 중 최대 하락폭</div>
 </div>
 
-<!-- ========== FF ========== -->
-<div class="page" id="p-ff">
-<div class="sh"><span class="sn">1</span><h2>Free Fire</h2><span class="tg" style="background:#fef8ee;color:var(--am)">Beat Carnival로 트래픽 반등, 매출 하락 전환</span></div>
-<div class="kt"><span style="background:#fff7ed;color:var(--am)">KEY TAKEAWAY</span><span>트래픽 반등 성공했으나 IP 파워 부재로 매출 역성장 불가피 — PUBGM과의 매출 격차 확대 중</span></div>
-<div class="sb" style="background:#fffbf0;border-color:#f5e6b8">
-  <div class="hl">▶ A.DAU 59,662,211 (MoM ▲5.9%, YoY ▼7.4%) · Revenue $41,532,561 (MoM ▼14.9%, YoY ▲15.6%)</div>
-  <div class="ds">피크 DAU 64,220,051 (2.15) · 피크 일매출 $2,262,986 (2.14) · 월평균 $1,483,306<br>Holi: Beat Carnival(DJ Alok) + Ramadan Cup e스포츠를 통한 문화권 이벤트 이중 커버리지로 트래픽 반등. 1월 고과금 BM 소진 후 소비 피로도에 따른 매출 하락세 전환</div>
-</div>
-<table><tr><th>분류</th><th>컨텐츠</th><th>일자</th><th>주요내용</th></tr>
-<tr><td>이벤트</td><td><strong>Holi: Beat Carnival</strong></td><td>2.20~3.9</td><td>DJ Alok 연계. BULLETPROOF 테마곡, Solara 맵 프로젝션. 무료: 매직 큐브, 번들</td></tr>
-<tr><td>BM</td><td>Beat Carnival 프리미엄</td><td>2.20~</td><td>Beat Beast·Leopard 번들, 100% 보너스 다이아 탑업</td></tr>
-<tr><td>e스포츠</td><td>Ramadan Cup / India Cup</td><td>2.7~28</td><td>Ramadan Cup 18팀 $25K / India Cup 4도시 퀄리파이어</td></tr></table>
-<div class="ib ib-bl"><div class="il">So What?</div><p>Beat Carnival은 대형 IP 없이 자사 캐릭터(Alok) 재활용 + 문화 이벤트(Holi) 결합의 <strong>저비용 고효율 사례</strong>. YoY ▼7.4%는 나루토급 IP 부재가 원인 → PUBGM IP 콜라보 우위 재확인. 인도·MENA 이중 커버리지는 PUBGM도 참고할 만한 로컬라이제이션 사례.</p></div>
+<div class="sec-t" style="color:var(--vi)"><span style="background:var(--vi)"></span>트래픽 분석</div>
+<ul>
+  <li><strong>(S2 Lunar Charge, 2.11)</strong> Year of the Horse 테마. Lachmann-556 돌격소총(무료 배틀패스), Plunder BR 최초 도입, DMZ: Recon 확장(The Train 미사일 이벤트·Velikan 보스·Five Gods of Wealth 계약), Shipment 설 테마 맵(~2.25), 1v1 Duel 복귀</li>
+  <li><strong>(Plunder)</strong> 워존 시리즈 인기 모드 CODM 최초 도입. Isolated 맵 3인 트리오 $1M 캐시 경쟁. 무한 리스폰, Cash Balloon·Deposit Helicopter 입금 시스템. 시즌 LTM으로 장기 리텐션 효과 제한적</li>
+  <li><strong>(DMZ: Recon — The Train)</strong> Serpent Island 신규 이벤트. 적 거점 제거 → 미사일 발사 → 열차 파괴 → 고급 전리품 확보. 글로벌 알림으로 전 서버 경쟁 유발</li>
+  <li><strong>(DMZ: Recon — Five Gods of Wealth)</strong> 설 콜라보 계약. 5개 마크 위치 아이템 수집 → 오신(五神) 소환 → 아이템 교환</li>
+  <li><strong>(라마단 — Starlit Quest, 2.16~)</strong> 무료 시즌 전체 운영. Zero — Tranquil Nights, AK47 — Luminous, SVD — Falcon's Eye 보상</li>
+</ul>
+
+<div class="sec-t" style="color:var(--vi)"><span style="background:var(--vi)"></span>매출 분석</div>
+<ul>
+  <li><strong>(배틀패스)</strong> Lachmann-556 무료 핵심. 프리미엄: Park — VNN Field Reporter, Stitch — The Butcher of Zordaya, Isabella — Puno 오퍼레이터 스킨. Counter UAV 리스킨, Secret Cache</li>
+  <li><strong>(미식 무기 — Mythic Tides Incoming, 2.4~6주)</strong> AGR-556 Flying Dutchman 미식 무료 획득 이벤트. Secret Cache 시스템 최초 적용. Cache Streak(일일 연속 오픈 보너스) 도입</li>
+  <li><strong>(스토어)</strong> Forged in Ruin Mythic Draw — Mythic Lachmann-556 Forged Calamity + Legendary Krueger. Golden Turn Draw — Legendary VMP Crimson Sparkfire(슬롯머신 인스펙트)</li>
+  <li><strong>(M4·M16 리워크)</strong> M4 모델 전면 리뉴얼(MW2/MW3 기준), M16 애니메이션 변경. 스탯 무변동, 사용감 개선</li>
+  <li><strong>(밸런스)</strong> Striker 다리 배율 1.0→0.9x, Fast Reload +20% 스프린트 패널티. Sparrow 화살 6→5발</li>
+</ul>
+
+<div class="sec-t" style="color:var(--vi)"><span style="background:var(--vi)"></span>콘텐츠 업데이트 상세</div>
+<table>
+  <tr><th>분류</th><th>컨텐츠</th><th>일자</th><th>주요내용</th></tr>
+  <tr><td>시즌</td><td><strong>S2: Lunar Charge</strong></td><td>2.11</td><td>Lachmann-556, Plunder BR, DMZ 확장(Train·Velikan·Five Gods), Shipment 설 맵, Duel 복귀</td></tr>
+  <tr><td>BM</td><td>Mythic Tides Incoming</td><td>2.4~(6주)</td><td>AGR-556 Flying Dutchman 미식 무료. Secret Cache·Cache Streak 최초 적용</td></tr>
+  <tr><td>BM</td><td>Forged in Ruin Mythic Draw</td><td>2.11~</td><td>Mythic Lachmann-556 Forged Calamity + Legendary Krueger — Utter Destruction</td></tr>
+  <tr><td>BM</td><td>Golden Turn Draw</td><td>2.11~</td><td>Legendary VMP — Crimson Sparkfire (슬롯머신 인스펙트 애니메이션)</td></tr>
+  <tr><td>이벤트</td><td>Starlit Quest (라마단)</td><td>2.16~</td><td>무료 시즌 전체 운영. Zero — Tranquil Nights, AK47 — Luminous, SVD — Falcon's Eye</td></tr>
+  <tr><td>이벤트</td><td>Second to None (Duel)</td><td>2.11~</td><td>트로피 누적 → Merc 2 오퍼레이터 스킨, Secret Cache 보상</td></tr>
+  <tr><td>랭크</td><td>신시즌 랭크</td><td>2.11</td><td>Epic Death Angel Alice — Nighthawk, Epic RAM-7 Mystical 보상</td></tr>
+  <tr><td>리워크</td><td>M4·M16 리워크</td><td>2.11</td><td>모델 리뉴얼(MW2/MW3), 애니메이션 변경. 스탯 무변동</td></tr>
+</table>
+<div class="ib" style="background:#fdf2f2;border-color:#f5caca"><div class="il" style="color:var(--rd)">So What? — 구조적 진단</div>Plunder·DMZ 확장·무료 미식 등 <strong>전례 없는 콘텐츠 확대에도 하락 지속</strong>은 단순 콘텐츠 부족이 아닌 <strong>유저 베이스 자체의 구조적 이탈</strong>을 시사. 2025.4 DF 론칭 이후 슈터 장르 코어 유저 분산이 장기화. 월평균 일매출 $1M 하회는 심리적 저항선 이탈. 위협도: <span class="b bu">낮음</span> (구조적 침체)</div>
 </div>
 
-<!-- ========== CODM ========== -->
-<div class="page" id="p-cm">
-<div class="sh"><span class="sn">2</span><h2>Call of Duty: Mobile</h2><span class="tg" style="background:#fdf2f2;color:var(--rd)">경쟁작 중 최대 YoY 하락폭</span></div>
-<div class="kt"><span style="background:#fef2f2;color:var(--rd)">KEY TAKEAWAY</span><span>콘텐츠가 아닌 유저 베이스 자체의 구조적 이탈 — 반등 시그널 부재</span></div>
-<div class="sb" style="background:#fdf5f5;border-color:#f5caca">
-  <div class="hl">▶ A.DAU 7,974,793 (MoM ▼3.8%, YoY ▼19.9%) · Revenue $27,621,019 (MoM ▼2.2%, YoY ▼20.8%)</div>
-  <div class="ds">피크 DAU 8,635,600 (2.1) · 피크 일매출 $1,650,571 (2.13) · <strong style="color:var(--rd)">월평균 $986,465 ($1M 하회)</strong><br>S2 Lunar Charge 대규모 콘텐츠(Plunder·DMZ·미식 무기) 투입에도 YoY 트래픽·매출 모두 경쟁작 중 최대 하락폭</div>
-</div>
-<table><tr><th>분류</th><th>컨텐츠</th><th>일자</th><th>주요내용</th></tr>
-<tr><td>시즌</td><td><strong>S2: Lunar Charge</strong></td><td>2.11</td><td>Lachmann-556, Plunder BR 최초, DMZ 확장, Duel 복귀</td></tr>
-<tr><td>BM</td><td>Mythic Tides Incoming</td><td>2.4~(6주)</td><td>AGR-556 Flying Dutchman 미식 무료. Secret Cache 최초</td></tr>
-<tr><td>이벤트</td><td>라마단 이벤트</td><td>2.16~</td><td>무료 시즌 전체 운영. 라마단 테마 보상</td></tr>
-<tr><td>리워크</td><td>M4·M16 리워크</td><td>2.11</td><td>모델 리뉴얼(MW2/MW3), 애니메이션 변경</td></tr></table>
-<div class="ib ib-rd"><div class="il">So What?</div><p>Plunder·DMZ·미식 등 <strong>전례 없는 콘텐츠 확대에도 하락 지속</strong>은 유저 베이스 자체의 구조적 이탈을 시사. DF 론칭(2025.4) 이후 슈터 장르 코어 유저가 분산되는 장기 트렌드. 월평균 일매출 $1M 하회는 심리적 저항선 이탈.</p></div>
+<!-- DELTA FORCE -->
+<div class="gp" id="gp-df">
+<div class="kt" style="background:#ecfdf5;color:var(--em)">KEY TAKEAWAY — 절대 규모 미미하나, 인도네시아·베트남 구조적 성장이 PUBGM 핵심 시장과 직접 충돌</div>
+<div class="sum" style="background:#eefaf5;border-color:#a8e6ca">
+  <div class="h">▶ A.DAU 1,964,987 (MoM ▲27.2%) · Revenue $3,147,081 (MoM ▲155.2%) <span style="font-size:10px;color:var(--g)">*중국버전 미포함 / YoY N/A</span></div>
+  <div class="d">피크 DAU 2,508,641 (2.17, 설 익일) · 피크 주간 매출 $985K (W/O 2.9) — 론칭 이후 최고<br>S8 Morphosis(2.3) + RED DAY 설 대형 이벤트(2.13~3.5) 시너지로 트래픽·매출 동반 급증. Vlinder(서포트), Aftershock(환경 파괴 맵), Flashpoint(이동형 거점전) 등 시즌 사상 가장 대규모 콘텐츠 업데이트</div>
 </div>
 
-<!-- ========== DF ========== -->
-<div class="page" id="p-df">
-<div class="sh"><span class="sn">3</span><h2>Delta Force</h2><span class="tg" style="background:#ecfdf5;color:var(--em)">Morphosis + RED DAY 시너지 급등</span></div>
-<div class="kt"><span style="background:#ecfdf5;color:var(--em)">KEY TAKEAWAY</span><span>절대 규모는 미미하나, 인도네시아·베트남에서의 구조적 성장이 PUBGM 핵심 시장과 직접 충돌</span></div>
-<div class="sb" style="background:#eefaf5;border-color:#a8e6ca">
-  <div class="hl">▶ A.DAU 1,964,987 (MoM ▲27.2%) · Revenue $3,147,081 (MoM ▲155.2%) <span style="font-size:10px;color:var(--g)">*중국버전 미포함</span></div>
-  <div class="ds">피크 DAU 2,508,641 (2.17, 설 익일) · 피크 주간 매출 $985K (W/O 2.9) — 론칭 이후 최고<br>S8 Morphosis(2.3) + RED DAY 설 대형 이벤트(2.13~3.5) 시너지로 트래픽·매출 동반 급증</div>
-</div>
-<table><tr><th>일자</th><th>이벤트</th><th>비고</th></tr>
-<tr><td><strong>2.3</strong></td><td>S8 Morphosis 오픈</td><td>Vlinder, Aftershock, Flashpoint, Fiery Owl Hunt</td></tr>
-<tr><td><strong>2.13</strong></td><td><strong>RED DAY 이벤트 시작</strong></td><td>Vyron's Restaurant, Golden Rose Date</td></tr>
-<tr style="background:#ecfdf5"><td><strong>2.16</strong></td><td><strong>설 당일 대규모 보상</strong></td><td><strong>1,000 Ticket + 무료 번들 3종</strong></td></tr>
-<tr><td>2.26</td><td>미드시즌 업데이트</td><td>Red Fish Event, Nightingale Lucky Draw</td></tr></table>
+<div class="sec-t" style="color:var(--em)"><span style="background:var(--em)"></span>트래픽 분석</div>
+<ul>
+  <li><strong>(S8 Morphosis, 2.3)</strong> 전 플랫폼 동시 론칭(무중단 업데이트). 신규 서포트 오퍼레이터 Vlinder — 힐링 버터플라이 드론·구조 UAV(무료 배틀패스 Tier 1). 신규 무기: MCX LT(돌격소총), FS-12(산탄총), Executioner(근접). Purple 탄약 티어 추가(고데미지 로드아웃)</li>
+  <li><strong>(Aftershock — 워페어 신규 맵)</strong> 대규모 도시 전장. 실시간 지진·건물 완전 붕괴·수륙양용 차량 경로. 환경 파괴 시스템으로 전술적 깊이 추가</li>
+  <li><strong>(Flashpoint — 신규 모드)</strong> 전체 로비가 하나의 이동형 거점을 두고 쟁탈. 90~120초 주기 거점 이동. 빠른 템포의 집중 교전</li>
+  <li><strong>(Fiery Owl Hunt)</strong> Operations 보스 모드. 1명이 Saeed "Fiery Owl"(크로스보우 보스), 나머지가 Ahsarah Guard로 PvE 보스전</li>
+  <li><strong>(Space City 2.0)</strong> 신규 Dock 구역(수중 전투·수중 전리품), 신규 보스 Hudson(Haavk 소속, 시네마틱 등장), 상어 AI(매복 유닛). 솔로큐 난이도 추가(Layali Grove Easy, Space City Normal)</li>
+  <li><strong>(RED DAY, 2.13~3.5)</strong> Year of the Horse 설 대형 이벤트. Vyron's Restaurant 프로그레션(레전더리 무기 외형 획득), 대규모 로그인 보상(2.10: 600 Ticket, 2.16: 1,000 Ticket 즉시 지급), 무료 번들 3종(G3 Emergency Alert, M249 Whiteout, Vityaz Sweetheart), GTQ-35 탱크 스킨</li>
+  <li><strong>(주간 추이)</strong> W6 1,757K → W7 1,887K → <strong>W8 2,273K(피크)</strong> → W9 1,994K. RED DAY(2.13~)·설 당일(2.16) 보상과 W8 피크 정확히 일치</li>
+  <li><strong>(Twitch Drops, 2.3~8)</strong> Morphosis 출시 기념 Twitch 시청 보상. Ticket·시즌 팩·무기 스킨 6종 이상</li>
+</ul>
 
-<p style="font-size:13px;font-weight:700;color:var(--n);margin:20px 0 10px">국가별 — 트래픽 vs 매출 완전 불일치</p>
+<div class="sec-t" style="color:var(--em)"><span style="background:var(--em)"></span>매출 분석</div>
+<ul>
+  <li><strong>(시즌패스)</strong> Vlinder + 무기 스킨 5종 + 차량 스킨 4종 + 2×3 Safe Box + Delta Ticket. Ultimate Vyron 스킨, Legendary 근접 무기 스킨(Dark Star), Deluxe 번들</li>
+  <li><strong>(RED DAY 유료화)</strong> CI-19·G18 'Blessings of the Horse' 레전더리 무기 외형, Nightingale·Rosa Fortuniana Lucky Draw(비복원 가챠, 첫 추첨 10 Delta Coin). Golden Rose Date 이벤트</li>
+  <li><strong>(매출 구조 — 대만 의존)</strong> 대만 매출 비중: 론칭 17% → 현재 <strong style="color:var(--rd)">53%</strong>(W/O 2.16 최대 59%). 트래픽 대국(인도네시아·브라질·베트남)의 ARPU가 극도로 낮아 수익화 미진</li>
+</ul>
+
+<div class="sec-t" style="color:var(--em)"><span style="background:var(--em)"></span>2월 이벤트 타임라인</div>
+<table>
+  <tr><th>일자</th><th>이벤트</th><th>비고</th></tr>
+  <tr><td><strong>2.3</strong></td><td>S8 Morphosis 전 플랫폼 론칭</td><td>Vlinder, MCX LT, FS-12, Aftershock, Flashpoint, Fiery Owl Hunt, Space City 2.0</td></tr>
+  <tr><td>2.3~8</td><td>Twitch Drops</td><td>Morphosis 출시 기념. Ticket, 시즌팩, 무기 스킨 6종+</td></tr>
+  <tr><td>2.3~3.5</td><td>Event Pass</td><td>시즌 론칭 기념 미션 보상</td></tr>
+  <tr><td>2.10</td><td>로그인 보상</td><td>600 Delta Ticket 지급</td></tr>
+  <tr><td><strong>2.13</strong></td><td><strong>RED DAY 이벤트 시작</strong></td><td>Vyron's Restaurant, Golden Rose Date, Firework Ratty, CI-19·G18 레전더리</td></tr>
+  <tr><td>2.13~26</td><td>Flashpoint 모드 한정 운영</td><td>이동형 거점 쟁탈전 (90~120초 주기)</td></tr>
+  <tr style="background:#ecfdf5"><td><strong>2.16</strong></td><td><strong>설 당일 — 대규모 보상</strong></td><td><strong>1,000 Ticket + 무료 번들 3종 + GTQ-35 탱크 스킨</strong></td></tr>
+  <tr><td>2.26</td><td>미드시즌 업데이트</td><td>Red Fish Event, Nightingale Lucky Draw, Rosa Fortuniana Lucky Draw</td></tr>
+</table>
+
+<div class="sec-t" style="color:var(--em)"><span style="background:var(--em)"></span>국가별 현황 — 트래픽 vs 매출 완전 불일치</div>
 <div class="two">
-<table><tr><th>트래픽 Top</th><th>비중</th><th>W6→W8</th><th>평가</th></tr>
-<tr><td><strong style="color:var(--rd)">인도네시아</strong></td><td><strong>35.4%</strong></td><td style="color:var(--gn)">+15.2%</td><td>비중 31→38% 구조적 확대</td></tr>
-<tr><td>브라질</td><td>14.8%</td><td style="color:var(--am)">+5.4%</td><td>설 반응 미미</td></tr>
-<tr><td><strong style="color:var(--rd)">베트남</strong></td><td>14.2%</td><td style="color:var(--gn)">+29.2%</td><td>급등 후 -22.9% 급락</td></tr>
-<tr><td>멕시코</td><td>11.4%</td><td style="color:var(--rd)">-10.9%</td><td>지속 하락</td></tr>
-<tr><td>파키스탄</td><td>7.9%</td><td style="color:var(--g)">-2.9%</td><td>횡보</td></tr></table>
-<table><tr><th>매출 Top</th><th>매출</th><th>비중</th><th>추이</th></tr>
-<tr><td><strong style="color:var(--rd)">대만</strong></td><td>$1.43M</td><td style="color:var(--rd);font-weight:700">53.2%</td><td>론칭 17%→53~59%</td></tr>
-<tr><td>미국</td><td>$342K</td><td>12.7%</td><td>26%→13%</td></tr>
-<tr><td>태국</td><td>$215K</td><td>8.0%</td><td>DAU+Rev Top</td></tr>
+<div>
+<div class="chrt"><div class="t">트래픽 상위국 (DAU)</div><div class="s">빨간색 = PUBGM 핵심 시장</div><div style="height:200px"><canvas id="c5"></canvas></div></div>
+<table><tr><th>국가</th><th>A.DAU</th><th>비중</th><th>W6→W8</th><th>평가</th></tr>
+<tr><td><strong style="color:var(--rd)">인도네시아</strong></td><td>16.8M</td><td><strong>35.4%</strong></td><td style="color:var(--gn)">+15.2%</td><td>비중 31→38% 구조적 확대. 이벤트 후 미하락</td></tr>
+<tr><td>브라질</td><td>7.0M</td><td>14.8%</td><td style="color:var(--am)">+5.4%</td><td>설 반응 미미. W9 -12.9%</td></tr>
+<tr><td><strong style="color:var(--rd)">베트남</strong></td><td>6.7M</td><td>14.2%</td><td style="color:var(--gn)">+29.2%</td><td>설 반응 최대. W9 -22.9% 급락(일시적)</td></tr>
+<tr><td>멕시코</td><td>5.4M</td><td>11.4%</td><td style="color:var(--rd)">-10.9%</td><td>월 내 지속 하락. 설 무반응</td></tr>
+<tr><td>파키스탄</td><td>3.7M</td><td>7.9%</td><td style="color:var(--g)">-2.9%</td><td>횡보</td></tr></table>
+</div>
+<div>
+<div class="chrt"><div class="t">매출 상위국 (Revenue)</div><div class="s">빨간색 = 대만 단일 의존 53%</div><div style="height:200px"><canvas id="c6"></canvas></div></div>
+<table><tr><th>국가</th><th>매출</th><th>비중</th><th>추이</th></tr>
+<tr><td><strong style="color:var(--rd)">대만</strong></td><td>$1.43M</td><td style="color:var(--rd);font-weight:700">53.2%</td><td>론칭 17%→53~59% 의존 심화</td></tr>
+<tr><td>미국</td><td>$342K</td><td>12.7%</td><td>론칭 26%→13% 비중 반감</td></tr>
+<tr><td>태국</td><td>$215K</td><td>8.0%</td><td>DAU+Rev 동시 Top</td></tr>
 <tr><td>일본</td><td>$197K</td><td>7.3%</td><td>점진 하락</td></tr>
-<tr><td>홍콩</td><td>$185K</td><td>6.9%</td><td>S6이후↑</td></tr></table>
+<tr><td>홍콩</td><td>$185K</td><td>6.9%</td><td>S6 이후 소폭↑</td></tr></table>
 </div>
-<div class="ib ib-rd"><div class="il">So What?</div><p><strong>인도네시아</strong>(비중 31→38%, 이벤트 후 미하락)·<strong>베트남</strong>(+29.2%)에서 이벤트마다 강한 반등 반복. <strong>PUBGM 핵심 시장과 직접 경합 구조 확인.</strong> 다만 절대 규모는 PUBGM의 11%로, 당분간 모니터링 대상.</p></div>
 </div>
-
-<!-- ========== THREAT MATRIX ========== -->
-<div class="page" id="p-threat">
-<div class="sh"><h2>경쟁 위협 매트릭스</h2><span class="tg" style="background:#f0f4ff;color:var(--bl)">한눈에 보는 경쟁 구도</span></div>
-<table>
-  <tr><th>경쟁작</th><th>위협도</th><th>DAU 대비</th><th>성장성</th><th>시장 중복</th><th>핵심 리스크</th></tr>
-  <tr><td><strong>Free Fire</strong></td><td><span class="b bu">낮음</span></td><td>3.3배</td><td>YoY ▼7.4%</td><td>동남아·MENA</td><td>매출 격차 확대. IP 파워 열위</td></tr>
-  <tr><td><strong>CODM</strong></td><td><span class="b bu">낮음</span></td><td>0.4배</td><td>YoY ▼20%</td><td>글로벌 슈터</td><td>구조적 침체. 반등 시그널 부재</td></tr>
-  <tr style="background:#fef2f2"><td><strong>Delta Force</strong></td><td><span class="b bd">중간</span></td><td>0.11배</td><td>MoM ▲27%</td><td style="color:var(--rd);font-weight:700">인니·베트남 직접 중복</td><td>동남아 유저 흡수 패턴 반복</td></tr>
-</table>
-
-<p style="font-size:13px;font-weight:700;color:var(--n);margin:24px 0 12px">경쟁 환경 변화 시그널</p>
-<div class="sig" style="background:#eef4ff;border-color:var(--bl)"><div class="st" style="color:var(--bl)">시그널 1 — PUBGM ARPU 우위 확대</div><div class="sd">ARPU $2.07 vs FF $0.70(3배). DAU 열위에도 매출 동등 → 과금 유저 충성도 구조적 우위</div></div>
-<div class="sig" style="background:#fef8ee;border-color:var(--am)"><div class="st" style="color:var(--am)">시그널 2 — CODM 월평균 일매출 $1M 하회</div><div class="sd">심리적 저항선 이탈. DF 론칭 이후 슈터 장르 파이 분산 구조 확인</div></div>
-<div class="sig" style="background:#fdf2f2;border-color:var(--rd)"><div class="st" style="color:var(--rd)">시그널 3 — DF 인도네시아 비중 구조적 확대</div><div class="sd">이벤트 종료 후에도 비중 31→38% 고착. PUBGM 핵심 시장과의 경합 심화</div></div>
-
-<p style="font-size:13px;font-weight:700;color:var(--n);margin:24px 0 12px">PUBGM 관점 종합</p>
-<div style="background:linear-gradient(135deg,#eef4ff,#dbeafe);border-radius:10px;padding:18px 22px;margin-bottom:16px;border:1px solid #bfdbfe">
-  <p style="font-size:13px;color:var(--s);line-height:1.8">매출은 경쟁작 중 <strong>유일하게 MoM·YoY 동시 성장</strong>. ARPU $2.07로 FF($0.70) 대비 3배 과금 효율. 핵심 과금 유저층 충성도 압도적 우위.</p>
-</div>
-<div class="three">
-  <div style="background:var(--w);border-radius:10px;padding:14px;border-left:4px solid var(--am)"><p style="font-size:11.5px;font-weight:700;color:var(--am);margin-bottom:4px">Free Fire — <span class="b bu">위협 낮음</span></p><p style="font-size:11px;color:var(--s);line-height:1.7">문화 이벤트 이중 커버리지로 트래픽 반등. IP 파워 열위로 매출 격차 확대 중</p></div>
-  <div style="background:var(--w);border-radius:10px;padding:14px;border-left:4px solid var(--vi)"><p style="font-size:11.5px;font-weight:700;color:var(--vi);margin-bottom:4px">CODM — <span class="b bu">위협 낮음</span></p><p style="font-size:11px;color:var(--s);line-height:1.7">YoY ▼20% 구조적 침체. 콘텐츠가 아닌 유저 이탈. 월매출 $1M 하회</p></div>
-  <div style="background:var(--w);border-radius:10px;padding:14px;border-left:4px solid var(--em)"><p style="font-size:11.5px;font-weight:700;color:var(--em);margin-bottom:4px">Delta Force — <span class="b bd">위협 중간</span></p><p style="font-size:11px;color:var(--s);line-height:1.7">인도네시아·베트남 경합 심화. 동남아 시장 모니터링 필요</p></div>
-</div>
-<p style="font-size:12px;color:var(--g);margin-top:16px">그 외 큰 특이사항 없습니다.</p>
+<div class="ib" style="background:#fdf2f2;border-color:#f5caca"><div class="il" style="color:var(--rd)">So What? — PUBGM 경계 포인트</div><strong>인도네시아</strong>(비중 31→38%, 이벤트 종료 후에도 하락 없이 고착)·<strong>베트남</strong>(설 주간 +29.2%)에서 이벤트마다 강한 반등 반복. 이 두 시장은 PUBGM 글로벌 매출의 핵심 시장으로, <strong style="color:var(--rd)">DF의 동남아 침투가 PUBGM 유저풀과 직접 경합하는 구조</strong>가 확인됨. 다만 절대 규모(A.DAU 197만)는 PUBGM(1,821만)의 11% 수준. 위협도: <span class="b bd">중간</span> — 시장별 모니터링 필요</div>
 </div>
 
-<!-- ========== ACTIONS ========== -->
-<div class="page" id="p-action">
-<div class="sh"><h2>Recommended Actions</h2><span class="tg" style="background:#eef4ff;color:var(--bl)">So What? → Next Step</span></div>
-<div class="three">
-  <div class="act" style="border-top-color:var(--bl)"><div class="al" style="color:var(--bl)">Action 1 — 즉시</div><div class="at">동남아 이벤트 캘린더 교차 모니터링</div><div class="ad">DF 인도네시아·베트남 이벤트 시점과 PUBGM 이벤트 겹침 여부를 주간 단위 추적. 이벤트 충돌 시 PUBGM DAU 이탈 패턴 확인</div></div>
-  <div class="act" style="border-top-color:var(--em)"><div class="al" style="color:var(--em)">Action 2 — 3월 내</div><div class="at">FF 로컬라이제이션 전략 벤치마킹</div><div class="ad">Beat Carnival의 인도(Holi)·MENA(Ramadan) 이중 커버리지는 저비용 고효율 사례. PUBGM 문화권별 맞춤 이벤트 확대 검토</div></div>
-  <div class="act" style="border-top-color:var(--vi)"><div class="al" style="color:var(--vi)">Action 3 — 분기 내</div><div class="at">DF 국가별 DAU-매출 상관분석 정례화</div><div class="ad">DF 대만 의존 탈피 시 동남아 수익화 시도가 PUBGM과 직접 경합 가능. 구조 변화 추적 필요</div></div>
-</div>
-</div>
+</div><!-- wrap -->
 
-<div class="ft"><p>Source: Sensor Tower App Intelligence · 79 Countries · China Excluded · Feb 2026 &nbsp;|&nbsp; KRAFTON IPL Team</p></div>
+<div class="ft"><p>Source: Sensor Tower App Intelligence · 79 Countries · China Excluded · Feb 2026 · KRAFTON IPL Team</p></div>
 
 <script>
-function go(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));document.getElementById('p-'+id).classList.add('on');document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('on'));event.target.classList.add('on');window.scrollTo(0,0);if(id==='charts')setTimeout(initCharts,100)}
-function st(g,t,el){el.parentElement.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));el.classList.add('on');['a','b','c','d','m'].forEach(x=>{const e=document.getElementById(g+'-'+x);if(e)e.style.display='none'});document.getElementById(g+'-'+t).style.display='block'}
+function gm(id){
+  ['ff','cm','df'].forEach(g=>{document.getElementById('gp-'+g).classList.remove('on');document.getElementById('btn-'+g).className='gt'});
+  document.getElementById('gp-'+id).classList.add('on');
+  const c={ff:'on-ff',cm:'on-cm',df:'on-df'};
+  document.getElementById('btn-'+id).className='gt '+c[id];
+}
+function sw(g,t,el){el.parentElement.querySelectorAll('.st').forEach(b=>b.classList.remove('on'));el.classList.add('on');['d','m'].forEach(x=>{const e=document.getElementById(g+'-'+x);if(e)e.style.display='none'});document.getElementById(g+'-'+t).style.display='block'}
 
 const CL={pm:'#2563eb',ff:'#d97706',cm:'#7c3aed',df:'#059669',rd:'#dc2626'};
-Chart.defaults.font.family="'Noto Sans KR',sans-serif";Chart.defaults.font.size=11;Chart.defaults.color='#94a3b8';
+Chart.defaults.font.family="'Noto Sans KR',sans-serif";Chart.defaults.font.size=10;Chart.defaults.color='#94a3b8';
 const days=Array.from({length:28},(_,i)=>String(i+1));
 const pmR=[1.226,.947,.863,.837,.964,1.367,1.159,1.060,.819,.909,.942,.966,1.277,1.209,1.215,1.400,1.202,1.266,1.904,3.054,2.212,1.782,1.490,1.421,1.400,1.403,1.735,1.572];
 const ffR=[1.771,1.285,1.281,1.497,1.370,1.449,1.867,1.735,1.174,1.228,1.298,1.435,1.937,2.263,1.921,1.569,1.314,1.404,1.290,1.390,1.546,1.452,1.243,1.278,1.279,1.238,1.338,1.682];
 const cmR=[.835,.715,.832,.737,.708,.964,1.070,.961,.696,.721,.897,1.319,1.651,1.459,1.292,1.158,.954,.929,.916,1.079,1.025,.910,.837,.889,.851,.945,1.186,1.086];
 const dfR=[.044,.071,.178,.149,.117,.123,.112,.102,.119,.191,.162,.146,.128,.127,.112,.167,.123,.115,.095,.101,.096,.095,.088,.076,.074,.076,.080,.082];
-const pmD=[18.43,17.13,17.31,17.02,17.86,18.41,18.71,18.73,17.01,17.08,16.95,17.52,18.34,18.83,18.50,17.57,17.81,17.62,18.77,19.55,20.13,19.81,18.08,18.49,18.21,18.21,18.81,18.99];
-const ffD=[62.09,55.34,55.77,56.30,57.00,58.95,62.57,61.06,54.63,54.77,55.27,56.15,60.10,63.86,64.22,62.49,61.21,62.75,62.12,61.69,63.48,61.54,57.86,57.39,58.09,58.72,61.12,64.02];
-const cmD=[8.64,7.68,7.62,7.75,7.52,7.89,8.46,8.22,7.69,7.72,7.53,7.78,8.22,8.48,8.33,8.45,8.12,7.96,8.02,8.18,8.47,8.45,7.65,7.58,7.57,7.56,7.64,8.11];
-const dfD=[1.63,1.64,1.72,1.82,1.77,1.71,1.80,1.84,1.68,1.76,1.81,1.81,1.83,2.01,2.30,2.46,2.51,2.31,2.11,2.11,2.25,2.17,2.04,2.01,1.92,1.96,1.99,2.04];
-const mk=(l,d,c,w=2,ds)=>({label:l,data:d,borderColor:c,borderWidth:w,pointRadius:0,pointHoverRadius:5,fill:false,tension:.35,borderDash:ds||[]});
-const lo=m=>({responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{position:'top',labels:{usePointStyle:true,pointStyle:'line',padding:14,font:{size:10}}},tooltip:{backgroundColor:'#fff',titleColor:'#0c1222',bodyColor:'#334155',borderColor:'#e2e8f0',borderWidth:1,padding:8,boxPadding:3}},scales:{x:{grid:{display:false},ticks:{maxRotation:0,font:{size:9}}},y:{grid:{color:'#f1f5f9',lineWidth:.5},ticks:{callback:v=>'$'+v.toFixed(1)+'M',font:{size:9}},max:m,beginAtZero:true}}});
-let chartsInit=false;
-function initCharts(){
-  if(chartsInit)return;chartsInit=true;
-  new Chart(document.getElementById('c1'),{type:'line',data:{labels:days,datasets:[{...mk('PUBG Mobile',pmR,CL.pm,2.5),fill:{target:'origin',above:CL.pm+'08'}},mk('Free Fire',ffR,CL.ff,1.8),{...mk('CODM',cmR,CL.cm,1.5),borderColor:CL.cm+'bb'},mk('Delta Force',dfR,CL.df,1.2,[4,3])]},options:{...lo(3.4),plugins:{...lo(3.4).plugins,annotation:{annotations:{pk:{type:'line',xMin:19,xMax:19,borderColor:CL.pm,borderWidth:1,borderDash:[3,3],label:{display:true,content:'$3.05M',position:'start',font:{size:9,weight:'bold'},color:CL.pm,backgroundColor:'#fff',padding:3}}}}}}});
-  const mo=["'25.01","'25.02","'25.03","'25.04","'25.05","'25.06","'25.07","'25.08","'25.09","'25.10","'25.11","'25.12","'26.01","'26.02"];
-  new Chart(document.getElementById('c2'),{type:'line',data:{labels:mo,datasets:[{...mk('PUBG Mobile',[40.2,31.2,51.9,51.6,37.5,32.6,41.5,43.2,36.5,27.8,31.7,36.6,35.2,37.6],CL.pm,2.5),pointRadius:3},{...mk('Free Fire',[51.9,35.9,37.5,36.1,36.7,39.0,52.0,55.8,34.4,37.3,33.1,44.3,48.8,41.5],CL.ff,1.8),pointRadius:2.5},{...mk('CODM',[42.0,34.9,31.0,28.9,32.6,31.4,39.5,33.0,26.9,30.2,26.7,37.9,28.2,27.6],CL.cm,1.5),pointRadius:2.5,borderColor:CL.cm+'bb'},{...mk('Delta Force',[0,0,0,1.6,3.2,1.7,2.6,2.1,2.2,2.1,2.1,1.4,1.2,3.1],CL.df,1.2,[4,3]),pointRadius:2}]},options:{...lo(58),plugins:{...lo(58).plugins,annotation:{annotations:{dl:{type:'line',xMin:3,xMax:3,borderColor:CL.df,borderWidth:1,borderDash:[3,3],label:{display:true,content:'DF 론칭',position:'start',font:{size:8},color:CL.df,backgroundColor:'#fff'}}}}}}});
-  const do2=m=>({responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{position:'top',labels:{usePointStyle:true,pointStyle:'line',padding:14,font:{size:10}}},tooltip:{backgroundColor:'#fff',titleColor:'#0c1222',bodyColor:'#334155',borderColor:'#e2e8f0',borderWidth:1,callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toFixed(1)+'M'}}},scales:{x:{grid:{display:false},ticks:{maxRotation:0,font:{size:9}}},y:{grid:{color:'#f1f5f9'},ticks:{callback:v=>v.toFixed(v<10?1:0)+'M',font:{size:9}},max:m}}});
-  new Chart(document.getElementById('c3'),{type:'line',data:{labels:days,datasets:[{...mk('Free Fire',ffD,CL.ff,1.8),fill:{target:'origin',above:CL.ff+'06'}},mk('PUBG Mobile',pmD,CL.pm,2.5),{...mk('CODM',cmD,CL.cm,1.5),borderColor:CL.cm+'bb'}]},options:do2(70)});
-  new Chart(document.getElementById('c4'),{type:'line',data:{labels:days,datasets:[{...mk('Delta Force',dfD,CL.df,2),fill:{target:'origin',above:CL.df+'08'}}]},options:{...do2(2.8),scales:{...do2(2.8).scales,y:{...do2(2.8).scales.y,min:1.4}},plugins:{legend:{display:false},tooltip:do2(2.8).plugins.tooltip,annotation:{annotations:{rd:{type:'box',xMin:12,xMax:25,backgroundColor:CL.rd+'06',borderWidth:0},rl:{type:'label',xValue:18,yValue:1.47,content:'RED DAY',font:{size:9,weight:'bold'},color:CL.rd},pk:{type:'point',xValue:16,yValue:2.51,backgroundColor:CL.df,radius:5,borderWidth:2,borderColor:'#fff'},pl:{type:'label',xValue:20,yValue:2.65,content:'피크 2.51M',font:{size:9,weight:'bold'},color:CL.df}}}}}});
-  const bo=(d,c,mx)=>({type:'bar',data:{labels:d.map(x=>x[0]),datasets:[{data:d.map(x=>x[1]),backgroundColor:d.map(x=>x[2]?CL.rd:'#bdd4ee'),borderRadius:4,barPercentage:.55}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'#f1f5f9'},max:mx,ticks:{font:{size:9}}},y:{grid:{display:false},ticks:{font:{size:10,weight:'bold'}}}}}});
-  new Chart(document.getElementById('c5'),bo([['인도네시아',16.8,1],['브라질',7.0,0],['베트남',6.7,1],['멕시코',5.4,0],['파키스탄',3.7,0],['태국',2.8,0]],'#bdd4ee',20));
-  new Chart(document.getElementById('c6'),{type:'bar',data:{labels:['대만','미국','태국','일본','홍콩','한국'],datasets:[{data:[1429,342,215,197,186,131],backgroundColor:['#dc2626','#a7dfc8','#a7dfc8','#a7dfc8','#a7dfc8','#a7dfc8'],borderRadius:4,barPercentage:.55}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'#f1f5f9'},ticks:{callback:v=>v>=1e3?'$'+(v/1e3).toFixed(1)+'M':'$'+v+'K',font:{size:9}}},y:{grid:{display:false},ticks:{font:{size:10,weight:'bold'}}}}}});
-}
+const mk=(l,d,c,w=2,ds)=>({label:l,data:d,borderColor:c,borderWidth:w,pointRadius:0,pointHoverRadius:4,fill:false,tension:.35,borderDash:ds||[]});
+const lo=m=>({responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{position:'top',labels:{usePointStyle:true,pointStyle:'line',padding:12,font:{size:10}}},tooltip:{backgroundColor:'#fff',titleColor:'#0f172a',bodyColor:'#334155',borderColor:'#e2e8f0',borderWidth:1,padding:8,boxPadding:3}},scales:{x:{grid:{display:false},ticks:{maxRotation:0,font:{size:8}}},y:{grid:{color:'#f1f5f9',lineWidth:.5},ticks:{callback:v=>'$'+v.toFixed(1)+'M',font:{size:8}},max:m,beginAtZero:true}}});
+
+new Chart(document.getElementById('c1'),{type:'line',data:{labels:days,datasets:[{...mk('PUBG Mobile',pmR,CL.pm,2.5),fill:{target:'origin',above:CL.pm+'08'}},mk('Free Fire',ffR,CL.ff,1.8),{...mk('CODM',cmR,CL.cm,1.5),borderColor:CL.cm+'bb'},mk('Delta Force',dfR,CL.df,1,[4,3])]},options:{...lo(3.4),plugins:{...lo(3.4).plugins,annotation:{annotations:{pk:{type:'line',xMin:19,xMax:19,borderColor:CL.pm,borderWidth:1,borderDash:[3,3],label:{display:true,content:'$3.05M',position:'start',font:{size:9,weight:'bold'},color:CL.pm,backgroundColor:'#fff',padding:3}}}}}}});
+
+const mo=["'25.01","'25.02","'25.03","'25.04","'25.05","'25.06","'25.07","'25.08","'25.09","'25.10","'25.11","'25.12","'26.01","'26.02"];
+new Chart(document.getElementById('c2'),{type:'line',data:{labels:mo,datasets:[{...mk('PUBG Mobile',[40.2,31.2,51.9,51.6,37.5,32.6,41.5,43.2,36.5,27.8,31.7,36.6,35.2,37.6],CL.pm,2.5),pointRadius:2.5},{...mk('Free Fire',[51.9,35.9,37.5,36.1,36.7,39.0,52.0,55.8,34.4,37.3,33.1,44.3,48.8,41.5],CL.ff,1.8),pointRadius:2},{...mk('CODM',[42.0,34.9,31.0,28.9,32.6,31.4,39.5,33.0,26.9,30.2,26.7,37.9,28.2,27.6],CL.cm,1.5),pointRadius:2,borderColor:CL.cm+'bb'},{...mk('Delta Force',[0,0,0,1.6,3.2,1.7,2.6,2.1,2.2,2.1,2.1,1.4,1.2,3.1],CL.df,1,[4,3]),pointRadius:1.5}]},options:lo(58)});
+
+new Chart(document.getElementById('c5'),{type:'bar',data:{labels:['인도네시아','브라질','베트남','멕시코','파키스탄','태국'],datasets:[{data:[16.8,7.0,6.7,5.4,3.7,2.8],backgroundColor:[CL.rd,'#bdd4ee',CL.rd,'#bdd4ee','#bdd4ee','#bdd4ee'],borderRadius:3,barPercentage:.5}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'#f1f5f9'},max:20,ticks:{callback:v=>v+'M',font:{size:8}}},y:{grid:{display:false},ticks:{font:{size:9,weight:'bold'}}}}}});
+new Chart(document.getElementById('c6'),{type:'bar',data:{labels:['대만','미국','태국','일본','홍콩','한국'],datasets:[{data:[1429,342,215,197,186,131],backgroundColor:[CL.rd,'#a7dfc8','#a7dfc8','#a7dfc8','#a7dfc8','#a7dfc8'],borderRadius:3,barPercentage:.5}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'#f1f5f9'},ticks:{callback:v=>v>=1e3?'$'+(v/1e3).toFixed(1)+'M':'$'+v+'K',font:{size:8}}},y:{grid:{display:false},ticks:{font:{size:9,weight:'bold'}}}}}});
 </script>
 </body>
 </html>
