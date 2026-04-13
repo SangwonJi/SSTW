@@ -18,7 +18,7 @@
 body{font-family:'DM Sans','Pretendard Variable',Pretendard,-apple-system,system-ui,sans-serif;background:var(--w);color:#1e293b;line-height:1.75;-webkit-font-smoothing:antialiased;font-size:14.5px;font-weight:400}
 .wrap{max-width:100%;margin:0 auto;padding:28px 56px 60px}
 h1{font-size:26px;font-weight:900;color:#000;margin-bottom:6px;letter-spacing:-.5px}
-h2{font-size:19px;font-weight:800;color:#000;margin:32px 0 14px;padding-bottom:8px;border-bottom:2px solid #000}
+h2{font-size:18px;font-weight:700;color:#0f172a;margin:32px 0 14px;padding-bottom:8px;border-bottom:1.5px solid #334155}
 h3{font-size:16.5px;font-weight:800;color:#0f172a;margin:26px 0 10px}
 .meta{font-size:13px;color:#64748b;margin-bottom:24px;font-weight:400}
 .kf{background:var(--lt);border-left:4px solid var(--bl);border-radius:0 6px 6px 0;padding:16px 20px;margin-bottom:24px}
@@ -40,10 +40,10 @@ h3{font-size:16.5px;font-weight:800;color:#0f172a;margin:26px 0 10px}
 .chrt .t{font-size:14px;font-weight:800;color:#000;margin-bottom:2px}
 .chrt .s{font-size:11px;color:var(--sv);margin-bottom:10px}
 
-.tabs{display:flex;gap:0;margin:0 0 0;border-bottom:2px solid var(--n)}
-.tab-btn{flex:1;padding:12px;font-size:14px;font-weight:800;text-align:center;cursor:pointer;border:none;background:var(--lt);color:var(--g);border-radius:6px 6px 0 0;margin-right:2px;transition:.15s}
+.tabs{display:flex;gap:0;margin:0 0 0;border-bottom:1.5px solid #cbd5e1}
+.tab-btn{flex:1;padding:10px 12px;font-size:13px;font-weight:600;text-align:center;cursor:pointer;border:none;background:var(--lt);color:var(--g);border-radius:6px 6px 0 0;margin-right:2px;transition:.15s}
 .tab-btn:hover{background:var(--bd)}
-.tab-btn.a-ff{background:#fef3c7;color:#92400e}.tab-btn.a-cm{background:#ede9fe;color:#5b21b6}.tab-btn.a-df{background:#d1fae5;color:#065f46}
+.tab-btn.a-ff{background:#fef3c7;color:#92400e;font-weight:700}.tab-btn.a-cm{background:#ede9fe;color:#5b21b6;font-weight:700}.tab-btn.a-df{background:#d1fae5;color:#065f46;font-weight:700}
 .gp{display:none;padding:20px 0 0;animation:fadeIn .2s}.gp.on{display:block}@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
 .sum{border-radius:6px;padding:16px 20px;margin-bottom:16px;border:1px solid;font-size:14px;line-height:1.8;color:#1e293b}
@@ -64,7 +64,7 @@ tr:hover td{background:#fafcff}
 
 .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .st-g{display:flex;gap:3px;margin-bottom:10px}
-.st{padding:6px 16px;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--bd);background:var(--w);color:var(--g)}
+.st{padding:7px 16px;border-radius:5px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--bd);background:var(--w);color:var(--g)}
 .st.on{background:var(--n);color:#fff;border-color:var(--n)}
 .img-cell{width:130px;min-width:130px}
 .img-cell img{width:100%;border-radius:4px;margin-bottom:2px;display:block;transition:transform .2s;cursor:pointer}.img-cell img:hover{transform:scale(1.05)}
@@ -129,8 +129,8 @@ a{color:var(--bl);text-decoration:none}a:hover{text-decoration:underline}
 
 <!-- Chart Category Toggle -->
 <div style="display:flex;gap:6px;margin-bottom:8px">
-  <button id="chartcat-direct" onclick="switchChartCat('direct')" style="padding:8px 20px;font-size:12px;font-weight:700;border:2px solid #000;border-radius:6px;cursor:pointer;background:#000;color:#fff">직접경쟁작 차트</button>
-  <button id="chartcat-indirect" onclick="switchChartCat('indirect')" style="padding:8px 20px;font-size:12px;font-weight:700;border:2px solid #d1d5db;border-radius:6px;cursor:pointer;background:#fff;color:#64748b">간접경쟁작 차트</button>
+  <button id="chartcat-direct" onclick="switchChartCat('direct')" style="padding:8px 18px;font-size:12px;font-weight:600;border:1.5px solid #0f172a;border-radius:5px;cursor:pointer;background:#0f172a;color:#fff">직접경쟁작 차트</button>
+  <button id="chartcat-indirect" onclick="switchChartCat('indirect')" style="padding:8px 18px;font-size:12px;font-weight:600;border:1.5px solid #d1d5db;border-radius:5px;cursor:pointer;background:#fff;color:#64748b">간접경쟁작 차트</button>
 </div>
 
 <!-- Direct Charts -->
@@ -154,8 +154,8 @@ a{color:var(--bl);text-decoration:none}a:hover{text-decoration:underline}
 <!-- ============ GAME TABS ============ -->
 <!-- Category Selector -->
 <div style="display:flex;gap:8px;margin:28px 0 4px">
-  <button id="cat-direct" onclick="switchCat('direct')" style="flex:1;padding:12px;font-size:14px;font-weight:800;border:2px solid #000;border-radius:8px;cursor:pointer;background:#000;color:#fff;transition:.15s">직접경쟁작</button>
-  <button id="cat-indirect" onclick="switchCat('indirect')" style="flex:1;padding:12px;font-size:14px;font-weight:800;border:2px solid #d1d5db;border-radius:8px;cursor:pointer;background:#fff;color:#64748b;transition:.15s">간접경쟁작</button>
+  <button id="cat-direct" onclick="switchCat('direct')" style="flex:1;padding:10px;font-size:13px;font-weight:600;border:1.5px solid #0f172a;border-radius:6px;cursor:pointer;background:#0f172a;color:#fff;transition:.15s;letter-spacing:.3px">직접경쟁작</button>
+  <button id="cat-indirect" onclick="switchCat('indirect')" style="flex:1;padding:10px;font-size:13px;font-weight:600;border:1.5px solid #d1d5db;border-radius:6px;cursor:pointer;background:#fff;color:#64748b;transition:.15s;letter-spacing:.3px">간접경쟁작</button>
 </div>
 
 <!-- Direct Competitor Tabs -->
@@ -711,8 +711,8 @@ function switchCat(cat){
   document.getElementById('tabs-direct').style.display=cat==='direct'?'flex':'none';
   document.getElementById('tabs-indirect').style.display=cat==='indirect'?'flex':'none';
   var cd=document.getElementById('cat-direct'),ci=document.getElementById('cat-indirect');
-  cd.style.cssText=cat==='direct'?'flex:1;padding:12px;font-size:14px;font-weight:800;border:2px solid #000;border-radius:8px;cursor:pointer;background:#000;color:#fff':'flex:1;padding:12px;font-size:14px;font-weight:800;border:2px solid #d1d5db;border-radius:8px;cursor:pointer;background:#fff;color:#64748b';
-  ci.style.cssText=cat==='indirect'?'flex:1;padding:12px;font-size:14px;font-weight:800;border:2px solid #000;border-radius:8px;cursor:pointer;background:#000;color:#fff':'flex:1;padding:12px;font-size:14px;font-weight:800;border:2px solid #d1d5db;border-radius:8px;cursor:pointer;background:#fff;color:#64748b';
+  cd.style.cssText=cat==='direct'?'flex:1;padding:10px;font-size:13px;font-weight:600;border:1.5px solid #0f172a;border-radius:6px;cursor:pointer;background:#0f172a;color:#fff;letter-spacing:.3px':'flex:1;padding:10px;font-size:13px;font-weight:600;border:1.5px solid #d1d5db;border-radius:6px;cursor:pointer;background:#fff;color:#64748b;letter-spacing:.3px';
+  ci.style.cssText=cat==='indirect'?'flex:1;padding:10px;font-size:13px;font-weight:600;border:1.5px solid #0f172a;border-radius:6px;cursor:pointer;background:#0f172a;color:#fff;letter-spacing:.3px':'flex:1;padding:10px;font-size:13px;font-weight:600;border:1.5px solid #d1d5db;border-radius:6px;cursor:pointer;background:#fff;color:#64748b;letter-spacing:.3px';
   ['ff','cm','df','rb','bs'].forEach(function(g){var el=document.getElementById('gp-'+g);if(el)el.classList.remove('on')});
   if(cat==='direct'){gmDirect('ff')}else{gmIndirect('rb')}
 }
@@ -770,12 +770,12 @@ new Chart(document.getElementById('c5'),{type:'bar',data:{labels:['인도네시�
 function switchChartCat(cat){
   document.getElementById('charts-direct').style.display=cat==='direct'?'block':'none';
   document.getElementById('charts-indirect').style.display=cat==='indirect'?'block':'none';
-  document.getElementById('chartcat-direct').style.background=cat==='direct'?'#000':'#fff';
+  document.getElementById('chartcat-direct').style.background=cat==='direct'?'#0f172a':'#fff';
   document.getElementById('chartcat-direct').style.color=cat==='direct'?'#fff':'#64748b';
-  document.getElementById('chartcat-direct').style.borderColor=cat==='direct'?'#000':'#d1d5db';
-  document.getElementById('chartcat-indirect').style.background=cat==='indirect'?'#000':'#fff';
+  document.getElementById('chartcat-direct').style.borderColor=cat==='direct'?'#0f172a':'#d1d5db';
+  document.getElementById('chartcat-indirect').style.background=cat==='indirect'?'#0f172a':'#fff';
   document.getElementById('chartcat-indirect').style.color=cat==='indirect'?'#fff':'#64748b';
-  document.getElementById('chartcat-indirect').style.borderColor=cat==='indirect'?'#000':'#d1d5db';
+  document.getElementById('chartcat-indirect').style.borderColor=cat==='indirect'?'#0f172a':'#d1d5db';
   if(cat==='indirect'&&!window._indirectChartsInit){window._indirectChartsInit=true;initIndirectCharts();}
 }
 function initIndirectCharts(){
