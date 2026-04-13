@@ -4,14 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>2026년 2월 직접경쟁작 월간 리포트</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--n:#0f172a;--s:#334155;--g:#64748b;--sv:#94a3b8;--bd:#e2e8f0;--lt:#f1f5f9;--bg:#f8fafc;--w:#fff;
 --bl:#2563eb;--am:#d97706;--vi:#7c3aed;--em:#059669;--rd:#dc2626;--gn:#16a34a}
-body{font-family:'Noto Sans KR',system-ui,sans-serif;background:var(--w);color:#1e293b;line-height:1.75;-webkit-font-smoothing:antialiased;font-size:13.5px;font-weight:400}
+body{font-family:'DM Sans','Pretendard Variable',Pretendard,-apple-system,system-ui,sans-serif;background:var(--w);color:#1e293b;line-height:1.75;-webkit-font-smoothing:antialiased;font-size:13.5px;font-weight:400}
 .wrap{max-width:1200px;margin:0 auto;padding:28px 32px 60px}
 h1{font-size:24px;font-weight:900;color:#000;margin-bottom:6px;letter-spacing:-.5px}
 h2{font-size:17px;font-weight:800;color:#000;margin:32px 0 14px;padding-bottom:8px;border-bottom:2px solid #000}
@@ -429,7 +430,7 @@ S8 Morphosis(2.3) + RED DAY 설 대형 이벤트(2.13~3.5) 시너지로 트래�
 function gm(id){['ff','cm','df'].forEach(g=>{document.getElementById('gp-'+g).classList.remove('on');document.getElementById('btn-'+g).className='tab-btn'});document.getElementById('gp-'+id).classList.add('on');const c={ff:'a-ff',cm:'a-cm',df:'a-df'};document.getElementById('btn-'+id).className='tab-btn '+c[id]}
 function sw(g,t,el){el.parentElement.querySelectorAll('.st').forEach(b=>b.classList.remove('on'));el.classList.add('on');['d','m'].forEach(x=>{const e=document.getElementById(g+'-'+x);if(e)e.style.display='none'});document.getElementById(g+'-'+t).style.display='block'}
 const CL={pm:'#2563eb',ff:'#d97706',cm:'#7c3aed',df:'#059669'};
-Chart.defaults.font.family="'Noto Sans KR',sans-serif";Chart.defaults.font.size=10;Chart.defaults.color='#94a3b8';
+Chart.defaults.font.family="'DM Sans','Pretendard Variable',sans-serif";Chart.defaults.font.size=10;Chart.defaults.color='#94a3b8';
 const days=Array.from({length:28},(_,i)=>String(i+1));
 const pmR=[1.226,.947,.863,.837,.964,1.367,1.159,1.060,.819,.909,.942,.966,1.277,1.209,1.215,1.400,1.202,1.266,1.904,3.054,2.212,1.782,1.490,1.421,1.400,1.403,1.735,1.572];
 const ffR=[1.771,1.285,1.281,1.497,1.370,1.449,1.867,1.735,1.174,1.228,1.298,1.435,1.937,2.263,1.921,1.569,1.314,1.404,1.290,1.390,1.546,1.452,1.243,1.278,1.279,1.238,1.338,1.682];
