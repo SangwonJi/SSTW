@@ -118,10 +118,25 @@ a{color:var(--bl);text-decoration:none}a:hover{text-decoration:underline}
 <div class="ib ib-bl"><div class="il">ARPU 분석 코멘트</div>
 CODM ARPU $3.46은 절대 수치 최고이나, DAU 감소 속도가 매출 감소보다 빨라 나타나는 <strong>"축소 경제(Shrinking Economy)"</strong> 현상. PUBGM은 DAU·매출 동시 성장하면서 ARPU $2.07을 유지하는 <strong>건강한 성장 구조</strong>를 시현. FF는 대규모 DAU(59.7M) 대비 ARPU $0.70으로 볼륨 의존형 수익 구조 유지 중</div>
 
-<!-- Daily Revenue Chart -->
+<!-- Chart Category Toggle -->
+<div style="display:flex;gap:6px;margin-bottom:8px">
+  <button id="chartcat-direct" onclick="switchChartCat('direct')" style="padding:8px 20px;font-size:12px;font-weight:700;border:2px solid #000;border-radius:6px;cursor:pointer;background:#000;color:#fff">직접경쟁작 차트</button>
+  <button id="chartcat-indirect" onclick="switchChartCat('indirect')" style="padding:8px 20px;font-size:12px;font-weight:700;border:2px solid #d1d5db;border-radius:6px;cursor:pointer;background:#fff;color:#64748b">간접경쟁작 차트</button>
+</div>
+
+<!-- Direct Charts -->
+<div id="charts-direct">
 <div class="st-g"><div class="st on" onclick="sw('rv','d',this)">2월 일별 매출</div><div class="st" onclick="sw('rv','m',this)">14개월 추이</div></div>
-<div id="rv-d" class="chrt"><div class="t">[ 당월 경쟁작 Daily별 매출 그래프 ]</div><div class="s">2026.2.1~2.28 · 호버하여 상세 수치 확인</div><div style="height:260px"><canvas id="c1"></canvas></div></div>
-<div id="rv-m" class="chrt" style="display:none"><div class="t">[ 최근 14개월 경쟁작 매출 그래프 ]</div><div class="s">2025.01~2026.02 · CODM은 DF 론칭(2025.4) 이후 구조적 하락</div><div style="height:260px"><canvas id="c2"></canvas></div></div>
+<div id="rv-d" class="chrt"><div class="t">[ 당월 직접경쟁작 Daily별 매출 그래프 ]</div><div class="s">FF · PUBGM · CODM · DF · 2026.2.1~2.28</div><div style="height:260px"><canvas id="c1"></canvas></div></div>
+<div id="rv-m" class="chrt" style="display:none"><div class="t">[ 최근 14개월 직접경쟁작 매출 그래프 ]</div><div class="s">2025.01~2026.02</div><div style="height:260px"><canvas id="c2"></canvas></div></div>
+</div>
+
+<!-- Indirect Charts -->
+<div id="charts-indirect" style="display:none">
+<div class="st-g"><div class="st on" onclick="sw('rv2','d',this)">2월 일별 매출</div><div class="st" onclick="sw('rv2','m',this)">14개월 추이</div></div>
+<div id="rv2-d" class="chrt"><div class="t">[ 당월 간접경쟁작 Daily별 매출 그래프 ]</div><div class="s">Roblox · Brawl Stars · PUBGM(비교 기준) · 2026.2.1~2.28</div><div style="height:260px"><canvas id="c7"></canvas></div></div>
+<div id="rv2-m" class="chrt" style="display:none"><div class="t">[ 최근 14개월 간접경쟁작 매출 그래프 ]</div><div class="s">2025.02~2026.02</div><div style="height:260px"><canvas id="c8"></canvas></div></div>
+</div>
 
 <!-- ============ GAME TABS ============ -->
 <!-- Category Selector -->
@@ -138,8 +153,8 @@ CODM ARPU $3.46은 절대 수치 최고이나, DAU 감소 속도가 매출 감�
 </div>
 <!-- Indirect Competitor Tabs -->
 <div class="tabs" id="tabs-indirect" style="display:none">
-  <button class="tab-btn" id="btn-rb" onclick="gm('rb')" style="background:#fef2f2;color:#991b1b">Roblox</button>
-  <button class="tab-btn" id="btn-bs" onclick="gm('bs')" style="background:#fef3c7;color:#92400e">Brawl Stars</button>
+  <button class="tab-btn" id="btn-rb" onclick="gm('rb')">Roblox</button>
+  <button class="tab-btn" id="btn-bs" onclick="gm('bs')">Brawl Stars</button>
 </div>
 
 <!-- ==================== FREE FIRE ==================== -->
@@ -554,7 +569,7 @@ function switchCat(cat){
   ['ff','cm','df','rb','bs'].forEach(g=>{document.getElementById('gp-'+g).classList.remove('on')});
   if(cat==='direct')gm('ff');else gm('rb');
 }
-function gm(id){['ff','cm','df','rb','bs'].forEach(g=>{var el=document.getElementById('gp-'+g);if(el)el.classList.remove('on');var btn=document.getElementById('btn-'+g);if(btn)btn.className='tab-btn'});document.getElementById('gp-'+id).classList.add('on');const c={ff:'a-ff',cm:'a-cm',df:'a-df'};if(c[id])document.getElementById('btn-'+id).className='tab-btn '+c[id];else{document.getElementById('btn-'+id).style.fontWeight='800';document.getElementById('btn-'+id).style.background=id==='rb'?'#fecaca':id==='bs'?'#fde68a':'';}}
+function gm(id){['ff','cm','df','rb','bs'].forEach(g=>{var el=document.getElementById('gp-'+g);if(el)el.classList.remove('on');var btn=document.getElementById('btn-'+g);if(btn)btn.className='tab-btn'});document.getElementById('gp-'+id).classList.add('on');const c={ff:'a-ff',cm:'a-cm',df:'a-df'};if(c[id])document.getElementById('btn-'+id).className='tab-btn '+c[id];else if(id==='rb'){document.getElementById('btn-'+id).className='tab-btn';document.getElementById('btn-'+id).style.background='#fecaca';document.getElementById('btn-'+id).style.color='#991b1b';}else if(id==='bs'){document.getElementById('btn-'+id).className='tab-btn';document.getElementById('btn-'+id).style.background='#fde68a';document.getElementById('btn-'+id).style.color='#92400e';}}
 function sw(g,t,el){el.parentElement.querySelectorAll('.st').forEach(b=>b.classList.remove('on'));el.classList.add('on');['d','m'].forEach(x=>{const e=document.getElementById(g+'-'+x);if(e)e.style.display='none'});document.getElementById(g+'-'+t).style.display='block'}
 const CL={pm:'#2563eb',ff:'#d97706',cm:'#7c3aed',df:'#059669'};
 Chart.defaults.font.family="'DM Sans','Pretendard Variable',sans-serif";Chart.defaults.font.size=10;Chart.defaults.color='#94a3b8';
@@ -569,6 +584,34 @@ new Chart(document.getElementById('c1'),{type:'line',data:{labels:days,datasets:
 const mo=["'25.01","'25.02","'25.03","'25.04","'25.05","'25.06","'25.07","'25.08","'25.09","'25.10","'25.11","'25.12","'26.01","'26.02"];
 new Chart(document.getElementById('c2'),{type:'line',data:{labels:mo,datasets:[{...mk('PUBG Mobile',[40.2,31.2,51.9,51.6,37.5,32.6,41.5,43.2,36.5,27.8,31.7,36.6,35.2,37.6],CL.pm,2.5),pointRadius:2.5},{...mk('Free Fire',[51.9,35.9,37.5,36.1,36.7,39.0,52.0,55.8,34.4,37.3,33.1,44.3,48.8,41.5],CL.ff,1.8),pointRadius:2},{...mk('CODM',[42.0,34.9,31.0,28.9,32.6,31.4,39.5,33.0,26.9,30.2,26.7,37.9,28.2,27.6],CL.cm,1.5),pointRadius:2,borderColor:CL.cm+'bb'},{...mk('Delta Force',[0,0,0,1.6,3.2,1.7,2.6,2.1,2.2,2.1,2.1,1.4,1.2,3.1],CL.df,1,[4,3]),pointRadius:1.5}]},options:lo(58)});
 new Chart(document.getElementById('c5'),{type:'bar',data:{labels:['인도네시아','브라질','베트남','멕시코','파키스탄','태국'],datasets:[{data:[16.8,7.0,6.7,5.4,3.7,2.8],backgroundColor:['#dc2626','#bdd4ee','#dc2626','#bdd4ee','#bdd4ee','#bdd4ee'],borderRadius:3,barPercentage:.5}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'#f1f5f9'},max:20,ticks:{callback:v=>v+'M',font:{size:8}}},y:{grid:{display:false},ticks:{font:{size:9,weight:'bold'}}}}}});
+
+function switchChartCat(cat){
+  document.getElementById('charts-direct').style.display=cat==='direct'?'block':'none';
+  document.getElementById('charts-indirect').style.display=cat==='indirect'?'block':'none';
+  document.getElementById('chartcat-direct').style.background=cat==='direct'?'#000':'#fff';
+  document.getElementById('chartcat-direct').style.color=cat==='direct'?'#fff':'#64748b';
+  document.getElementById('chartcat-direct').style.borderColor=cat==='direct'?'#000':'#d1d5db';
+  document.getElementById('chartcat-indirect').style.background=cat==='indirect'?'#000':'#fff';
+  document.getElementById('chartcat-indirect').style.color=cat==='indirect'?'#fff':'#64748b';
+  document.getElementById('chartcat-indirect').style.borderColor=cat==='indirect'?'#000':'#d1d5db';
+  if(cat==='indirect'&&!window._indirectChartsInit){window._indirectChartsInit=true;initIndirectCharts();}
+}
+function initIndirectCharts(){
+  const rbR=[1634,1312,1328,1376,1338,1466,1550,1571,1187,1238,1292,1323,1495,1667,1720,1507,1445,1476,1466,1699,1744,1763,1471,1479,1426,1517,1660,1938];
+  const bsR=[893,639,593,651,1689,1815,1310,1110,858,826,849,723,833,956,904,794,915,964,897,1005,1036,1047,892,758,810,1351,1727,1557];
+  const pmRi=pmR.map(v=>v*1000);
+  new Chart(document.getElementById('c7'),{type:'line',data:{labels:days,datasets:[
+    {...mk('PUBG Mobile',pmR,CL.pm,2),borderDash:[4,3]},
+    {...mk('Roblox',rbR.map(v=>v/1000),'#ef4444',2.5),fill:{target:'origin',above:'#ef444408'}},
+    mk('Brawl Stars',bsR.map(v=>v/1000),'#f59e0b',2),
+  ]},options:lo(3.5)});
+  const mo2=["'25.02","'25.03","'25.04","'25.05","'25.06","'25.07","'25.08","'25.09","'25.10","'25.11","'25.12","'26.01","'26.02"];
+  new Chart(document.getElementById('c8'),{type:'line',data:{labels:mo2,datasets:[
+    {...mk('PUBG Mobile',[31.2,51.9,51.6,37.5,32.6,41.5,43.2,36.5,27.8,31.7,36.6,35.2,37.6],CL.pm,2),pointRadius:2,borderDash:[4,3]},
+    {...mk('Roblox',[97.0,38.4,38.8,47.0,53.4,62.8,73.0,65.3,67.0,56.3,62.6,48.6,42.1],'#ef4444',2.5),pointRadius:2.5},
+    {...mk('Brawl Stars',[34.5,39.2,29.5,42.7,28.2,28.5,23.1,20.6,21.6,19.9,21.0,25.4,28.4],'#f59e0b',2),pointRadius:2},
+  ]},options:lo(100)});
+}
 new Chart(document.getElementById('c6'),{type:'bar',data:{labels:['대만','미국','태국','일본','홍콩','한국'],datasets:[{data:[1429,342,215,197,186,131],backgroundColor:['#dc2626','#a7dfc8','#a7dfc8','#a7dfc8','#a7dfc8','#a7dfc8'],borderRadius:3,barPercentage:.5}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'#f1f5f9'},ticks:{callback:v=>v>=1e3?'$'+(v/1e3).toFixed(1)+'M':'$'+v+'K',font:{size:8}}},y:{grid:{display:false},ticks:{font:{size:9,weight:'bold'}}}}}});
 </script>
 </body>
