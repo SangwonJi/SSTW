@@ -599,7 +599,7 @@ function gm(id){
   if(id==='ff'||id==='cm'||id==='df'){gmDirect(id)}
   else{gmIndirect(id)}
 }
-function sw(g,t,el){el.parentElement.querySelectorAll('.st').forEach(b=>b.classList.remove('on'));el.classList.add('on');['d','m'].forEach(x=>{const e=document.getElementById(g+'-'+x);if(e)e.style.display='none'});document.getElementById(g+'-'+t).style.display='block'}
+function sw(g,t,el){el.parentElement.querySelectorAll('.st').forEach(b=>b.classList.remove('on'));el.classList.add('on');['d','m','td','tm'].forEach(x=>{const e=document.getElementById(g+'-'+x);if(e)e.style.display='none'});document.getElementById(g+'-'+t).style.display='block'}
 const CL={pm:'#2563eb',ff:'#d97706',cm:'#7c3aed',df:'#059669'};
 Chart.defaults.font.family="'DM Sans','Pretendard Variable',sans-serif";Chart.defaults.font.size=10;Chart.defaults.color='#94a3b8';
 const days=Array.from({length:28},(_,i)=>String(i+1));
