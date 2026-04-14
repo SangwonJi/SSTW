@@ -33,13 +33,15 @@ document.querySelectorAll('.mt').forEach(function(table){
     if(max===min) return;
     vals.forEach(function(v){
       var pct=(v.val-min)/(max-min);
-      var r=Math.round(245-pct*25);
-      var g=Math.round(248+pct*7);
-      var b=Math.round(255-pct*35);
+      // 진한 파란색(높은값) → 옅은 파란색(낮은값) 그라데이션
+      var r=Math.round(235-pct*75);
+      var g=Math.round(240-pct*40);
+      var b=Math.round(255-pct*15);
       var cell=row.cells[v.idx];
-      // Skip the highlighted 2월 column (3rd column)
+      // 당월(2월) 컬럼 스킵 (별도 하이라이트)
       if(v.idx===2) return;
       cell.style.backgroundColor='rgb('+r+','+g+','+b+')';
+      if(pct>0.85) cell.style.color='#1e3a5f';
     });
   });
 });
@@ -67,13 +69,15 @@ document.querySelectorAll('.mt').forEach(function(table){
     if(max===min) return;
     vals.forEach(function(v){
       var pct=(v.val-min)/(max-min);
-      var r=Math.round(245-pct*25);
-      var g=Math.round(248+pct*7);
-      var b=Math.round(255-pct*35);
+      // 진한 파란색(높은값) → 옅은 파란색(낮은값) 그라데이션
+      var r=Math.round(235-pct*75);
+      var g=Math.round(240-pct*40);
+      var b=Math.round(255-pct*15);
       var cell=row.cells[v.idx];
-      // Skip the highlighted 2월 column (3rd column)
+      // 당월(2월) 컬럼 스킵 (별도 하이라이트)
       if(v.idx===2) return;
       cell.style.backgroundColor='rgb('+r+','+g+','+b+')';
+      if(pct>0.85) cell.style.color='#1e3a5f';
     });
   });
 });
@@ -932,13 +936,15 @@ document.querySelectorAll('.mt').forEach(function(table){
     if(max===min) return;
     vals.forEach(function(v){
       var pct=(v.val-min)/(max-min);
-      var r=Math.round(245-pct*25);
-      var g=Math.round(248+pct*7);
-      var b=Math.round(255-pct*35);
+      // 진한 파란색(높은값) → 옅은 파란색(낮은값) 그라데이션
+      var r=Math.round(235-pct*75);
+      var g=Math.round(240-pct*40);
+      var b=Math.round(255-pct*15);
       var cell=row.cells[v.idx];
-      // Skip the highlighted 2월 column (3rd column)
+      // 당월(2월) 컬럼 스킵 (별도 하이라이트)
       if(v.idx===2) return;
       cell.style.backgroundColor='rgb('+r+','+g+','+b+')';
+      if(pct>0.85) cell.style.color='#1e3a5f';
     });
   });
 });
