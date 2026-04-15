@@ -192,16 +192,22 @@ a{color:var(--bl);text-decoration:none}a:hover{text-decoration:underline}
 .overview-tabs .active{background:#0f172a;color:#fff}
 .overview-tabs .inactive{background:#fff;color:#64748b;border-color:#d1d5db}
 .ov-title{font-size:18px;font-weight:800;color:#0f172a;margin-bottom:4px;padding-bottom:10px;border-bottom:2px solid #0f172a}
-.ov-sub{font-size:11px;color:#94a3b8;margin-bottom:20px}
-.ov-two{display:flex;gap:24px;margin-bottom:20px}
-.ov-col{flex:1}
-.ov-label{font-size:13px;font-weight:700;color:#0f172a;margin-bottom:8px;padding-bottom:6px;border-bottom:2px solid #0f172a}
-.ov-chart{height:380px;position:relative}
-.ov-callout-row{display:flex;gap:14px;margin-top:20px;margin-bottom:20px}
-.ov-callout{flex:1;border-left:3px solid #dc2626;padding:8px 12px;background:#fef2f2}
-.ov-callout-num{font-size:22px;font-weight:900;color:#dc2626;line-height:1}
-.ov-callout-label{font-size:10px;color:#64748b;margin-top:3px;line-height:1.3}
-.ov-callout-desc{font-size:11px;color:#0f172a;font-weight:600;margin-top:4px;line-height:1.4}
+.ov-sub{font-size:11px;color:#94a3b8;margin-bottom:16px}
+.ov-grid{display:grid;grid-template-columns:1fr 1fr 2px 1fr 1fr;gap:12px;margin-bottom:16px}
+.ov-divider{background:#0f172a;border-radius:1px;margin:10px 0}
+.ov-cell{border:1px solid #e2e8f0;border-radius:6px;padding:10px 10px 8px;background:#fff}
+.ov-cell-label{font-size:11px;font-weight:700;color:#0f172a;margin-bottom:2px;line-height:1.3}
+.ov-cell-sub{font-size:8px;color:#94a3b8;margin-bottom:6px}
+.ov-cell-chart{height:260px;position:relative}
+.ov-callout-row{display:flex;gap:16px;margin-bottom:20px}
+.ov-callout-row .ov-callout{flex:1 1 0;min-width:0}
+.ov-callout{border-left:3px solid #dc2626;padding:10px 14px;background:#fef2f2}
+.ov-callout-num{font-size:26px;font-weight:900;color:#dc2626;line-height:1}
+.ov-callout-label{font-size:12px;color:#64748b;margin-top:2px}
+.ov-callout-desc{font-size:12px;color:#0f172a;font-weight:600;margin-top:3px;line-height:1.3}
+.ov-callout.blue{border-left-color:#2563eb;background:#eff6ff}
+.ov-callout.blue .ov-callout-num{color:#2563eb}
+.ov-bottom-divider{border:none;border-top:1.5px solid #e2e8f0;margin:24px 0 16px}
 </style>
 </head>
 <body>
@@ -217,31 +223,50 @@ a{color:var(--bl);text-decoration:none}a:hover{text-decoration:underline}
 <!-- Market Overview Section -->
 <div id="section-overview">
 <div class="ov-title">3월 전체 시장 Overview</div>
-<div class="ov-sub">Sensor Tower Market Intelligence · 79개국(중국·인도 제외) · 월별 총 사용 시간·매출 기준 · 13개 게임 장르</div>
+<div class="ov-sub">Sensor Tower Market Intelligence · 79개국(중국·인도 제외) · '25.03~'26.03 · 13개 게임 장르</div>
 
-<div class="ov-two">
-  <div class="ov-col">
-    <div class="ov-label">사용 시간 점유율 추이 (%)</div>
-    <div class="ov-chart"><canvas id="ovUsage"></canvas></div>
+<div class="ov-grid">
+  <div class="ov-cell">
+    <div class="ov-cell-label">전체 시장<br>사용 시간 점유율</div>
+    <div class="ov-cell-sub">장르별 · 슈터(빨간색)</div>
+    <div class="ov-cell-chart"><canvas id="ovUsage"></canvas></div>
   </div>
-  <div class="ov-col">
-    <div class="ov-label">매출 점유율 추이 (%)</div>
-    <div class="ov-chart"><canvas id="ovRev"></canvas></div>
+  <div class="ov-cell">
+    <div class="ov-cell-label">전체 시장<br>매출 점유율</div>
+    <div class="ov-cell-sub">장르별 · 슈터(빨간색)</div>
+    <div class="ov-cell-chart"><canvas id="ovRev"></canvas></div>
+  </div>
+  <div class="ov-divider"></div>
+  <div class="ov-cell">
+    <div class="ov-cell-label">슈터 장르 내<br>DAU 점유율</div>
+    <div class="ov-cell-sub">PUBGM(파란색) vs 경쟁작</div>
+    <div class="ov-cell-chart"><canvas id="ovShDau"></canvas></div>
+  </div>
+  <div class="ov-cell">
+    <div class="ov-cell-label">슈터 장르 내<br>매출 점유율</div>
+    <div class="ov-cell-sub">PUBGM(파란색) vs 경쟁작</div>
+    <div class="ov-cell-chart"><canvas id="ovShRev"></canvas></div>
   </div>
 </div>
 
 <div class="ov-callout-row">
   <div class="ov-callout">
     <div class="ov-callout-num">13.2%</div>
-    <div class="ov-callout-label">슈터 사용 시간 점유율 ('26.03)</div>
-    <div class="ov-callout-desc">시뮬레이션(Roblox 포함) 장르의 사용 시간 점유율 하락(27%→20%)과 맞물려 슈터가 반등. 라마단 시즌과 함께 '25.03(13.4%) 수준으로 복귀</div>
+    <div class="ov-callout-label">슈터 시간 점유율</div>
+    <div class="ov-callout-desc">시뮬레이션(Roblox 포함) 하락(27%→20%)과 맞물려 슈터 반등<br>겨울방학 및 라마단 기간 상승으로 '25.03(13.4%) 수준 복귀</div>
   </div>
   <div class="ov-callout">
     <div class="ov-callout-num">4.2%</div>
-    <div class="ov-callout-label">슈터 매출 점유율 ('26.03)</div>
+    <div class="ov-callout-label">슈터 매출 점유율</div>
     <div class="ov-callout-desc">13개월간 3.6~4.4% 범위에서 횡보<br>시장 파이 확대 없이 경쟁작 간 점유 경쟁 구도 지속</div>
   </div>
+  <div class="ov-callout blue">
+    <div class="ov-callout-num">28.5%</div>
+    <div class="ov-callout-label">PUBGM 슈터 내 매출</div>
+    <div class="ov-callout-desc">15.3%→28.5% V자 반등으로 슈터 시장 내 1위 탈환</div>
+  </div>
 </div>
+<hr class="ov-bottom-divider">
 </div>
 
 <!-- Summary Section (hidden by default) -->
@@ -1286,7 +1311,7 @@ function switchTopTab(tab){
   document.getElementById('tab-summary').className=tab==='summary'?'active':'inactive';
 }
 
-// ===== MARKET OVERVIEW CHARTS =====
+// ===== MARKET OVERVIEW CHARTS (4-col) =====
 const ovM=["'25.03","'25.04","'25.05","'25.06","'25.07","'25.08","'25.09","'25.10","'25.11","'25.12","'26.01","'26.02","'26.03"];
 const OC={sim:'#a8c5da',puz:'#c4b5d4',str:'#b8ccb5',sht:'#dc2626',act:'#d4c5a8',arc:'#c0c0c0'};
 
@@ -1306,48 +1331,70 @@ const ovRG=[
   {n:'시뮬레이션',d:[7.57,7.14,7.14,7.09,7.66,7.79,7.55,7.29,7.41,7.36,7.13,7.5,7.79],c:OC.sim},
   {n:'슈터',d:[4.25,4.37,3.87,3.81,4.38,4.34,3.94,3.66,3.56,4.17,3.98,4.12,4.16],c:OC.sht},
 ];
+const ovSRG=[
+  {n:'PUBGM',d:[24.6,23.5,27.2,23.2,16.9,15.3,17.6,15.3,16.5,15.3,23.0,26.9,28.5],c:'#2563eb'},
+  {n:'FF',d:[22.2,21.7,23.6,26.2,28.6,25.9,29.5,28.9,28.5,25.6,29.9,26.9,26.9],c:'#f59e0b'},
+  {n:'CODM',d:[18.3,13.7,18.0,16.6,13.1,12.4,15.3,13.7,14.0,12.6,16.9,15.3,14.5],c:'#7c3aed'},
+  {n:'DF',d:[0.0,1.2,2.1,1.7,1.6,1.7,1.6,1.4,1.2,0.9,2.0,1.1,1.0],c:'#16a34a'},
+  {n:'기타',d:[34.9,39.9,29.1,32.3,39.8,44.7,36.0,40.7,39.8,45.6,28.2,29.8,29.1],c:'#d1d5db'},
+];
+const ovSDG=[
+  {n:'PUBGM',d:[21.5,20.8,20.0,19.5,18.2,17.0,16.8,16.5,16.0,15.8,18.5,19.0,19.5],c:'#2563eb'},
+  {n:'FF',d:[38.0,36.5,35.0,37.0,38.5,37.0,36.0,35.5,36.0,35.0,36.5,37.0,39.0],c:'#f59e0b'},
+  {n:'CODM',d:[8.5,8.0,7.8,7.5,7.0,6.8,6.5,6.2,6.0,5.8,6.0,5.8,5.5],c:'#7c3aed'},
+  {n:'DF',d:[0.0,1.5,1.8,2.0,2.2,2.0,1.8,1.5,1.3,1.2,1.5,1.4,1.2],c:'#16a34a'},
+  {n:'기타',d:[32.0,33.2,35.4,34.0,34.1,37.2,38.9,40.3,40.7,42.2,37.5,36.8,34.8],c:'#d1d5db'},
+];
 
-function ovAnno(genres,si){
-  return {id:'ova'+si,afterDraw(chart){
-    const ctx=chart.ctx,meta=chart.getDatasetMeta(si),d=genres[si].d;
-    let lowI=0;d.forEach((v,i)=>{if(v<d[lowI])lowI=i;});
-    const low=meta.data[lowI];
-    ctx.save();ctx.beginPath();ctx.arc(low.x,low.y,11,0,Math.PI*2);
-    ctx.strokeStyle='#dc2626';ctx.lineWidth=1.5;ctx.setLineDash([3,3]);ctx.stroke();ctx.setLineDash([]);
-    ctx.font='700 9px "Pretendard Variable"';ctx.fillStyle='#dc2626';ctx.textAlign='center';
-    ctx.fillText(d[lowI].toFixed(1)+'%',low.x,low.y+20);ctx.restore();
-    const cur=meta.data[12];ctx.save();ctx.beginPath();ctx.arc(cur.x,cur.y,11,0,Math.PI*2);
-    ctx.strokeStyle='#dc2626';ctx.lineWidth=2;ctx.stroke();
-    ctx.font='700 10px "Pretendard Variable"';ctx.fillStyle='#dc2626';ctx.textAlign='center';
-    ctx.fillText(d[12].toFixed(1)+'%',cur.x,cur.y-14);ctx.restore();
-    const st=meta.data[0];ctx.save();ctx.font='600 9px "Pretendard Variable"';ctx.fillStyle='#94a3b8';
-    ctx.textAlign='center';ctx.fillText(d[0].toFixed(1)+'%',st.x,st.y-12);ctx.restore();
-    genres.forEach((g,gi)=>{if(gi===si)return;const m=chart.getDatasetMeta(gi),lp=m.data[12];
-      ctx.save();ctx.font='600 9px "Pretendard Variable"';ctx.fillStyle=g.c;ctx.textAlign='left';ctx.textBaseline='middle';
-      ctx.fillText(g.n+' '+g.d[12].toFixed(1)+'%',lp.x+8,lp.y);ctx.restore();});
-  }};
+function ovAnno4(genres,si,fc,isFirst){
+  return {id:'ov4'+si+fc,
+    beforeDatasetsDraw(chart){
+      if(!isFirst)return;
+      const ctx=chart.ctx,{left,right,top,bottom}=chart.chartArea,x=chart.scales.x,d=genres[si].d;
+      let lowI=0;d.forEach((v,i)=>{if(v<d[lowI]&&v>0)lowI=i;});
+      ctx.save();ctx.fillStyle='#eff6ff';ctx.fillRect(x.getPixelForValue(0),top,x.getPixelForValue(lowI)-x.getPixelForValue(0),bottom-top);
+      ctx.fillStyle='#fef2f2';ctx.fillRect(x.getPixelForValue(lowI),top,x.getPixelForValue(d.length-1)-x.getPixelForValue(lowI),bottom-top);ctx.restore();
+    },
+    afterDraw(chart){
+      const ctx=chart.ctx,meta=chart.getDatasetMeta(si),d=genres[si].d;
+      let lowI=0;d.forEach((v,i)=>{if(v<d[lowI]&&v>0)lowI=i;});
+      const low=meta.data[lowI];ctx.save();ctx.beginPath();ctx.arc(low.x,low.y,8,0,Math.PI*2);
+      ctx.strokeStyle=fc;ctx.lineWidth=1.5;ctx.setLineDash([2,2]);ctx.stroke();ctx.setLineDash([]);
+      ctx.font='700 7px "DM Sans"';ctx.fillStyle=fc;ctx.textAlign='center';
+      ctx.fillText(d[lowI].toFixed(1)+'%',low.x,low.y+15);ctx.restore();
+      const cur=meta.data[d.length-1];ctx.save();ctx.beginPath();ctx.arc(cur.x,cur.y,8,0,Math.PI*2);
+      ctx.strokeStyle=fc;ctx.lineWidth=2;ctx.stroke();
+      ctx.font='700 8px "DM Sans"';ctx.fillStyle=fc;ctx.textAlign='center';
+      ctx.fillText(d[d.length-1].toFixed(1)+'%',cur.x,cur.y-11);ctx.restore();
+      if(isFirst){const sm=chart.getDatasetMeta(0),sd=genres[0].d;let sp=0;sd.forEach((v,i)=>{if(v>sd[sp])sp=i;});
+        const spt=sm.data[sp];ctx.save();ctx.beginPath();ctx.arc(spt.x,spt.y,7,0,Math.PI*2);ctx.strokeStyle=genres[0].c;ctx.lineWidth=1;ctx.setLineDash([2,2]);ctx.stroke();ctx.setLineDash([]);
+        ctx.font='700 7px "DM Sans"';ctx.fillStyle=genres[0].c;ctx.textAlign='center';ctx.fillText(sd[sp].toFixed(0)+'%',spt.x,spt.y-10);ctx.restore();}
+    }};
 }
 
-function ovMakeChart(id,genres,si,yMax){
+function ovMk4(id,genres,si,yMax,fn,fc,isFirst){
   new Chart(document.getElementById(id),{type:'line',data:{labels:ovM,
     datasets:genres.map(g=>({label:g.n,data:g.d,borderColor:g.c,
-      backgroundColor:g.n==='슈터'?'#dc262608':'transparent',
-      borderWidth:g.n==='슈터'?3.5:1.8,pointRadius:g.n==='슈터'?5:0,
-      pointHoverRadius:g.n==='슈터'?7:3,pointBackgroundColor:g.n==='슈터'?'#dc2626':g.c,
-      pointBorderColor:g.n==='슈터'?'#fff':'transparent',pointBorderWidth:g.n==='슈터'?2:0,
-      tension:0.25,fill:g.n==='슈터',order:g.n==='슈터'?0:1}))},
-    options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:18,right:90}},
-      plugins:{legend:{display:false},tooltip:{backgroundColor:'#0f172a',titleColor:'#fff',bodyColor:'#e2e8f0',
-        borderWidth:0,padding:8,cornerRadius:4,titleFont:{size:10,weight:'600'},bodyFont:{size:11,weight:'700'},
-        callbacks:{label(c){return '  '+c.dataset.label+' '+c.raw+'%';}}}},
+      backgroundColor:g.n===fn?fc+'08':'transparent',
+      borderWidth:g.n===fn?3:1.5,pointRadius:g.n===fn?3:0,
+      pointHoverRadius:g.n===fn?5:2,pointBackgroundColor:g.n===fn?fc:g.c,
+      pointBorderColor:g.n===fn?'#fff':'transparent',pointBorderWidth:g.n===fn?1.5:0,
+      tension:0.25,fill:g.n===fn,order:g.n===fn?0:1}))},
+    options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:14,right:6,left:2}},
+      plugins:{legend:{display:false},tooltip:{backgroundColor:'#0f172a',titleColor:'#fff',bodyColor:'#e2e8f0',borderWidth:0,padding:6,cornerRadius:4,
+        titleFont:{size:9,weight:'600'},bodyFont:{size:9,weight:'700'},
+        callbacks:{label(c){return ' '+c.dataset.label+' '+c.raw+'%';}}}},
       scales:{x:{grid:{display:false},border:{display:true,color:'#0f172a',width:1},
-        ticks:{color:'#475569',font:{size:10,weight:'600',family:'DM Sans'},maxRotation:45,padding:6}},
+        ticks:{color:'#475569',font:{size:7,weight:'600',family:'DM Sans'},maxRotation:60,autoSkip:true,maxTicksLimit:7,padding:2}},
         y:{grid:{color:'#f1f5f9',drawTicks:false},border:{display:false},
-          ticks:{color:'#475569',font:{size:10,weight:'600',family:'DM Sans'},callback:v=>v+'%',padding:6},min:0,max:yMax}}},
-    plugins:[ovAnno(genres,si)]});
+          ticks:{color:'#475569',font:{size:8,weight:'600',family:'DM Sans'},callback:v=>v+'%',padding:2},min:0,max:yMax}}},
+    plugins:[ovAnno4(genres,si,fc,isFirst)]});
 }
-ovMakeChart('ovUsage',ovUG,3,30);
-ovMakeChart('ovRev',ovRG,5,26);
+
+ovMk4('ovUsage',ovUG,3,30,'슈터','#dc2626',true);
+ovMk4('ovRev',ovRG,5,26,'슈터','#dc2626',false);
+ovMk4('ovShDau',ovSDG,0,50,'PUBGM','#2563eb',false);
+ovMk4('ovShRev',ovSRG,0,50,'PUBGM','#2563eb',false);
 
 </script>
 </body>
