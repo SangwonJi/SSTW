@@ -185,11 +185,67 @@ a{color:var(--bl);text-decoration:none}a:hover{text-decoration:underline}
 .bump-insight { background:#f8fafc; border:1px solid #e2e8f0; border-radius:5px; padding:10px 14px; margin-top:10px; font-size:12px; color:#334155; line-height:1.5; }
 .bump-insight strong { color:#0f172a; }
 .section-divider { border:none; border-top:1.5px solid #e2e8f0; margin:32px 0 16px; }
+
+/* Market Overview */
+.overview-tabs{display:flex;gap:6px;margin-bottom:16px}
+.overview-tabs button{padding:10px 20px;font-size:15px;font-weight:700;border:1.5px solid #0f172a;border-radius:6px;cursor:pointer;transition:.15s;letter-spacing:.3px}
+.overview-tabs .active{background:#0f172a;color:#fff}
+.overview-tabs .inactive{background:#fff;color:#64748b;border-color:#d1d5db}
+.ov-title{font-size:18px;font-weight:800;color:#0f172a;margin-bottom:4px;padding-bottom:10px;border-bottom:2px solid #0f172a}
+.ov-sub{font-size:11px;color:#94a3b8;margin-bottom:20px}
+.ov-two{display:flex;gap:24px;margin-bottom:20px}
+.ov-col{flex:1}
+.ov-label{font-size:13px;font-weight:700;color:#0f172a;margin-bottom:8px;padding-bottom:6px;border-bottom:2px solid #0f172a}
+.ov-chart{height:380px;position:relative}
+.ov-callout-row{display:flex;gap:14px;margin-top:20px;margin-bottom:20px}
+.ov-callout{flex:1;border-left:3px solid #dc2626;padding:8px 12px;background:#fef2f2}
+.ov-callout-num{font-size:22px;font-weight:900;color:#dc2626;line-height:1}
+.ov-callout-label{font-size:10px;color:#64748b;margin-top:3px;line-height:1.3}
+.ov-callout-desc{font-size:11px;color:#0f172a;font-weight:600;margin-top:4px;line-height:1.4}
 </style>
 </head>
 <body>
 <div class="wrap">
 
+
+<!-- Overview / Summary Tabs -->
+<div class="overview-tabs">
+  <button id="tab-overview" class="active" onclick="switchTopTab('overview')">시장 Overview</button>
+  <button id="tab-summary" class="inactive" onclick="switchTopTab('summary')">Summary</button>
+</div>
+
+<!-- Market Overview Section -->
+<div id="section-overview">
+<div class="ov-title">3월 전체 시장 Overview</div>
+<div class="ov-sub">Sensor Tower Market Intelligence · 79개국(중국·인도 제외) · 월별 총 사용 시간·매출 기준 · 13개 게임 장르</div>
+
+<div class="ov-two">
+  <div class="ov-col">
+    <div class="ov-label">사용 시간 점유율 추이 (%)</div>
+    <div class="ov-chart"><canvas id="ovUsage"></canvas></div>
+  </div>
+  <div class="ov-col">
+    <div class="ov-label">매출 점유율 추이 (%)</div>
+    <div class="ov-chart"><canvas id="ovRev"></canvas></div>
+  </div>
+</div>
+
+<div class="ov-callout-row">
+  <div class="ov-callout">
+    <div class="ov-callout-num">13.2%</div>
+    <div class="ov-callout-label">슈터 사용 시간 점유율 ('26.03)</div>
+    <div class="ov-callout-desc">시뮬레이션(Roblox 포함) 장르의 사용 시간 점유율 하락(27%→20%)과 맞물려 슈터가 반등. 라마단 시즌과 함께 '25.03(13.4%) 수준으로 복귀</div>
+  </div>
+  <div class="ov-callout">
+    <div class="ov-callout-num">4.2%</div>
+    <div class="ov-callout-label">슈터 매출 점유율 ('26.03)</div>
+    <div class="ov-callout-desc">13개월간 3.6~4.4% 범위에서 횡보<br>시장 파이 확대 없이 경쟁작 간 점유 경쟁 구도 지속</div>
+  </div>
+</div>
+</div>
+
+<!-- Summary Section (hidden by default) -->
+<div id="section-summary" style="display:none">
 <h2>[ Summary ]</h2>
 
 <div class="kf">
@@ -256,6 +312,8 @@ a{color:var(--bl);text-decoration:none}a:hover{text-decoration:underline}
   <div class="cd" style="border-top-color:#ef4444"><div class="lb" style="color:#ef4444">Roblox (간접)</div><div class="v1">130.2M <span style="font-size:14px;font-weight:400;color:var(--g)">A.DAU</span> <span style="font-size:14px;color:var(--g);font-weight:400;margin-left:8px">·</span> <span style="font-size:24px;font-weight:900">$47.3M</span> <span style="font-size:14px;font-weight:400;color:var(--g)">매출</span></div><div class="bx"><span class="b bd">DAU MoM <span style="color:#2563eb;font-weight:700">▼1.5%</span></span><span class="b bu">DAU YoY <span style="color:#dc2626;font-weight:700">▲21.6%</span></span><span class="b bu">매출 MoM <span style="color:#dc2626;font-weight:700">▲12.4%</span></span><span class="b bu">매출 YoY <span style="color:#dc2626;font-weight:700">▲23.2%</span></span></div></div>
   <div class="cd" style="border-top-color:#f59e0b"><div class="lb" style="color:#f59e0b">Brawl Stars (간접)</div><div class="v1">62.6M <span style="font-size:14px;font-weight:400;color:var(--g)">A.DAU</span> <span style="font-size:14px;color:var(--g);font-weight:400;margin-left:8px">·</span> <span style="font-size:24px;font-weight:900">$40.4M</span> <span style="font-size:14px;font-weight:400;color:var(--g)">매출</span></div><div class="bx"><span class="b bu">DAU MoM <span style="color:#dc2626;font-weight:700">▲24.8%</span></span><span class="b bu">DAU YoY <span style="color:#dc2626;font-weight:700">▲35.0%</span></span><span class="b bu">매출 MoM <span style="color:#dc2626;font-weight:700">▲42.2%</span></span><span class="b bu">매출 YoY <span style="color:#dc2626;font-weight:700">▲3.0%</span></span></div></div>
 </div>
+
+</div><!-- end section-summary -->
 
 <!-- Chart Category Toggle -->
 <div style="display:flex;gap:6px;margin-bottom:8px">
@@ -1217,6 +1275,79 @@ const bs_rev_data=[
 ];
 makeBump('bs-rev-bump',bs_rev_data,["'25.02", "'25.03", "'25.04", "'25.05", "'25.06", "'25.07", "'25.08", "'25.09", "'25.10", "'25.11", "'25.12", "'26.01", "'26.02", "'26.03"],6);
 makeBumpDonut('bs-rev-donut','bs-rev-leg',bs_rev_data,["'25.02", "'25.03", "'25.04", "'25.05", "'25.06", "'25.07", "'25.08", "'25.09", "'25.10", "'25.11", "'25.12", "'26.01", "'26.02", "'26.03"]);
+
+
+
+// ===== TOP TAB SWITCH =====
+function switchTopTab(tab){
+  document.getElementById('section-overview').style.display=tab==='overview'?'block':'none';
+  document.getElementById('section-summary').style.display=tab==='summary'?'block':'none';
+  document.getElementById('tab-overview').className=tab==='overview'?'active':'inactive';
+  document.getElementById('tab-summary').className=tab==='summary'?'active':'inactive';
+}
+
+// ===== MARKET OVERVIEW CHARTS =====
+const ovM=["'25.03","'25.04","'25.05","'25.06","'25.07","'25.08","'25.09","'25.10","'25.11","'25.12","'26.01","'26.02","'26.03"];
+const OC={sim:'#a8c5da',puz:'#c4b5d4',str:'#b8ccb5',sht:'#dc2626',act:'#d4c5a8',arc:'#c0c0c0'};
+
+const ovUG=[
+  {n:'시뮬레이션',d:[18.37,20.0,21.76,24.0,26.56,27.01,24.99,23.99,22.91,22.71,21.86,20.28,19.9],c:OC.sim},
+  {n:'퍼즐',d:[17.97,18.2,18.2,17.28,16.56,17.25,18.48,18.78,19.03,18.75,19.32,18.85,18.22],c:OC.puz},
+  {n:'전략',d:[17.02,17.49,16.88,15.53,15.09,15.2,16.76,18.23,18.72,17.92,16.47,16.89,16.73],c:OC.str},
+  {n:'슈터',d:[13.42,12.09,11.29,11.51,11.34,11.16,10.12,9.05,8.97,9.93,11.3,11.92,13.15],c:OC.sht},
+  {n:'액션',d:[5.92,5.5,5.66,5.33,4.76,4.51,4.29,4.36,4.71,4.69,5.06,6.43,7.38],c:OC.act},
+  {n:'아케이드',d:[6.18,6.14,5.9,6.23,6.39,6.11,5.89,5.6,5.6,5.85,6.0,5.97,5.96],c:OC.arc},
+];
+const ovRG=[
+  {n:'퍼즐',d:[19.98,19.91,19.92,19.98,19.64,20.53,21.41,21.66,21.45,21.73,22.78,22.68,23.99],c:OC.puz},
+  {n:'전략',d:[21.59,22.49,22.86,22.51,22.91,23.64,23.29,24.48,24.46,24.15,22.83,22.66,21.51],c:OC.str},
+  {n:'RPG',d:[16.67,16.82,17.39,17.16,17.23,15.86,16.24,15.68,15.64,15.53,16.05,15.74,14.31],c:'#b5c4b8'},
+  {n:'Casino',d:[15.47,15.48,14.88,14.84,14.53,14.23,14.69,14.44,14.32,13.63,13.95,13.55,13.84],c:'#c8bfa8'},
+  {n:'시뮬레이션',d:[7.57,7.14,7.14,7.09,7.66,7.79,7.55,7.29,7.41,7.36,7.13,7.5,7.79],c:OC.sim},
+  {n:'슈터',d:[4.25,4.37,3.87,3.81,4.38,4.34,3.94,3.66,3.56,4.17,3.98,4.12,4.16],c:OC.sht},
+];
+
+function ovAnno(genres,si){
+  return {id:'ova'+si,afterDraw(chart){
+    const ctx=chart.ctx,meta=chart.getDatasetMeta(si),d=genres[si].d;
+    let lowI=0;d.forEach((v,i)=>{if(v<d[lowI])lowI=i;});
+    const low=meta.data[lowI];
+    ctx.save();ctx.beginPath();ctx.arc(low.x,low.y,11,0,Math.PI*2);
+    ctx.strokeStyle='#dc2626';ctx.lineWidth=1.5;ctx.setLineDash([3,3]);ctx.stroke();ctx.setLineDash([]);
+    ctx.font='700 9px "Pretendard Variable"';ctx.fillStyle='#dc2626';ctx.textAlign='center';
+    ctx.fillText(d[lowI].toFixed(1)+'%',low.x,low.y+20);ctx.restore();
+    const cur=meta.data[12];ctx.save();ctx.beginPath();ctx.arc(cur.x,cur.y,11,0,Math.PI*2);
+    ctx.strokeStyle='#dc2626';ctx.lineWidth=2;ctx.stroke();
+    ctx.font='700 10px "Pretendard Variable"';ctx.fillStyle='#dc2626';ctx.textAlign='center';
+    ctx.fillText(d[12].toFixed(1)+'%',cur.x,cur.y-14);ctx.restore();
+    const st=meta.data[0];ctx.save();ctx.font='600 9px "Pretendard Variable"';ctx.fillStyle='#94a3b8';
+    ctx.textAlign='center';ctx.fillText(d[0].toFixed(1)+'%',st.x,st.y-12);ctx.restore();
+    genres.forEach((g,gi)=>{if(gi===si)return;const m=chart.getDatasetMeta(gi),lp=m.data[12];
+      ctx.save();ctx.font='600 9px "Pretendard Variable"';ctx.fillStyle=g.c;ctx.textAlign='left';ctx.textBaseline='middle';
+      ctx.fillText(g.n+' '+g.d[12].toFixed(1)+'%',lp.x+8,lp.y);ctx.restore();});
+  }};
+}
+
+function ovMakeChart(id,genres,si,yMax){
+  new Chart(document.getElementById(id),{type:'line',data:{labels:ovM,
+    datasets:genres.map(g=>({label:g.n,data:g.d,borderColor:g.c,
+      backgroundColor:g.n==='슈터'?'#dc262608':'transparent',
+      borderWidth:g.n==='슈터'?3.5:1.8,pointRadius:g.n==='슈터'?5:0,
+      pointHoverRadius:g.n==='슈터'?7:3,pointBackgroundColor:g.n==='슈터'?'#dc2626':g.c,
+      pointBorderColor:g.n==='슈터'?'#fff':'transparent',pointBorderWidth:g.n==='슈터'?2:0,
+      tension:0.25,fill:g.n==='슈터',order:g.n==='슈터'?0:1}))},
+    options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:18,right:90}},
+      plugins:{legend:{display:false},tooltip:{backgroundColor:'#0f172a',titleColor:'#fff',bodyColor:'#e2e8f0',
+        borderWidth:0,padding:8,cornerRadius:4,titleFont:{size:10,weight:'600'},bodyFont:{size:11,weight:'700'},
+        callbacks:{label(c){return '  '+c.dataset.label+' '+c.raw+'%';}}}},
+      scales:{x:{grid:{display:false},border:{display:true,color:'#0f172a',width:1},
+        ticks:{color:'#475569',font:{size:10,weight:'600',family:'DM Sans'},maxRotation:45,padding:6}},
+        y:{grid:{color:'#f1f5f9',drawTicks:false},border:{display:false},
+          ticks:{color:'#475569',font:{size:10,weight:'600',family:'DM Sans'},callback:v=>v+'%',padding:6},min:0,max:yMax}}},
+    plugins:[ovAnno(genres,si)]});
+}
+ovMakeChart('ovUsage',ovUG,3,30);
+ovMakeChart('ovRev',ovRG,5,26);
 
 </script>
 </body>
