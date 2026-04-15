@@ -170,12 +170,12 @@ a{color:var(--bl);text-decoration:none}a:hover{text-decoration:underline}
 @media(max-width:800px){.cards,.two{grid-template-columns:1fr}.tabs{flex-direction:column}}
 
 /* Bump Chart */
-.bump-section { margin:16px 0 20px; }
-.bump-title { font-size:13px; font-weight:700; color:#0f172a; margin-bottom:2px; }
-.bump-sub { font-size:10px; color:#64748b; margin-bottom:10px; }
+.bump-section { margin:32px 0 36px; }
+.bump-title { font-size:14px; font-weight:700; color:#0f172a; margin-bottom:2px; }
+.bump-sub { font-size:11px; color:#64748b; margin-bottom:10px; }
 .bump-wrap { display:flex; gap:14px; align-items:stretch; }
-.bump-chart { flex:1; position:relative; height:340px; }
-.bump-donut-area { width:155px; display:flex; flex-direction:column; align-items:center; padding-top:4px; }
+.bump-chart { flex:1; position:relative; height:450px; }
+.bump-donut-area { width:165px; display:flex; flex-direction:column; align-items:center; padding-top:4px; }
 .bump-donut-title { font-size:9px; font-weight:700; color:#94a3b8; text-align:center; margin-bottom:6px; letter-spacing:.5px; text-transform:uppercase; }
 .bump-donut-legend { margin-top:8px; width:100%; }
 .bump-donut-item { display:flex; align-items:center; gap:5px; margin-bottom:4px; font-size:10px; }
@@ -184,7 +184,7 @@ a{color:var(--bl);text-decoration:none}a:hover{text-decoration:underline}
 .bump-donut-pct { font-weight:700; min-width:36px; text-align:right; }
 .bump-insight { background:#f8fafc; border:1px solid #e2e8f0; border-radius:5px; padding:8px 12px; margin-top:8px; font-size:11px; color:#334155; line-height:1.5; }
 .bump-insight strong { color:#0f172a; }
-.section-divider { border:none; border-top:1.5px solid #e2e8f0; margin:20px 0 12px; }
+.section-divider { border:none; border-top:1.5px solid #e2e8f0; margin:32px 0 16px; }
 </style>
 </head>
 <body>
@@ -356,7 +356,7 @@ a{color:var(--bl);text-decoration:none}a:hover{text-decoration:underline}
     <div class="bump-chart"><canvas id="ff-dau-bump"></canvas></div>
     <div class="bump-donut-area">
       <div class="bump-donut-title">당월 점유율</div>
-      <canvas id="ff-dau-donut" width="130" height="130"></canvas>
+      <canvas id="ff-dau-donut" width="140" height="140"></canvas>
       <div class="bump-donut-legend" id="ff-dau-leg"></div>
     </div>
   </div>
@@ -395,7 +395,7 @@ a{color:var(--bl);text-decoration:none}a:hover{text-decoration:underline}
     <div class="bump-chart"><canvas id="ff-rev-bump"></canvas></div>
     <div class="bump-donut-area">
       <div class="bump-donut-title">당월 점유율</div>
-      <canvas id="ff-rev-donut" width="130" height="130"></canvas>
+      <canvas id="ff-rev-donut" width="140" height="140"></canvas>
       <div class="bump-donut-legend" id="ff-rev-leg"></div>
     </div>
   </div>
@@ -459,7 +459,7 @@ S3 Paranoia(3.18~) 시즌 전환으로 초자연 호러 테마, MX Guardian 산�
     <div class="bump-chart"><canvas id="cm-dau-bump"></canvas></div>
     <div class="bump-donut-area">
       <div class="bump-donut-title">당월 점유율</div>
-      <canvas id="cm-dau-donut" width="130" height="130"></canvas>
+      <canvas id="cm-dau-donut" width="140" height="140"></canvas>
       <div class="bump-donut-legend" id="cm-dau-leg"></div>
     </div>
   </div>
@@ -497,7 +497,7 @@ S3 Paranoia(3.18~) 시즌 전환으로 초자연 호러 테마, MX Guardian 산�
     <div class="bump-chart"><canvas id="cm-rev-bump"></canvas></div>
     <div class="bump-donut-area">
       <div class="bump-donut-title">당월 점유율</div>
-      <canvas id="cm-rev-donut" width="130" height="130"></canvas>
+      <canvas id="cm-rev-donut" width="140" height="140"></canvas>
       <div class="bump-donut-legend" id="cm-rev-leg"></div>
     </div>
   </div>
@@ -562,7 +562,7 @@ RED DAY 설 이벤트 종료(3.5) 이후 미드시즌 업데이트(3.5, Iridesce
     <div class="bump-chart"><canvas id="df-dau-bump"></canvas></div>
     <div class="bump-donut-area">
       <div class="bump-donut-title">당월 점유율</div>
-      <canvas id="df-dau-donut" width="130" height="130"></canvas>
+      <canvas id="df-dau-donut" width="140" height="140"></canvas>
       <div class="bump-donut-legend" id="df-dau-leg"></div>
     </div>
   </div>
@@ -599,7 +599,7 @@ RED DAY 설 이벤트 종료(3.5) 이후 미드시즌 업데이트(3.5, Iridesce
     <div class="bump-chart"><canvas id="df-rev-bump"></canvas></div>
     <div class="bump-donut-area">
       <div class="bump-donut-title">당월 점유율</div>
-      <canvas id="df-rev-donut" width="130" height="130"></canvas>
+      <canvas id="df-rev-donut" width="140" height="140"></canvas>
       <div class="bump-donut-legend" id="df-rev-leg"></div>
     </div>
   </div>
@@ -696,7 +696,7 @@ A.DAU 1.3억 유지(토·일 150M / 평일 114~126M). 3월은 <strong>March 2026
     <div class="bump-chart"><canvas id="rb-dau-bump"></canvas></div>
     <div class="bump-donut-area">
       <div class="bump-donut-title">당월 점유율</div>
-      <canvas id="rb-dau-donut" width="130" height="130"></canvas>
+      <canvas id="rb-dau-donut" width="140" height="140"></canvas>
       <div class="bump-donut-legend" id="rb-dau-leg"></div>
     </div>
   </div>
@@ -739,7 +739,7 @@ A.DAU 1.3억 유지(토·일 150M / 평일 114~126M). 3월은 <strong>March 2026
     <div class="bump-chart"><canvas id="rb-rev-bump"></canvas></div>
     <div class="bump-donut-area">
       <div class="bump-donut-title">당월 점유율</div>
-      <canvas id="rb-rev-donut" width="130" height="130"></canvas>
+      <canvas id="rb-rev-donut" width="140" height="140"></canvas>
       <div class="bump-donut-legend" id="rb-rev-leg"></div>
     </div>
   </div>
@@ -809,7 +809,7 @@ A.DAU 1.3억 유지(토·일 150M / 평일 114~126M). 3월은 <strong>March 2026
     <div class="bump-chart"><canvas id="bs-dau-bump"></canvas></div>
     <div class="bump-donut-area">
       <div class="bump-donut-title">당월 점유율</div>
-      <canvas id="bs-dau-donut" width="130" height="130"></canvas>
+      <canvas id="bs-dau-donut" width="140" height="140"></canvas>
       <div class="bump-donut-legend" id="bs-dau-leg"></div>
     </div>
   </div>
@@ -847,7 +847,7 @@ A.DAU 1.3억 유지(토·일 150M / 평일 114~126M). 3월은 <strong>March 2026
     <div class="bump-chart"><canvas id="bs-rev-bump"></canvas></div>
     <div class="bump-donut-area">
       <div class="bump-donut-title">당월 점유율</div>
-      <canvas id="bs-rev-donut" width="130" height="130"></canvas>
+      <canvas id="bs-rev-donut" width="140" height="140"></canvas>
       <div class="bump-donut-legend" id="bs-rev-leg"></div>
     </div>
   </div>
