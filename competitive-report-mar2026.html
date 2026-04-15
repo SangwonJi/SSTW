@@ -1352,10 +1352,14 @@ function ovAnno4(genres,si,fc,isFirst){
       if(isFirst){const sm=chart.getDatasetMeta(0),sd=genres[0].d;let sp=0;sd.forEach((v,i)=>{if(v>sd[sp])sp=i;});
         const spt=sm.data[sp];ctx.save();ctx.beginPath();ctx.arc(spt.x,spt.y,7,0,Math.PI*2);ctx.strokeStyle=genres[0].c;ctx.lineWidth=1;ctx.setLineDash([2,2]);ctx.stroke();ctx.setLineDash([]);
         ctx.font='700 9px "DM Sans"';ctx.fillStyle=genres[0].c;ctx.textAlign='center';ctx.fillText(sd[sp].toFixed(0)+'%',spt.x,spt.y-10);ctx.restore();}
-      // End labels for all genres
+      // End labels for all genres (including focus)
       genres.forEach((g,gi)=>{if(gi===si)return;const m=chart.getDatasetMeta(gi),lp=m.data[d.length-1];
         ctx.save();ctx.font='600 10px "Pretendard Variable"';ctx.fillStyle=g.c;ctx.textAlign='left';ctx.textBaseline='middle';
         ctx.fillText(g.n+' '+g.d[g.d.length-1].toFixed(1)+'%',lp.x+6,lp.y);ctx.restore();});
+      // Focus genre end label (bold)
+      const fMeta=chart.getDatasetMeta(si),fLp=fMeta.data[d.length-1];
+      ctx.save();ctx.font='800 11px "Pretendard Variable"';ctx.fillStyle=fc;ctx.textAlign='left';ctx.textBaseline='middle';
+      ctx.fillText(genres[si].n,fLp.x+6,fLp.y);ctx.restore();
     }};
 }
 
