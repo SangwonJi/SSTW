@@ -187,10 +187,7 @@ a{color:var(--bl);text-decoration:none}a:hover{text-decoration:underline}
 .section-divider { border:none; border-top:1.5px solid #e2e8f0; margin:32px 0 16px; }
 
 /* Market Overview */
-.overview-tabs{display:flex;gap:6px;margin-bottom:16px}
-.overview-tabs button{padding:10px 20px;font-size:15px;font-weight:700;border:1.5px solid #0f172a;border-radius:6px;cursor:pointer;transition:.15s;letter-spacing:.3px}
-.overview-tabs .active{background:#0f172a;color:#fff}
-.overview-tabs .inactive{background:#fff;color:#64748b;border-color:#d1d5db}
+
 .ov-title{font-size:18px;font-weight:800;color:#0f172a;margin-bottom:4px;padding-bottom:10px;border-bottom:2px solid #0f172a}
 .ov-sub{font-size:11px;color:#94a3b8;margin-bottom:16px}
 .ov-grid{display:grid;grid-template-columns:1fr 1fr 2px 1fr 1fr;gap:12px;margin-bottom:16px}
@@ -212,13 +209,6 @@ a{color:var(--bl);text-decoration:none}a:hover{text-decoration:underline}
 </head>
 <body>
 <div class="wrap">
-
-
-<!-- Overview / Summary Tabs -->
-<div class="overview-tabs">
-  <button id="tab-overview" class="active" onclick="switchTopTab('overview')">시장 Overview</button>
-  <button id="tab-summary" class="inactive" onclick="switchTopTab('summary')">Summary</button>
-</div>
 
 <!-- Market Overview Section -->
 <div id="section-overview">
@@ -269,8 +259,8 @@ a{color:var(--bl);text-decoration:none}a:hover{text-decoration:underline}
 <hr class="ov-bottom-divider">
 </div>
 
-<!-- Summary Section (hidden by default) -->
-<div id="section-summary" style="display:none">
+<!-- Summary Section -->
+<div id="section-summary">
 <h2>[ Summary ]</h2>
 
 <div class="kf">
@@ -1303,13 +1293,6 @@ makeBumpDonut('bs-rev-donut','bs-rev-leg',bs_rev_data,["'25.02", "'25.03", "'25.
 
 
 
-// ===== TOP TAB SWITCH =====
-function switchTopTab(tab){
-  document.getElementById('section-overview').style.display=tab==='overview'?'block':'none';
-  document.getElementById('section-summary').style.display=tab==='summary'?'block':'none';
-  document.getElementById('tab-overview').className=tab==='overview'?'active':'inactive';
-  document.getElementById('tab-summary').className=tab==='summary'?'active':'inactive';
-}
 
 // ===== MARKET OVERVIEW CHARTS (4-col) =====
 const ovM=["'25.03","'25.04","'25.05","'25.06","'25.07","'25.08","'25.09","'25.10","'25.11","'25.12","'26.01","'26.02","'26.03"];
@@ -1369,6 +1352,10 @@ function ovAnno4(genres,si,fc,isFirst){
       if(isFirst){const sm=chart.getDatasetMeta(0),sd=genres[0].d;let sp=0;sd.forEach((v,i)=>{if(v>sd[sp])sp=i;});
         const spt=sm.data[sp];ctx.save();ctx.beginPath();ctx.arc(spt.x,spt.y,7,0,Math.PI*2);ctx.strokeStyle=genres[0].c;ctx.lineWidth=1;ctx.setLineDash([2,2]);ctx.stroke();ctx.setLineDash([]);
         ctx.font='700 7px "DM Sans"';ctx.fillStyle=genres[0].c;ctx.textAlign='center';ctx.fillText(sd[sp].toFixed(0)+'%',spt.x,spt.y-10);ctx.restore();}
+      // End labels for all genres
+      genres.forEach((g,gi)=>{if(gi===si)return;const m=chart.getDatasetMeta(gi),lp=m.data[d.length-1];
+        ctx.save();ctx.font='600 8px "Pretendard Variable"';ctx.fillStyle=g.c;ctx.textAlign='left';ctx.textBaseline='middle';
+        ctx.fillText(g.n+' '+g.d[g.d.length-1].toFixed(1)+'%',lp.x+6,lp.y);ctx.restore();});
     }};
 }
 
