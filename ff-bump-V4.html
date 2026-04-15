@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Fire Bump Chart V4</title>
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;900&display=swap');
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'DM Sans','Pretendard Variable',sans-serif; background:#fff; padding:20px; }
+.section { margin-bottom:36px; }
+.section-title { font-size:14px; font-weight:700; color:#0f172a; margin-bottom:2px; }
+.section-sub { font-size:10px; color:#64748b; margin-bottom:14px; }
+.chart-wrapper { display:flex; gap:16px; align-items:stretch; }
+.bump-area { flex:1; position:relative; height:400px; }
+.donut-area { width:160px; display:flex; flex-direction:column; align-items:center; padding-top:4px; }
+.donut-title { font-size:9px; font-weight:700; color:#94a3b8; text-align:center; margin-bottom:8px; letter-spacing:.5px; text-transform:uppercase; }
+.donut-legend { margin-top:10px; width:100%; }
+.donut-item { display:flex; align-items:center; gap:6px; margin-bottom:4px; font-size:10px; }
+.donut-dot { width:8px; height:8px; border-radius:50%; }
+.donut-name { flex:1; color:#64748b; }
+.donut-pct { font-weight:700; }
+.divider { border:none; border-top:1px solid #e2e8f0; margin:28px 0; }
+.insight-box { background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:10px 14px; margin-top:12px; font-size:11px; color:#334155; line-height:1.6; }
+.insight-box strong { color:#0f172a; }
+</style>
+</head>
+<body>
+
+<div class="section">
+  <div class="section-title">[ Free Fire 국가별 DAU 점유율 순위 변화 ]</div>
+  <div class="section-sub">상위 6개국 · 최근 1년</div>
+  <div class="chart-wrapper">
+    <div class="bump-area"><canvas id="dauBump"></canvas></div>
+    <div class="donut-area">
+      <div class="donut-title">'26.03 점유율</div>
+      <canvas id="dauDonut" width="140" height="140"></canvas>
+      <div class="donut-legend" id="dauLeg"></div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section">
+  <div class="section-title">[ Free Fire 국가별 매출 점유율 순위 변화 ]</div>
+  <div class="section-sub">상위 6개국 · 최근 1년</div>
+  <div class="chart-wrapper">
+    <div class="bump-area"><canvas id="revBump"></canvas></div>
+    <div class="donut-area">
+      <div class="donut-title">'26.03 점유율</div>
+      <canvas id="revDonut" width="140" height="140"></canvas>
+      <div class="donut-legend" id="revLeg"></div>
+    </div>
+  </div>
+  <div class="insight-box">
+    <strong>구조적 특징 :</strong> DAU는 인도네시아(42%)가 압도적이나, 매출은 미국(49%)+멕시코(25%)가 전체의 74%를 차지. 트래픽과 매출의 국가 구조가 완전히 분리되어 있으며, 인도네시아는 DAU 1위이나 매출 비중은 8.5%에 불과
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+const months=["'25.02","'25.03","'25.04","'25.05","'25.06","'25.07","'25.08","'25.09","'25.10","'25.11","'25.12","'26.01","'26.02","'26.03"];
+
+const dauCountries=[
+  {name:'인도네시아',share:[35.8,37.4,37.1,32.7,29.2,23.9,21.5,23.7,24.3,25.6,30.9,31.7,35.4,41.9],color:'#dc2626',pubgm:true},
+  {name:'베트남',share:[14.0,13.5,14.4,17.9,20.9,21.9,21.8,19.6,18.0,16.7,13.9,13.0,14.2,13.0],color:'#2563eb',pubgm:true},
+  {name:'브라질',share:[17.1,14.6,12.6,11.8,11.2,12.8,13.9,13.5,13.4,14.8,14.7,16.4,14.8,11.1],color:'#16a34a',pubgm:false},
+  {name:'멕시코',share:[11.0,10.6,11.1,11.6,11.4,12.5,12.9,12.3,14.1,13.7,12.4,12.6,11.4,9.8],color:'#d97706',pubgm:false},
+  {name:'파키스탄',share:[6.8,7.4,7.6,7.8,8.7,9.7,10.5,11.4,10.5,10.7,10.2,9.0,7.9,7.8],color:'#7c3aed',pubgm:true},
+  {name:'태국',share:[4.9,5.5,7.5,8.4,7.4,6.1,5.6,5.8,6.5,6.4,5.5,5.8,5.8,6.6],color:'#0891b2',pubgm:true},
+];
+
+const revCountries=[
+  {name:'미국',share:[43.8,44.5,45.8,47.4,50.0,59.9,57.2,58.2,57.9,55.6,58.1,57.7,56.4,49.0],color:'#475569',pubgm:false},
+  {name:'멕시코',share:[33.0,33.2,30.0,29.8,29.4,22.4,23.0,21.4,25.2,26.5,25.4,24.4,25.7,24.7],color:'#d97706',pubgm:false},
+  {name:'인도네시아',share:[3.7,4.1,5.1,3.1,2.9,2.0,2.4,3.1,2.0,2.4,2.5,3.1,3.6,8.5],color:'#dc2626',pubgm:true},
+  {name:'태국',share:[5.5,5.9,8.4,8.7,5.9,5.5,6.6,5.2,4.4,6.0,5.2,4.7,4.4,8.3],color:'#0891b2',pubgm:true},
+  {name:'브라질',share:[4.4,4.1,3.1,3.5,3.6,3.2,3.8,3.7,3.2,3.4,3.2,4.2,3.3,3.0],color:'#16a34a',pubgm:false},
+  {name:'베트남',share:[2.2,1.9,1.6,2.1,2.9,2.1,2.1,3.0,2.5,1.8,1.2,0.0,1.8,1.8],color:'#2563eb',pubgm:true},
+];
+
+function computeRanks(data){
+  return data[0].share.map((_,mi)=>{
+    const vals=data.map(c=>({name:c.name,share:c.share[mi]}));
+    vals.sort((a,b)=>b.share-a.share);
+    const rm={};vals.forEach((v,i)=>rm[v.name]=i+1);return rm;
+  });
+}
+
+// Plugin: draw % label at bottom-right of each point
+const pctLabelPlugin = {
+  id:'pctLabels',
+  afterDatasetsDraw(chart){
+    const {ctx} = chart;
+    const data = chart.config._countryData;
+    if(!data) return;
+    
+    chart.data.datasets.forEach((ds, di) => {
+      const meta = chart.getDatasetMeta(di);
+      const country = data[di];
+      
+      meta.data.forEach((pt, pi) => {
+        const share = country.share[pi];
+        const label = share >= 10 ? Math.round(share)+'%' : share.toFixed(1)+'%';
+        
+        ctx.save();
+        ctx.font = '600 10px "DM Sans"';
+        ctx.fillStyle = country.color;
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'top';
+        ctx.fillText(label, pt.x + 6, pt.y + 5);
+        ctx.restore();
+      });
+    });
+  }
+};
+
+function makeChart(canvasId, data, maxRank){
+  const ranksByMonth = computeRanks(data);
+  const firstRanks = ranksByMonth[0];
+  const rankToName = {};
+  data.forEach(c => { rankToName[firstRanks[c.name]] = c.name; });
+  const rankToColor = {};
+  data.forEach(c => { rankToColor[firstRanks[c.name]] = c.color; });
+
+  const datasets = data.map(c => {
+    const ranks = ranksByMonth.map(rm => rm[c.name]);
+    return {
+      label: c.name,
+      data: ranks,
+      borderColor: c.color,
+      backgroundColor: c.color,
+      borderWidth: 2.5,
+      pointRadius: 4.5,
+      pointHoverRadius: 6,
+      pointBackgroundColor: c.color,
+      pointBorderColor: '#fff',
+      pointBorderWidth: 1.5,
+      tension: 0.3,
+      fill: false,
+    };
+  });
+
+  const chart = new Chart(document.getElementById(canvasId), {
+    type: 'line',
+    data: { labels: months, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: { padding: { left: 15, right: 40, top: 15, bottom: 10 } },
+      onHover(e, elements, chart) {
+        const dsets = chart.data.datasets;
+        if (elements.length > 0) {
+          const hi = elements[0].datasetIndex;
+          dsets.forEach((ds, i) => {
+            ds.borderColor = i === hi ? data[i].color : data[i].color + '22';
+            ds.pointBackgroundColor = i === hi ? data[i].color : data[i].color + '22';
+            ds.borderWidth = i === hi ? 4 : 1.5;
+          });
+        } else {
+          dsets.forEach((ds, i) => {
+            ds.borderColor = data[i].color;
+            ds.pointBackgroundColor = data[i].color;
+            ds.borderWidth = 2.5;
+          });
+        }
+        chart.update('none');
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#fff', titleColor: '#0f172a', bodyColor: '#334155',
+          borderColor: '#e2e8f0', borderWidth: 1, padding: 10,
+          callbacks: {
+            title(items) { return months[items[0].dataIndex]; },
+            label(c) {
+              const ci = c.datasetIndex, mi = c.dataIndex;
+              const share = data[ci].share[mi];
+              const prev = mi > 0 ? data[ci].share[mi - 1] : share;
+              const diff = (share - prev).toFixed(1);
+              const arrow = diff > 0 ? '▲' : diff < 0 ? '▼' : '─';
+              return data[ci].name + ': ' + c.raw + '위 (' + share + '%) ' + arrow + Math.abs(diff) + '%p';
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { color: '#0f172a', font: { size: 11, weight: '600' }, maxRotation: 45 }
+        },
+        y: {
+          reverse: true,
+          min: 0, max: maxRank + 1,
+          grid: { color: '#f1f5f9', drawTicks: false },
+          ticks: {
+            stepSize: 1,
+            font: { size: 12, weight: '700' },
+            padding: 6,
+            callback: function(v) {
+              if (v < 1 || v > maxRank) return '';
+              return rankToName[v] || '';
+            },
+            color: function(ctx) {
+              return rankToColor[ctx.tick.value] || '#0f172a';
+            }
+          }
+        }
+      }
+    },
+    plugins: [pctLabelPlugin]
+  });
+  chart.config._countryData = data;
+}
+
+function makeDonut(canvasId, legendId, data){
+  const sorted = [...data].sort((a, b) => b.share[13] - a.share[13]);
+  const others = 100 - sorted.reduce((s, c) => s + c.share[13], 0);
+  const labels = [...sorted.map(c => c.name), '기타'];
+  const vals = [...sorted.map(c => c.share[13]), others > 0 ? Math.round(others * 10) / 10 : 0];
+  const colors = [...sorted.map(c => c.color), '#e2e8f0'];
+
+  new Chart(document.getElementById(canvasId), {
+    type: 'doughnut',
+    data: { labels, datasets: [{ data: vals, backgroundColor: colors, borderColor: '#fff', borderWidth: 2, hoverOffset: 6 }] },
+    options: {
+      responsive: false, cutout: '60%',
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#fff', titleColor: '#0f172a', bodyColor: '#334155',
+          borderColor: '#e2e8f0', borderWidth: 1,
+          callbacks: { label(c) { return c.label + ': ' + c.raw.toFixed(1) + '%'; } }
+        }
+      }
+    }
+  });
+
+  const el = document.getElementById(legendId);
+  sorted.forEach(c => {
+    const d = document.createElement('div');
+    d.className = 'donut-item';
+    d.innerHTML = '<div class="donut-dot" style="background:' + c.color + '"></div><span class="donut-name">' + c.name + '</span><span class="donut-pct" style="color:' + c.color + '">' + c.share[13] + '%</span>';
+    el.appendChild(d);
+  });
+}
+
+makeChart('dauBump', dauCountries, 6);
+makeDonut('dauDonut', 'dauLeg', dauCountries);
+makeChart('revBump', revCountries, 6);
+makeDonut('revDonut', 'revLeg', revCountries);
+</script>
+</body>
+</html>
