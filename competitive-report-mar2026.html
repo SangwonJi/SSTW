@@ -205,6 +205,16 @@ a{color:var(--bl);text-decoration:none}a:hover{text-decoration:underline}
 .ov-callout.blue{border-left-color:#2563eb;background:#eff6ff}
 .ov-callout.blue .ov-callout-num{color:#2563eb}
 .ov-bottom-divider{border:none;border-top:1.5px solid #e2e8f0;margin:24px 0 16px}
+
+/* Accordion cards */
+.cd{cursor:pointer;transition:all .2s;position:relative}
+.cd:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.cd.active{box-shadow:0 0 0 2px #0f172a;transform:translateY(-2px)}
+.cd::after{content:'▼';position:absolute;top:10px;right:12px;font-size:10px;color:#94a3b8;transition:.2s}
+.cd.active::after{content:'▲';color:#0f172a}
+.gp{display:none}
+.gp.open{display:block;animation:slideDown .3s ease}
+@keyframes slideDown{from{opacity:0;max-height:0}to{opacity:1;max-height:5000px}}
 </style>
 </head>
 <body>
@@ -315,17 +325,17 @@ a{color:var(--bl);text-decoration:none}a:hover{text-decoration:underline}
 </div>
 
 <div class="cards">
-  <div class="cd" style="border-top-color:var(--am)"><div class="lb" style="color:var(--am)">Free Fire</div><div class="v1">66.3M <span style="font-size:14px;font-weight:400;color:var(--g)">A.DAU</span> <span style="font-size:14px;color:var(--g);font-weight:400;margin-left:8px">·</span> <span style="font-size:24px;font-weight:900">$43.7M</span> <span style="font-size:14px;font-weight:400;color:var(--g)">매출</span></div><div class="bx"><span class="b bu">DAU MoM <span style="color:#dc2626;font-weight:700">▲11.1%</span></span><span class="b bu">DAU YoY <span style="color:#dc2626;font-weight:700">▲1.4%</span></span><span class="b bu">매출 MoM <span style="color:#dc2626;font-weight:700">▲5.3%</span></span><span class="b bu">매출 YoY <span style="color:#dc2626;font-weight:700">▲16.6%</span></span></div></div>
-  <div class="cd pm"><div class="lb" style="color:var(--bl)">★ PUBG Mobile</div><div class="v1">18.7M <span style="font-size:14px;font-weight:400;color:var(--g)">A.DAU</span> <span style="font-size:14px;color:var(--g);font-weight:400;margin-left:8px">·</span> <span style="font-size:24px;font-weight:900">$46.4M</span> <span style="font-size:14px;font-weight:400;color:var(--g)">매출</span></div><div class="bx"><span class="b bu">DAU MoM <span style="color:#dc2626;font-weight:700">▲2.8%</span></span><span class="b bd">DAU YoY <span style="color:#2563eb;font-weight:700">▼15.6%</span></span><span class="b bu">매출 MoM <span style="color:#dc2626;font-weight:700">▲23.5%</span></span><span class="b bd">매출 YoY <span style="color:#2563eb;font-weight:700">▼10.5%</span></span></div></div>
-  <div class="cd" style="border-top-color:var(--vi)"><div class="lb" style="color:var(--vi)">Call of Duty: Mobile</div><div class="v1">7.6M <span style="font-size:14px;font-weight:400;color:var(--g)">A.DAU</span> <span style="font-size:14px;color:var(--g);font-weight:400;margin-left:8px">·</span> <span style="font-size:24px;font-weight:900">$23.6M</span> <span style="font-size:14px;font-weight:400;color:var(--g)">매출</span></div><div class="bx"><span class="b bd">DAU MoM <span style="color:#2563eb;font-weight:700">▼4.5%</span></span><span class="b bd">DAU YoY <span style="color:#2563eb;font-weight:700">▼21.8%</span></span><span class="b bd">매출 MoM <span style="color:#2563eb;font-weight:700">▼14.7%</span></span><span class="b bd">매출 YoY <span style="color:#2563eb;font-weight:700">▼23.9%</span></span></div></div>
-  <div class="cd" style="border-top-color:var(--em)"><div class="lb" style="color:var(--em)">Delta Force</div><div class="v1">1.7M <span style="font-size:14px;font-weight:400;color:var(--g)">A.DAU</span> <span style="font-size:14px;color:var(--g);font-weight:400;margin-left:8px">·</span> <span style="font-size:24px;font-weight:900">$1.7M</span> <span style="font-size:14px;font-weight:400;color:var(--g)">매출</span></div><div class="bx"><span class="b bd">DAU MoM <span style="color:#2563eb;font-weight:700">▼12.9%</span></span><span class="b bn">DAU YoY N/A</span><span class="b bd">매출 MoM <span style="color:#2563eb;font-weight:700">▼46.7%</span></span></div></div>
+  <div class="cd" style="border-top-color:var(--am)" onclick="toggleGame('ff',this)"><div class="lb" style="color:var(--am)">Free Fire</div><div class="v1">66.3M <span style="font-size:14px;font-weight:400;color:var(--g)">A.DAU</span> <span style="font-size:14px;color:var(--g);font-weight:400;margin-left:8px">·</span> <span style="font-size:24px;font-weight:900">$43.7M</span> <span style="font-size:14px;font-weight:400;color:var(--g)">매출</span></div><div class="bx"><span class="b bu">DAU MoM <span style="color:#dc2626;font-weight:700">▲11.1%</span></span><span class="b bu">DAU YoY <span style="color:#dc2626;font-weight:700">▲1.4%</span></span><span class="b bu">매출 MoM <span style="color:#dc2626;font-weight:700">▲5.3%</span></span><span class="b bu">매출 YoY <span style="color:#dc2626;font-weight:700">▲16.6%</span></span></div></div>
+  <div class="cd pm" style="cursor:default"><div class="lb" style="color:var(--bl)">★ PUBG Mobile</div><div class="v1">18.7M <span style="font-size:14px;font-weight:400;color:var(--g)">A.DAU</span> <span style="font-size:14px;color:var(--g);font-weight:400;margin-left:8px">·</span> <span style="font-size:24px;font-weight:900">$46.4M</span> <span style="font-size:14px;font-weight:400;color:var(--g)">매출</span></div><div class="bx"><span class="b bu">DAU MoM <span style="color:#dc2626;font-weight:700">▲2.8%</span></span><span class="b bd">DAU YoY <span style="color:#2563eb;font-weight:700">▼15.6%</span></span><span class="b bu">매출 MoM <span style="color:#dc2626;font-weight:700">▲23.5%</span></span><span class="b bd">매출 YoY <span style="color:#2563eb;font-weight:700">▼10.5%</span></span></div></div>
+  <div class="cd" style="border-top-color:var(--vi)" onclick="toggleGame('cm',this)"><div class="lb" style="color:var(--vi)">Call of Duty: Mobile</div><div class="v1">7.6M <span style="font-size:14px;font-weight:400;color:var(--g)">A.DAU</span> <span style="font-size:14px;color:var(--g);font-weight:400;margin-left:8px">·</span> <span style="font-size:24px;font-weight:900">$23.6M</span> <span style="font-size:14px;font-weight:400;color:var(--g)">매출</span></div><div class="bx"><span class="b bd">DAU MoM <span style="color:#2563eb;font-weight:700">▼4.5%</span></span><span class="b bd">DAU YoY <span style="color:#2563eb;font-weight:700">▼21.8%</span></span><span class="b bd">매출 MoM <span style="color:#2563eb;font-weight:700">▼14.7%</span></span><span class="b bd">매출 YoY <span style="color:#2563eb;font-weight:700">▼23.9%</span></span></div></div>
+  <div class="cd" style="border-top-color:var(--em)" onclick="toggleGame('df',this)"><div class="lb" style="color:var(--em)">Delta Force</div><div class="v1">1.7M <span style="font-size:14px;font-weight:400;color:var(--g)">A.DAU</span> <span style="font-size:14px;color:var(--g);font-weight:400;margin-left:8px">·</span> <span style="font-size:24px;font-weight:900">$1.7M</span> <span style="font-size:14px;font-weight:400;color:var(--g)">매출</span></div><div class="bx"><span class="b bd">DAU MoM <span style="color:#2563eb;font-weight:700">▼12.9%</span></span><span class="b bn">DAU YoY N/A</span><span class="b bd">매출 MoM <span style="color:#2563eb;font-weight:700">▼46.7%</span></span></div></div>
 </div>
 
 <!-- Indirect Competitor Cards -->
 <h3 style="margin-top:28px">간접경쟁작 주요 지표</h3>
 <div class="cards" style="grid-template-columns:repeat(2,1fr);margin-bottom:16px">
-  <div class="cd" style="border-top-color:#ef4444"><div class="lb" style="color:#ef4444">Roblox (간접)</div><div class="v1">130.2M <span style="font-size:14px;font-weight:400;color:var(--g)">A.DAU</span> <span style="font-size:14px;color:var(--g);font-weight:400;margin-left:8px">·</span> <span style="font-size:24px;font-weight:900">$47.3M</span> <span style="font-size:14px;font-weight:400;color:var(--g)">매출</span></div><div class="bx"><span class="b bd">DAU MoM <span style="color:#2563eb;font-weight:700">▼1.5%</span></span><span class="b bu">DAU YoY <span style="color:#dc2626;font-weight:700">▲21.6%</span></span><span class="b bu">매출 MoM <span style="color:#dc2626;font-weight:700">▲12.4%</span></span><span class="b bu">매출 YoY <span style="color:#dc2626;font-weight:700">▲23.2%</span></span></div></div>
-  <div class="cd" style="border-top-color:#f59e0b"><div class="lb" style="color:#f59e0b">Brawl Stars (간접)</div><div class="v1">62.6M <span style="font-size:14px;font-weight:400;color:var(--g)">A.DAU</span> <span style="font-size:14px;color:var(--g);font-weight:400;margin-left:8px">·</span> <span style="font-size:24px;font-weight:900">$40.4M</span> <span style="font-size:14px;font-weight:400;color:var(--g)">매출</span></div><div class="bx"><span class="b bu">DAU MoM <span style="color:#dc2626;font-weight:700">▲24.8%</span></span><span class="b bu">DAU YoY <span style="color:#dc2626;font-weight:700">▲35.0%</span></span><span class="b bu">매출 MoM <span style="color:#dc2626;font-weight:700">▲42.2%</span></span><span class="b bu">매출 YoY <span style="color:#dc2626;font-weight:700">▲3.0%</span></span></div></div>
+  <div class="cd" style="border-top-color:#ef4444" onclick="toggleGame('rb',this)"><div class="lb" style="color:#ef4444">Roblox (간접)</div><div class="v1">130.2M <span style="font-size:14px;font-weight:400;color:var(--g)">A.DAU</span> <span style="font-size:14px;color:var(--g);font-weight:400;margin-left:8px">·</span> <span style="font-size:24px;font-weight:900">$47.3M</span> <span style="font-size:14px;font-weight:400;color:var(--g)">매출</span></div><div class="bx"><span class="b bd">DAU MoM <span style="color:#2563eb;font-weight:700">▼1.5%</span></span><span class="b bu">DAU YoY <span style="color:#dc2626;font-weight:700">▲21.6%</span></span><span class="b bu">매출 MoM <span style="color:#dc2626;font-weight:700">▲12.4%</span></span><span class="b bu">매출 YoY <span style="color:#dc2626;font-weight:700">▲23.2%</span></span></div></div>
+  <div class="cd" style="border-top-color:#f59e0b" onclick="toggleGame('bs',this)"><div class="lb" style="color:#f59e0b">Brawl Stars (간접)</div><div class="v1">62.6M <span style="font-size:14px;font-weight:400;color:var(--g)">A.DAU</span> <span style="font-size:14px;color:var(--g);font-weight:400;margin-left:8px">·</span> <span style="font-size:24px;font-weight:900">$40.4M</span> <span style="font-size:14px;font-weight:400;color:var(--g)">매출</span></div><div class="bx"><span class="b bu">DAU MoM <span style="color:#dc2626;font-weight:700">▲24.8%</span></span><span class="b bu">DAU YoY <span style="color:#dc2626;font-weight:700">▲35.0%</span></span><span class="b bu">매출 MoM <span style="color:#dc2626;font-weight:700">▲42.2%</span></span><span class="b bu">매출 YoY <span style="color:#dc2626;font-weight:700">▲3.0%</span></span></div></div>
 </div>
 
 </div><!-- end section-summary -->
@@ -375,7 +385,7 @@ a{color:var(--bl);text-decoration:none}a:hover{text-decoration:underline}
 </div>
 
 <!-- ==================== FREE FIRE ==================== -->
-<div class="gp on" id="gp-ff">
+<div class="gp" id="gp-ff">
 
 <h2>Free Fire 월간 매출 및 트래픽 현황</h2>
 
@@ -1386,6 +1396,28 @@ ovMk4('ovUsage',ovUG,3,30,'슈터','#dc2626',true);
 ovMk4('ovRev',ovRG,5,26,'슈터','#dc2626',false);
 ovMk4('ovShDau',ovSDG,0,50,'PUBGM','#2563eb',false);
 ovMk4('ovShRev',ovSRG,0,50,'PUBGM','#2563eb',false);
+
+
+// ===== ACCORDION TOGGLE =====
+function toggleGame(id, cardEl){
+  const panel = document.getElementById('gp-'+id);
+  const isOpen = panel.classList.contains('open');
+  
+  // Close all panels
+  document.querySelectorAll('.gp').forEach(p=>p.classList.remove('open'));
+  // Remove active from all cards
+  document.querySelectorAll('.cd').forEach(c=>c.classList.remove('active'));
+  
+  if(!isOpen){
+    // Open this panel
+    panel.classList.add('open');
+    cardEl.classList.add('active');
+    // Smooth scroll to panel
+    setTimeout(()=>{
+      panel.scrollIntoView({behavior:'smooth',block:'start'});
+    }, 100);
+  }
+}
 
 </script>
 </body>
