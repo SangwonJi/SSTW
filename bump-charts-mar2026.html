@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026년 3월 경쟁작 국가별 점유율 Bump Chart</title>
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans','Pretendard Variable',sans-serif;background:#fff;padding:16px 20px}
+.game-header{display:flex;align-items:center;gap:10px;margin:28px 0 4px;padding:12px 16px;background:#0f172a;border-radius:8px;cursor:pointer}
+.game-header:first-of-type{margin-top:8px}
+.game-header h2{color:#fff;font-size:16px;font-weight:700;flex:1}
+.game-header .toggle{color:#64748b;font-size:12px}
+.game-frame{border:none;width:100%;transition:height .3s}
+.page-title{font-size:20px;font-weight:900;color:#0f172a;margin-bottom:2px}
+.page-sub{font-size:11px;color:#64748b;margin-bottom:16px}
+</style>
+</head>
+<body>
+<div class="page-title">경쟁작 국가별 점유율 순위 변화 (Bump Chart)</div>
+<div class="page-sub">Sensor Tower · 79개국 · 중국 제외 · 최근 1년 · DAU + 매출</div>
+
+<div class="game-header" onclick="toggle('ff')"><h2>1. Free Fire</h2><span class="toggle" id="ff-toggle">▼</span></div>
+<iframe id="ff" class="game-frame" src="https://sangwonji.github.io/SSTW/ff-bump-V4.html" height="820"></iframe>
+
+<div class="game-header" onclick="toggle('codm')"><h2>2. CODM</h2><span class="toggle" id="codm-toggle">▼</span></div>
+<iframe id="codm" class="game-frame" src="https://sangwonji.github.io/SSTW/codm-bump-V4.html" height="820"></iframe>
+
+<div class="game-header" onclick="toggle('df')"><h2>3. Delta Force</h2><span class="toggle" id="df-toggle">▼</span></div>
+<iframe id="df" class="game-frame" src="https://sangwonji.github.io/SSTW/df-bump-V4.html" height="820"></iframe>
+
+<div class="game-header" onclick="toggle('rb')"><h2>4. Roblox</h2><span class="toggle" id="rb-toggle">▼</span></div>
+<iframe id="rb" class="game-frame" src="https://sangwonji.github.io/SSTW/roblox-bump-V4.html" height="820"></iframe>
+
+<div class="game-header" onclick="toggle('bs')"><h2>5. Brawl Stars</h2><span class="toggle" id="bs-toggle">▼</span></div>
+<iframe id="bs" class="game-frame" src="https://sangwonji.github.io/SSTW/bs-bump-V4.html" height="820"></iframe>
+
+<script>
+function toggle(id){
+  const f=document.getElementById(id);
+  const t=document.getElementById(id+'-toggle');
+  if(f.style.height==='0px'){f.style.height='820px';t.textContent='▼';}
+  else{f.style.height='0px';t.textContent='▶';}
+}
+</script>
+</body>
+</html>
