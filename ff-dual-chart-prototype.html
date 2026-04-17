@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>FF 국가별 점유율 — 순위 + 절댓값 듀얼 차트 프로토타입</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+body{font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;background:#f8fafc;margin:0;padding:30px;color:#0f172a}
+.container{max-width:1300px;margin:0 auto}
+h1{font-size:24px;margin:0 0 8px}
+.sub{color:#64748b;font-size:14px;margin-bottom:30px}
+.proto{background:#fff;border-radius:12px;padding:24px;margin-bottom:30px;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.proto-title{font-size:18px;font-weight:800;margin:0 0 4px;color:#1e40af}
+.proto-sub{color:#64748b;font-size:13px;margin-bottom:20px}
+.chart-title{font-size:14px;font-weight:700;color:#0f172a;margin:24px 0 4px;padding-left:8px;border-left:3px solid #2563eb}
+.chart-sub{font-size:12px;color:#64748b;margin-bottom:12px;padding-left:11px}
+.divider{border:none;border-top:1px dashed #e2e8f0;margin:28px 0}
+.pros{color:#059669;font-size:12px;margin-top:8px}
+.cons{color:#dc2626;font-size:12px;margin-top:4px}
+.note-box{background:#eff6ff;border-left:3px solid #2563eb;padding:10px 14px;font-size:13px;color:#1e40af;margin-top:16px;border-radius:4px}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>FF 국가별 점유율 — 순위 + 절댓값 듀얼 차트</h1>
+<div class="sub">순위 차트(상단)와 절댓값 차트(하단) 2개를 짝지어, "누가 앞서는지" + "얼마나 변했는지"를 동시에 표현</div>
+
+<!-- OPTION A: Bump + Share % Line -->
+<div class="proto">
+<div class="proto-title">옵션 A — 순위 Bump + 점유율(%) 라인 차트</div>
+<div class="proto-sub">상단은 기존 순위 변화, 하단은 각 국가의 점유율(%) 변화를 절댓값으로. 인도네시아의 V자 회복(33.97% 피크)이 하단에서 명확히 보임.</div>
+
+<div class="chart-title">[ Free Fire 국가별 DAU 점유율 순위 변화 ]</div>
+<div class="chart-sub">Sensor Tower · 79개국(중국·인도 제외) · 최근 1년</div>
+<svg id="bump-svg-a" width="100%" height="380" viewBox="0 0 1200 380" preserveAspectRatio="none"></svg>
+
+<div class="chart-title" style="border-left-color:#dc2626">[ Free Fire 국가별 DAU 점유율(%) 추이 ]</div>
+<div class="chart-sub">동일 국가·동일 기간 · 절댓값(%p) 변화</div>
+<canvas id="share-line-a" style="max-height:360px"></canvas>
+
+<div class="pros">✅ 순위 + 점유율 크기 동시 표현. 인도네시아 24%→34% V자 회복이 하단에서 명확</div>
+<div class="cons">❌ 차트 2개라 세로 공간 차지. 좁은 범위(1~12%)는 하단에서 겹쳐 보일 수 있음</div>
+</div>
+
+<!-- OPTION B: Bump + Absolute DAU (M) -->
+<div class="proto">
+<div class="proto-title">옵션 B — 순위 Bump + DAU 절댓값(백만) 라인 차트</div>
+<div class="proto-sub">하단이 점유율(%) 대신 실제 DAU(M). 전체 시장 규모 변화도 함께 보임.</div>
+
+<div class="chart-title">[ Free Fire 국가별 DAU 점유율 순위 변화 ]</div>
+<div class="chart-sub">Sensor Tower · 79개국(중국·인도 제외) · 최근 1년</div>
+<svg id="bump-svg-b" width="100%" height="380" viewBox="0 0 1200 380" preserveAspectRatio="none"></svg>
+
+<div class="chart-title" style="border-left-color:#dc2626">[ Free Fire 국가별 DAU 절댓값 추이 ]</div>
+<div class="chart-sub">동일 국가·동일 기간 · 백만 단위(M)</div>
+<canvas id="dau-line-b" style="max-height:360px"></canvas>
+
+<div class="pros">✅ 순위 + 실제 유저 수 규모 동시. 인도네시아 1,900만→2,200만 급증이 체감</div>
+<div class="cons">❌ 상단은 점유율 순위인데 하단은 절댓값이라 의미 혼재 가능</div>
+</div>
+
+<!-- OPTION C: Bump + Stacked Share (같은 데이터 두 방식) -->
+<div class="proto">
+<div class="proto-title">옵션 C — 순위 Bump + 스택 영역(Streamgraph)</div>
+<div class="proto-sub">하단은 스택 영역으로 시장 전체 구성을 표현. 인도네시아가 위에서 아래로 두꺼워지는 모습이 dynamic.</div>
+
+<div class="chart-title">[ Free Fire 국가별 DAU 점유율 순위 변화 ]</div>
+<div class="chart-sub">Sensor Tower · 79개국(중국·인도 제외) · 최근 1년</div>
+<svg id="bump-svg-c" width="100%" height="380" viewBox="0 0 1200 380" preserveAspectRatio="none"></svg>
+
+<div class="chart-title" style="border-left-color:#dc2626">[ Free Fire 국가별 DAU 점유율 구성 변화 ]</div>
+<div class="chart-sub">스택 영역 · 전체 100% 기준</div>
+<canvas id="stream-c" style="max-height:360px"></canvas>
+
+<div class="pros">✅ 순위(상) + 시장 구성(하) 조합. 인도네시아 영역 팽창이 가장 dynamic</div>
+<div class="cons">❌ 하단이 스택이라 개별 국가 정확한 변화는 보기 어려움</div>
+</div>
+
+<div class="note-box">
+💡 <strong>제 추천:</strong> <strong>옵션 A (순위 + 점유율% 라인)</strong>가 가장 일관성 있음. 상·하단이 같은 지표(%)를 다른 각도로 보여주므로 읽기 편함. 하단 차트에 포커스는 상위 3~5개 국가만 강조하면 혼잡도 해결.
+</div>
+
+</div>
+
+<script>
+// =========== Data ===========
+const months = ['2025-03','2025-04','2025-05','2025-06','2025-07','2025-08','2025-09','2025-10','2025-11','2025-12','2026-01','2026-02','2026-03'];
+const monthLabels = ['25.03','25.04','25.05','25.06','25.07','25.08','25.09','25.10','25.11','25.12','26.01','26.02','26.03'];
+
+// Share % data
+const shareData = {
+  'ID': [29.61,29.60,26.18,23.27,18.57,16.53,18.27,18.75,19.61,23.93,24.73,28.12,33.97],
+  'BR': [11.54,10.08,9.48,8.92,9.91,10.66,10.39,10.38,11.37,11.41,12.80,11.79,9.00],
+  'VN': [10.74,11.50,14.35,16.68,17.05,16.74,15.11,13.90,12.79,10.72,10.17,11.29,10.56],
+  'MX': [8.41,8.84,9.26,9.06,9.73,9.95,9.49,10.90,10.50,9.59,9.84,9.06,7.94],
+  'PK': [5.90,6.09,6.26,6.93,7.56,8.10,8.79,8.11,8.18,7.89,6.98,6.24,6.32],
+  'TH': [4.38,5.96,6.72,5.92,4.77,4.28,4.50,5.01,4.92,4.29,4.49,4.64,5.38],
+  'DZ': [3.25,2.48,2.51,3.51,4.42,4.80,4.71,3.85,3.34,3.49,2.66,2.46,2.83],
+  'CO': [2.81,2.81,2.85,2.96,3.05,3.21,3.03,3.24,3.06,3.04,3.25,2.82,2.50],
+};
+
+// Absolute DAU (Million) — computed from share * total 79-country DAU
+// Total 79-country FF DAU: 25.03=65M, ..., 26.03=66M (approximate)
+const totalDAU = [65.4,59.2,55.0,58.4,59.1,57.8,50.5,45.4,43.7,48.7,56.3,59.7,66.3];
+const dauData = {};
+Object.keys(shareData).forEach(cc => {
+  dauData[cc] = shareData[cc].map((s, i) => Math.round(s * totalDAU[i] / 100 * 10) / 10);
+});
+
+const countryNames = {ID:'인도네시아',BR:'브라질',VN:'베트남',MX:'멕시코',PK:'파키스탄',TH:'태국',DZ:'알제리',CO:'콜롬비아'};
+const colors = {ID:'#dc2626',BR:'#059669',VN:'#f59e0b',MX:'#7c3aed',PK:'#0891b2',TH:'#e11d48',DZ:'#64748b',CO:'#8b5cf6'};
+
+// Compute ranks
+function computeRanks(shareData) {
+  const ranks = {};
+  Object.keys(shareData).forEach(cc => ranks[cc] = []);
+  months.forEach((_, i) => {
+    const values = Object.keys(shareData).map(cc => ({cc, v: shareData[cc][i]}));
+    values.sort((a,b) => b.v - a.v);
+    values.forEach((item, rank) => {
+      ranks[item.cc].push(rank + 1);
+    });
+  });
+  return ranks;
+}
+const ranks = computeRanks(shareData);
+
+// =========== Bump Chart ===========
+function drawBump(svgId) {
+  const svg = document.getElementById(svgId);
+  const W = 1200, H = 380, margin = {top: 30, right: 180, bottom: 40, left: 60};
+  const chartW = W - margin.left - margin.right;
+  const chartH = H - margin.top - margin.bottom;
+  const countries = Object.keys(shareData);
+  const numRanks = countries.length;
+  
+  const xScale = i => margin.left + (i / (months.length - 1)) * chartW;
+  const yScale = r => margin.top + ((r - 1) / (numRanks - 1)) * chartH;
+  
+  let html = '';
+  
+  // X-axis labels
+  monthLabels.forEach((label, i) => {
+    html += `<text x="${xScale(i)}" y="${H - 15}" text-anchor="middle" font-size="11" fill="#64748b">${label}</text>`;
+  });
+  
+  // Y-axis ranks
+  for (let r = 1; r <= numRanks; r++) {
+    html += `<text x="${margin.left - 10}" y="${yScale(r) + 4}" text-anchor="end" font-size="11" fill="#94a3b8">#${r}</text>`;
+  }
+  
+  // Lines
+  countries.forEach(cc => {
+    const pts = months.map((_, i) => ({x: xScale(i), y: yScale(ranks[cc][i])}));
+    
+    let d = `M ${pts[0].x} ${pts[0].y}`;
+    for (let i = 1; i < pts.length; i++) {
+      const prev = pts[i-1], curr = pts[i];
+      const cp1x = prev.x + (curr.x - prev.x) / 2;
+      d += ` C ${cp1x} ${prev.y}, ${cp1x} ${curr.y}, ${curr.x} ${curr.y}`;
+    }
+    html += `<path d="${d}" fill="none" stroke="${colors[cc]}" stroke-width="2.5" opacity="0.85"/>`;
+    
+    // Circles at each point
+    pts.forEach((p, i) => {
+      html += `<circle cx="${p.x}" cy="${p.y}" r="4" fill="${colors[cc]}" stroke="#fff" stroke-width="1.5"/>`;
+    });
+    
+    // End label with share %
+    const last = pts[pts.length - 1];
+    html += `<text x="${last.x + 10}" y="${last.y + 4}" font-size="12" font-weight="700" fill="${colors[cc]}">${countryNames[cc]} ${shareData[cc][months.length-1].toFixed(1)}%</text>`;
+  });
+  
+  svg.innerHTML = html;
+}
+drawBump('bump-svg-a');
+drawBump('bump-svg-b');
+drawBump('bump-svg-c');
+
+// =========== OPTION A: Share % Line ===========
+new Chart(document.getElementById('share-line-a').getContext('2d'), {
+  type: 'line',
+  data: {
+    labels: monthLabels,
+    datasets: Object.keys(shareData).map(cc => ({
+      label: countryNames[cc],
+      data: shareData[cc],
+      borderColor: colors[cc],
+      backgroundColor: colors[cc] + '20',
+      borderWidth: cc === 'ID' ? 3 : 2,
+      tension: 0.4,
+      pointRadius: 3,
+      pointBackgroundColor: colors[cc]
+    }))
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      tooltip: {
+        mode: 'index',
+        callbacks: {
+          label: (ctx) => `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(1)}%`
+        }
+      },
+      legend: {position: 'right', labels: {boxWidth: 12, font: {size: 11}}}
+    },
+    scales: {
+      y: {title: {display: true, text: '점유율(%)'}, ticks: {callback: v => v + '%'}},
+      x: {grid: {display: false}}
+    }
+  }
+});
+
+// =========== OPTION B: Absolute DAU (M) ===========
+new Chart(document.getElementById('dau-line-b').getContext('2d'), {
+  type: 'line',
+  data: {
+    labels: monthLabels,
+    datasets: Object.keys(dauData).map(cc => ({
+      label: countryNames[cc],
+      data: dauData[cc],
+      borderColor: colors[cc],
+      backgroundColor: colors[cc] + '20',
+      borderWidth: cc === 'ID' ? 3 : 2,
+      tension: 0.4,
+      pointRadius: 3,
+      pointBackgroundColor: colors[cc]
+    }))
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      tooltip: {
+        mode: 'index',
+        callbacks: {
+          label: (ctx) => `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(1)}M`
+        }
+      },
+      legend: {position: 'right', labels: {boxWidth: 12, font: {size: 11}}}
+    },
+    scales: {
+      y: {title: {display: true, text: 'A.DAU (백만)'}, ticks: {callback: v => v + 'M'}},
+      x: {grid: {display: false}}
+    }
+  }
+});
+
+// =========== OPTION C: Streamgraph ===========
+new Chart(document.getElementById('stream-c').getContext('2d'), {
+  type: 'line',
+  data: {
+    labels: monthLabels,
+    datasets: Object.keys(shareData).map(cc => ({
+      label: countryNames[cc],
+      data: shareData[cc],
+      backgroundColor: colors[cc] + 'c0',
+      borderColor: colors[cc],
+      borderWidth: 1,
+      fill: true,
+      tension: 0.4
+    }))
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      tooltip: {mode: 'index'},
+      legend: {position: 'right', labels: {boxWidth: 12, font: {size: 11}}}
+    },
+    scales: {
+      y: {stacked: true, title: {display: true, text: '누적 점유율(%)'}, ticks: {callback: v => v + '%'}},
+      x: {grid: {display: false}}
+    }
+  }
+});
+</script>
+</body>
+</html>
