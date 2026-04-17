@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>FF 국가별 점유율 시각화 프로토타입</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+body{font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;background:#f8fafc;margin:0;padding:30px;color:#0f172a}
+.container{max-width:1300px;margin:0 auto}
+h1{font-size:24px;margin:0 0 8px}
+.sub{color:#64748b;font-size:14px;margin-bottom:30px}
+.proto{background:#fff;border-radius:12px;padding:24px;margin-bottom:30px;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.proto-title{font-size:18px;font-weight:800;margin:0 0 4px;color:#1e40af}
+.proto-sub{color:#64748b;font-size:13px;margin-bottom:20px}
+.proto-note{background:#eff6ff;border-left:3px solid #2563eb;padding:10px 14px;font-size:13px;color:#1e40af;margin-top:16px;border-radius:4px}
+.pros{color:#059669;font-size:12px;margin-top:8px}
+.cons{color:#dc2626;font-size:12px;margin-top:4px}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Free Fire 국가별 점유율 시각화 — 프로토타입 3종</h1>
+<div class="sub">기존 Bump Chart가 "너무 일직선"이라 점유율 변화 크기가 안 보이는 문제 개선. 3가지 대안 제시.</div>
+
+<!-- PROTO 1: Ribbon Chart (thickness = share %) -->
+<div class="proto">
+<div class="proto-title">① Ribbon Chart — 굵기가 점유율을 나타내는 변형 Bump Chart</div>
+<div class="proto-sub">순위는 그대로 유지하되, 선 굵기가 해당 월의 점유율(%)에 비례. 인도네시아가 24.2% 회복하는 순간 선이 급격히 두꺼워지는 것이 보임.</div>
+<svg id="ribbon-svg" width="100%" height="450" viewBox="0 0 1200 450" preserveAspectRatio="none"></svg>
+<div class="pros">✅ 순위 + 점유율 크기를 한눈에. V자 회복이 시각적으로 드러남.</div>
+<div class="cons">❌ 굵기가 심하게 달라지면 시각적 혼잡. 인도네시아가 너무 두꺼워질 수 있음.</div>
+</div>
+
+<!-- PROTO 2: Streamgraph (stacked area) -->
+<div class="proto">
+<div class="proto-title">② Streamgraph — 스택 영역 차트</div>
+<div class="proto-sub">각 국가가 "강(river)"처럼 흐르며, 폭이 점유율. 총합이 100%를 이루는 "시장 구성"을 직관적으로 보여줌.</div>
+<canvas id="stream-chart" style="max-height:450px"></canvas>
+<div class="pros">✅ 시장 전체 구성 + 각 국가 변화를 동시에. 인도네시아 영역이 우상단에서 급격히 팽창하는 게 명확.</div>
+<div class="cons">❌ 국가별 "순위"가 안 보임. 하위 국가는 얇아서 잘 안 보임.</div>
+</div>
+
+<!-- PROTO 3: Heatmap + Ladder -->
+<div class="proto">
+<div class="proto-title">③ Heatmap — 월×국가 색 밀도로 점유율 표현</div>
+<div class="proto-sub">가로축 월, 세로축 국가. 색 진하기가 점유율. 각 셀에 실제 숫자 표시. 인도네시아 행이 중간에 밝아졌다가 끝에서 다시 진해지는 V자 패턴이 보임.</div>
+<div id="heatmap" style="overflow-x:auto"></div>
+<div class="pros">✅ 정확한 숫자 + 패턴 동시 파악. 분석적 관점에서 가장 정보량 많음.</div>
+<div class="cons">❌ "변화의 흐름"보다는 "특정 시점의 스냅샷"에 가까움. 덜 dynamic.</div>
+</div>
+
+<!-- PROTO 4: Hybrid (Bump with share dots) -->
+<div class="proto">
+<div class="proto-title">④ Enhanced Bump — 각 지점에 점유율 원(Circle) 추가</div>
+<div class="proto-sub">기존 Bump Chart 유지 + 각 월 교차점에 점유율 비례 원 표시. 최소 수정으로 최대 효과.</div>
+<svg id="enhanced-svg" width="100%" height="500" viewBox="0 0 1200 500" preserveAspectRatio="none"></svg>
+<div class="pros">✅ 기존 디자인 연속성 유지. 원의 크기로 점유율 파악. 급격한 변화가 드러남.</div>
+<div class="cons">❌ 원이 겹치면 혼잡. 여전히 "일직선" 느낌이 완전히 해소되진 않음.</div>
+</div>
+
+</div>
+
+<script>
+// =========== Data ===========
+const months = ['2025-03','2025-04','2025-05','2025-06','2025-07','2025-08','2025-09','2025-10','2025-11','2025-12','2026-01','2026-02','2026-03'];
+const monthLabels = ['25.03','25.04','25.05','25.06','25.07','25.08','25.09','25.10','25.11','25.12','26.01','26.02','26.03'];
+const data = {
+  'ID': [29.61,29.60,26.18,23.27,18.57,16.53,18.27,18.75,19.61,23.93,24.73,28.12,33.97],
+  'BR': [11.54,10.08,9.48,8.92,9.91,10.66,10.39,10.38,11.37,11.41,12.80,11.79,9.00],
+  'VN': [10.74,11.50,14.35,16.68,17.05,16.74,15.11,13.90,12.79,10.72,10.17,11.29,10.56],
+  'MX': [8.41,8.84,9.26,9.06,9.73,9.95,9.49,10.90,10.50,9.59,9.84,9.06,7.94],
+  'PK': [5.90,6.09,6.26,6.93,7.56,8.10,8.79,8.11,8.18,7.89,6.98,6.24,6.32],
+  'TH': [4.38,5.96,6.72,5.92,4.77,4.28,4.50,5.01,4.92,4.29,4.49,4.64,5.38],
+  'DZ': [3.25,2.48,2.51,3.51,4.42,4.80,4.71,3.85,3.34,3.49,2.66,2.46,2.83],
+  'CO': [2.81,2.81,2.85,2.96,3.05,3.21,3.03,3.24,3.06,3.04,3.25,2.82,2.50],
+};
+const countryNames = {ID:'인도네시아',BR:'브라질',VN:'베트남',MX:'멕시코',PK:'파키스탄',TH:'태국',DZ:'알제리',CO:'콜롬비아'};
+const colors = {ID:'#dc2626',BR:'#059669',VN:'#f59e0b',MX:'#7c3aed',PK:'#0891b2',TH:'#e11d48',DZ:'#64748b',CO:'#8b5cf6'};
+
+// =========== Compute ranks ===========
+function computeRanks() {
+  const ranks = {};
+  Object.keys(data).forEach(cc => ranks[cc] = []);
+  months.forEach((_, i) => {
+    const values = Object.keys(data).map(cc => ({cc, v: data[cc][i]}));
+    values.sort((a,b) => b.v - a.v);
+    values.forEach((item, rank) => {
+      ranks[item.cc].push(rank + 1);
+    });
+  });
+  return ranks;
+}
+const ranks = computeRanks();
+
+// =========== PROTO 1: Ribbon Chart ===========
+function drawRibbon() {
+  const svg = document.getElementById('ribbon-svg');
+  const W = 1200, H = 450, margin = {top: 30, right: 180, bottom: 40, left: 60};
+  const chartW = W - margin.left - margin.right;
+  const chartH = H - margin.top - margin.bottom;
+  const countries = Object.keys(data);
+  const numRanks = countries.length;
+  
+  const xScale = i => margin.left + (i / (months.length - 1)) * chartW;
+  const yScale = r => margin.top + ((r - 1) / (numRanks - 1)) * chartH;
+  const thickness = v => 2 + (v / 35) * 25; // 점유율 0~35% -> 2~27px
+  
+  let html = '';
+  
+  // X-axis labels
+  monthLabels.forEach((label, i) => {
+    html += `<text x="${xScale(i)}" y="${H - 15}" text-anchor="middle" font-size="11" fill="#64748b">${label}</text>`;
+  });
+  
+  // Draw ribbons (varying thickness)
+  countries.forEach(cc => {
+    const pts = months.map((_, i) => ({x: xScale(i), y: yScale(ranks[cc][i]), t: thickness(data[cc][i])}));
+    
+    // Build path with variable thickness using polygons between consecutive points
+    for (let i = 0; i < pts.length - 1; i++) {
+      const p1 = pts[i], p2 = pts[i+1];
+      const t1 = p1.t / 2, t2 = p2.t / 2;
+      
+      // Smooth curve (use bezier approximation as thick strokes)
+      const midX = (p1.x + p2.x) / 2;
+      html += `<path d="M ${p1.x} ${p1.y - t1} 
+                       C ${midX} ${p1.y - t1}, ${midX} ${p2.y - t2}, ${p2.x} ${p2.y - t2}
+                       L ${p2.x} ${p2.y + t2}
+                       C ${midX} ${p2.y + t2}, ${midX} ${p1.y + t1}, ${p1.x} ${p1.y + t1}
+                       Z" fill="${colors[cc]}" opacity="0.75"/>`;
+    }
+    
+    // Circles at each point (sized by share)
+    pts.forEach((p, i) => {
+      html += `<circle cx="${p.x}" cy="${p.y}" r="${p.t/2 + 1}" fill="${colors[cc]}" stroke="#fff" stroke-width="1.5"/>`;
+    });
+    
+    // End label
+    const lastPt = pts[pts.length - 1];
+    html += `<text x="${lastPt.x + 12}" y="${lastPt.y + 4}" font-size="12" font-weight="700" fill="${colors[cc]}">${countryNames[cc]} ${data[cc][months.length-1].toFixed(1)}%</text>`;
+  });
+  
+  svg.innerHTML = html;
+}
+drawRibbon();
+
+// =========== PROTO 2: Streamgraph ===========
+const ctx = document.getElementById('stream-chart').getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: monthLabels,
+    datasets: Object.keys(data).map(cc => ({
+      label: countryNames[cc],
+      data: data[cc],
+      backgroundColor: colors[cc] + 'c0',
+      borderColor: colors[cc],
+      borderWidth: 1,
+      fill: true,
+      tension: 0.4
+    }))
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      tooltip: {mode: 'index'},
+      legend: {position: 'right', labels: {boxWidth: 12, font: {size: 11}}}
+    },
+    scales: {
+      y: {stacked: true, title: {display: true, text: '점유율(%)'}},
+      x: {grid: {display: false}}
+    }
+  }
+});
+
+// =========== PROTO 3: Heatmap ===========
+function drawHeatmap() {
+  const container = document.getElementById('heatmap');
+  const countries = Object.keys(data);
+  const maxVal = Math.max(...countries.flatMap(cc => data[cc]));
+  
+  let html = '<table style="border-collapse:collapse;margin:0 auto;font-size:12px">';
+  
+  // Header
+  html += '<tr><th style="padding:6px 10px;background:#f1f5f9;text-align:left">국가</th>';
+  monthLabels.forEach(m => {
+    html += `<th style="padding:6px 8px;background:#f1f5f9;text-align:center;min-width:60px">${m}</th>`;
+  });
+  html += '<th style="padding:6px 8px;background:#f1f5f9;text-align:center">변화</th>';
+  html += '</tr>';
+  
+  // Rows
+  countries.forEach(cc => {
+    html += `<tr><td style="padding:6px 10px;font-weight:600;color:${colors[cc]}">${countryNames[cc]}</td>`;
+    data[cc].forEach((v, i) => {
+      const intensity = v / maxVal;
+      const bg = `rgba(${parseInt(colors[cc].slice(1,3),16)},${parseInt(colors[cc].slice(3,5),16)},${parseInt(colors[cc].slice(5,7),16)},${intensity * 0.8})`;
+      const textColor = intensity > 0.5 ? '#fff' : '#0f172a';
+      html += `<td style="padding:6px 8px;text-align:center;background:${bg};color:${textColor};font-weight:${intensity > 0.5 ? 700 : 500}">${v.toFixed(1)}</td>`;
+    });
+    const start = data[cc][0], end = data[cc][data[cc].length-1];
+    const diff = end - start;
+    const color = diff > 0 ? '#dc2626' : '#2563eb';
+    const symbol = diff > 0 ? '▲' : '▼';
+    html += `<td style="padding:6px 8px;text-align:center;font-weight:700;color:${color}">${symbol} ${Math.abs(diff).toFixed(1)}%p</td>`;
+    html += '</tr>';
+  });
+  
+  html += '</table>';
+  container.innerHTML = html;
+}
+drawHeatmap();
+
+// =========== PROTO 4: Enhanced Bump ===========
+function drawEnhanced() {
+  const svg = document.getElementById('enhanced-svg');
+  const W = 1200, H = 500, margin = {top: 40, right: 180, bottom: 50, left: 60};
+  const chartW = W - margin.left - margin.right;
+  const chartH = H - margin.top - margin.bottom;
+  const countries = Object.keys(data);
+  const numRanks = countries.length;
+  
+  const xScale = i => margin.left + (i / (months.length - 1)) * chartW;
+  const yScale = r => margin.top + ((r - 1) / (numRanks - 1)) * chartH;
+  const radius = v => 3 + (v / 35) * 18;
+  
+  let html = '';
+  
+  monthLabels.forEach((label, i) => {
+    html += `<text x="${xScale(i)}" y="${H - 20}" text-anchor="middle" font-size="11" fill="#64748b">${label}</text>`;
+  });
+  
+  // Lines + circles
+  countries.forEach(cc => {
+    const pts = months.map((_, i) => ({x: xScale(i), y: yScale(ranks[cc][i]), v: data[cc][i]}));
+    
+    // Smooth path
+    let d = `M ${pts[0].x} ${pts[0].y}`;
+    for (let i = 1; i < pts.length; i++) {
+      const prev = pts[i-1], curr = pts[i];
+      const cp1x = prev.x + (curr.x - prev.x) / 2;
+      d += ` C ${cp1x} ${prev.y}, ${cp1x} ${curr.y}, ${curr.x} ${curr.y}`;
+    }
+    html += `<path d="${d}" fill="none" stroke="${colors[cc]}" stroke-width="2.5" opacity="0.8"/>`;
+    
+    // Circles (share-sized)
+    pts.forEach(p => {
+      html += `<circle cx="${p.x}" cy="${p.y}" r="${radius(p.v)}" fill="${colors[cc]}" opacity="0.7" stroke="#fff" stroke-width="2"/>`;
+      if (radius(p.v) > 10) {
+        html += `<text x="${p.x}" y="${p.y + 3}" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">${p.v.toFixed(0)}</text>`;
+      }
+    });
+    
+    // End label
+    const last = pts[pts.length - 1];
+    html += `<text x="${last.x + radius(last.v) + 8}" y="${last.y + 4}" font-size="12" font-weight="700" fill="${colors[cc]}">${countryNames[cc]} ${last.v.toFixed(1)}%</text>`;
+  });
+  
+  svg.innerHTML = html;
+}
+drawEnhanced();
+</script>
+</body>
+</html>
